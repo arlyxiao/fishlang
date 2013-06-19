@@ -9,11 +9,11 @@ describe Sentence do
   }
 
   it "sentence translation(1) should be correct" do
-    @sentence.translate.should == @sentence_translation_1
+    @sentence.translate?(@sentence_translation_1).should == true
   end
 
   it "sentence translation(2) should be correct" do
-    @sentence.translate.should == @sentence_translation_1
+    @sentence.translate?(@sentence_translation_2).should == true
   end
 
   
