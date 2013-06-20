@@ -4,9 +4,16 @@ source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.12'
 
+
 gem 'mysql2', '0.3.11'
 gem 'devise', '2.2.4'
 gem 'jquery-rails'
+
+
+# emberjs
+gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'
+gem 'ember-source', '1.0.0.rc4'
+gem 'handlebars-source', '1.0.0.rc4'
 
 
 group :test do
