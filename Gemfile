@@ -15,6 +15,9 @@ gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'
 gem 'ember-source', '1.0.0.rc4'
 gem 'handlebars-source', '1.0.0.rc4'
 
+gem 'jbuilder', '~> 1.0.1'
+
+
 
 group :test do
   gem "awesome_print"
