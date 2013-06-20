@@ -9,6 +9,7 @@ gem 'mysql2', '0.3.11'
 gem 'devise', '2.2.4'
 gem 'jquery-rails'
 gem 'active_model_serializers'
+gem 'turbolinks'
 
 
 
