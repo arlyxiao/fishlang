@@ -11,7 +11,7 @@
 
 FishLang.Store = DS.Store.extend(
   revision: 12
-  adapter: "DS.RESTAdapter" # "DS.FixtureAdapter"
+  adapter: "DS.RESTAdapter"
 )
 
 FishLang.Sentence = DS.Model.extend(
@@ -33,13 +33,15 @@ FishLang.SentencesController = Ember.ArrayController.extend(
 )
 
 FishLang.SentenceController = Ember.ObjectController.extend(
-  isChecking: false
-  checking: ->
-    @set "isChecking", true
+  check: ->
+    @get('store').commit()
 )
+
 
 
 FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
-      path: ":sentence_id"
+      path: ":sentence_id", ->
+        @route "check",
+          path: "check"

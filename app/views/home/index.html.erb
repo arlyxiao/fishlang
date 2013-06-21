@@ -12,6 +12,9 @@
 </script>
 
 <script type="text/x-handlebars" id="sentences">
+
+  {{example.subject}}
+
   <div class='container-fluid'>
     <div class='row-fluid'>
       <div class='span3'>
@@ -37,20 +40,12 @@
 
 
 <script type="text/x-handlebars" id="sentence">
-  {{id}}
-  {{ subject }}
-
-  {{#if isChecking}}
-  {{partial 'sentence/edit'}}
-  {{else}}
-  <button {{action 'checking'}} class='btn'>Edit</button>
-  {{/if}}
-</script>
-
-
-<script type="text/x-handlebars" id="sentence/_edit">
+ 
   <p>{{view Ember.TextField valueBinding='subject' cols="50" rows="10"}}</p>
+  <button {{action 'check'}} class='btn'>Check</button>
+
 </script>
+
 
 
 
