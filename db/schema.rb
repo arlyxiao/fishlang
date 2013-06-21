@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20130621030635) do
   end
 
   create_table "sentences", :force => true do |t|
-    t.string   "subject"
+    t.string   "subject",    :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
