@@ -15,9 +15,7 @@ FishLang.Store = DS.Store.extend(
 )
 
 FishLang.Sentence = DS.Model.extend(
-  content: DS.attr("string")
-  created_at: DS.attr("string")
-  xsf: DS.attr("string")
+  subject: DS.attr("string")
 )
 
 

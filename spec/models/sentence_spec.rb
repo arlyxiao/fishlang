@@ -3,32 +3,32 @@ require "spec_helper"
 describe Sentence do
 
   before {
-    @sentence = FactoryGirl.create(:sentence, :content => 'estoy bien')
+    @sentence = FactoryGirl.create(:sentence, :subject => 'estoy bien')
     @sentence_translation_1 = FactoryGirl.create(:sentence_translation, 
       :sentence => @sentence,
-      :content => "I'm file"
+      :subject => "I'm file"
     )
 
     @sentence_translation_2 = FactoryGirl.create(:sentence_translation,
       :sentence => @sentence,
-     :content => 'I am fine'
+     :subject => 'I am fine'
     )
 
-    @content_1 = "I'm file"
-    @content_2 = 'I am fine'
-    @content_3 = 'am fine'
+    @subject_1 = "I'm file"
+    @subject_2 = 'I am fine'
+    @subject_3 = 'am fine'
   }
 
   it "sentence translation(1) should be correct" do
-    @sentence.translate?(@content_1).should == true
+    @sentence.translate?(@subject_1).should == true
   end
 
   it "sentence translation(2) should be correct" do
-    @sentence.translate?(@content_2).should == true
+    @sentence.translate?(@subject_2).should == true
   end
 
   it "sentence translation(3) should be incorrect" do
-    @sentence.translate?(@content_3).should == false
+    @sentence.translate?(@subject_3).should == false
   end
 
   

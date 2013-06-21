@@ -20,7 +20,7 @@
           {{#each sentence in filteredContent}}
           <tr>
             <td>
-              {{#linkTo sentence sentence}} {{sentence.content}} {{/linkTo}}
+              {{#linkTo sentence sentence}} {{sentence.subject}} {{/linkTo}}
             </td>
           </tr>
           {{/each}}
@@ -38,9 +38,7 @@
 
 <script type="text/x-handlebars" id="sentence">
   {{id}}
-  {{ content }}
-  {{ created_at }}
-  {{ xsf }}
+  {{ subject }}
 
   {{#if isChecking}}
   {{partial 'sentence/edit'}}
@@ -51,7 +49,7 @@
 
 
 <script type="text/x-handlebars" id="sentence/_edit">
-  <p>{{view Ember.TextField valueBinding='content' cols="50" rows="10"}}</p>
+  <p>{{view Ember.TextField valueBinding='subject' cols="50" rows="10"}}</p>
 </script>
 
 

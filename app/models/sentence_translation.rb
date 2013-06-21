@@ -1,5 +1,5 @@
 class SentenceTranslation < ActiveRecord::Base
   belongs_to :sentence
 
-  validates :sentence, :content, :presence => true
+  validates :sentence, :subject, :presence => true
 end

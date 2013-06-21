@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :sentence do
-    sequence(:content){|n| "content_#{n}" }    
+    sequence(:subject){|n| "content_#{n}" }    
   end
 end

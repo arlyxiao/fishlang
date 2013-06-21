@@ -190,6 +190,7 @@
       "/Users/xiaorich/www/fishlang/config/routes.rb": [
         1,
         1,
+        1,
         null,
         1,
         null
@@ -209,8 +210,24 @@
         null,
         null
       ],
+      "/Users/xiaorich/www/fishlang/app/controllers/sentences_controller.rb": [
+        1,
+        null,
+        1,
+        0,
+        0,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
       "/Users/xiaorich/www/fishlang/app/models/sentence.rb": [
         1,
+        1,
+        null,
         1,
         null,
         1,
@@ -224,6 +241,11 @@
         1,
         1,
         null,
+        1,
+        null
+      ],
+      "/Users/xiaorich/www/fishlang/app/serializers/sentence_serializer.rb": [
+        1,
         1,
         null
       ],
@@ -242,6 +264,6 @@
         null
       ]
     },
-    "timestamp": 1371715557
+    "timestamp": 1371784125
   }
 }
