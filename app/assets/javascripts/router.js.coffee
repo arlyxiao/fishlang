@@ -1,5 +1,3 @@
-# For more information see: http://emberjs.com/guides/routing/
-
-Fishlang.Router.map ()->
-  # @resource('posts')
+#FishLang.Router.map (match)->
+  # match('/').to('index')
 

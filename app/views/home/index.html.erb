@@ -1,4 +1,17 @@
-<script type="text/x-handlebars", id="sentences">
+<script type="text/x-handlebars">
+  <div class="navbar">
+    <div class="navbar-inner">
+      <a class="brand" href="#">Bloggr</a>
+      <ul class="nav">
+        <li>{{#linkTo 'sentences'}}sentences{{/linkTo}}</li>
+      </ul>
+
+    </div>
+  </div>
+  {{outlet}}
+</script>
+
+<script type="text/x-handlebars" id="sentences">
   <div class='container-fluid'>
     <div class='row-fluid'>
       <div class='span3'>
@@ -7,7 +20,7 @@
           {{#each sentence in filteredContent}}
           <tr>
             <td>
-              {{sentence.content}}
+              {{#linkTo sentence sentence}} {{sentence.content}} {{/linkTo}}
             </td>
           </tr>
           {{/each}}
@@ -16,6 +29,30 @@
 
     </div>
   </div>
+
+  <div class="span9">
+    {{outlet}}
+  </div>
 </script>
+
+
+<script type="text/x-handlebars" id="sentence">
+  {{id}}
+  {{ content }}
+  {{ created_at }}
+  {{ xsf }}
+
+  {{#if isChecking}}
+  {{partial 'sentence/edit'}}
+  {{else}}
+  <button {{action 'checking'}} class='btn'>Edit</button>
+  {{/if}}
+</script>
+
+
+<script type="text/x-handlebars" id="sentence/_edit">
+  <p>{{view Ember.TextField valueBinding='content' cols="50" rows="10"}}</p>
+</script>
+
 
 

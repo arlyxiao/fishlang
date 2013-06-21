@@ -1,3 +1,3 @@
 class SentenceSerializer < ActiveModel::Serializer
-  attributes :id, :content
+  attributes :id, :content, :created_at
 end

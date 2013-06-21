@@ -5,4 +5,8 @@ class SentencesController < ApplicationController
     render json: sentences
   end
 
+  def show
+    render json: Sentence.find(params[:id])
+  end
+
 end
