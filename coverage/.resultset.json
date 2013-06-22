@@ -230,6 +230,7 @@
         0,
         null,
         null,
+        null,
         1,
         0,
         0,
@@ -248,12 +249,15 @@
         1,
         null,
         1,
+        9,
         3,
         null,
         null
       ],
       "/Users/xiaorich/www/fishlang/app/models/sentence_translation.rb": [
         1,
+        1,
+        null,
         1,
         null,
         1,
@@ -279,6 +283,6 @@
         null
       ]
     },
-    "timestamp": 1371799142
+    "timestamp": 1371878046
   }
 }

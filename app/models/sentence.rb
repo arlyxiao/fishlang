@@ -6,6 +6,7 @@ class Sentence < ActiveRecord::Base
   validates :subject, :presence => true
 
   def translate?(subject)
-    translations.map(&:subject).include? subject
+    subjects = translations.map!{|c| c.subject.downcase.strip}
+    subjects.include? subject.downcase.strip
   end
 end
