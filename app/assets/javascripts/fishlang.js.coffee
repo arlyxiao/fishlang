@@ -34,14 +34,14 @@ FishLang.SentencesController = Ember.ArrayController.extend(
 
 FishLang.SentenceController = Ember.ObjectController.extend(
   check: ->
-    @get('store').commit()
+    data = {subject: @get('subject')}
+    url = '/sentences/' + @get('id') + '/check'
+    Ember.$.post(url, data).then (response) ->
+      alert(response)
 )
-
 
 
 FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
-        @route "check",
-          path: "check"

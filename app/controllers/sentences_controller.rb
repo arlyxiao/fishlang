@@ -9,6 +9,7 @@ class SentencesController < ApplicationController
     render json: Sentence.find(params[:id])
   end
 
+
   def check
     @sentence = Sentence.find(params[:id])
     result = @sentence.translate?(params[:subject])

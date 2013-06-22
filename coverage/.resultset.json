@@ -190,7 +190,15 @@
       "/Users/xiaorich/www/fishlang/config/routes.rb": [
         1,
         1,
+        null,
         1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        null,
+        null,
         null,
         1,
         null
@@ -219,6 +227,13 @@
         null,
         null,
         1,
+        0,
+        null,
+        null,
+        1,
+        0,
+        0,
+        null,
         0,
         null,
         null,
@@ -264,6 +279,6 @@
         null
       ]
     },
-    "timestamp": 1371784125
+    "timestamp": 1371799142
   }
 }
