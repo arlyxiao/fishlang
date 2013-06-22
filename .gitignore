@@ -13,3 +13,15 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+
+
+Gemfile.lock
+
+tmp/
+vendor/bundle/*
+
+
+log/*.pid
+coverage/
+
