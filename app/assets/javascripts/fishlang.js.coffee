@@ -19,6 +19,21 @@ FishLang.Sentence = DS.Model.extend(
 )
 
 
+FishLang.SentenceView = Ember.View.extend(
+  didInsertElement: ->
+    $('#subject').focus()
+
+  keyPress: (event) ->
+    $("#check_btn").removeAttr('disabled')
+    if event.keyCode == 13
+      if $("#check_btn").is(":disabled") && !$("#continue_btn").is(":disabled")
+        $('#continue_btn').trigger('click')
+        $('#check_btn').focus()
+
+      if !$("#check_btn").is(":disabled") && $("#continue_btn").is(":disabled")
+        $('#check_btn').trigger('click')
+        $('#continue_btn').focus()
+)
 
 
 FishLang.LessonController = Ember.ObjectController.extend(
@@ -40,6 +55,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
         $('#continue_btn').val(response)
         $("#check_btn").attr('disabled', 'disabled')
         $("#continue_btn").removeAttr('disabled')
+        $('#continue_btn').focus()
       else
         alert(response)
       
@@ -48,6 +64,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     @transitionToRoute 'sentence', FishLang.Sentence.find($('#continue_btn').val())
     $("#continue_btn").attr('disabled', 'disabled')
     $("#check_btn").removeAttr('disabled')
+    $('#check_btn').focus()
     $('.translation_box').val('')
 )
 
