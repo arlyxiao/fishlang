@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(:version => 20130623044905) do
   end
 
   create_table "sentences", :force => true do |t|
-    t.string   "subject",    :null => false
+    t.string   "subject"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.integer  "lesson_id"
