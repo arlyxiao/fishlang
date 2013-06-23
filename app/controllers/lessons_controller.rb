@@ -8,12 +8,11 @@ class LessonsController < ApplicationController
 
 
   def index
-    lessons = Lesson.all
-    render json: lessons
+    @lessons = Lesson.all
   end
 
   def show
-    render json: @lesson
+    @sentence = @lesson.sentences.first
   end
 
 end

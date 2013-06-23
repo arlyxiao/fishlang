@@ -18,32 +18,14 @@ FishLang.Sentence = DS.Model.extend(
   subject: DS.attr("string")
 )
 
-FishLang.LessonsRoute = Ember.Route.extend(
-  model: ->
-    FishLang.Lesson.find()
-)
 
 
-FishLang.Lesson = DS.Model.extend(
-  name: DS.attr("string")
-)
 
-
-FishLang.SentencesController = Ember.ArrayController.extend(
-  sortProperties: [ "id" ]
-  sortAscending: true
-  filteredContent: (->
-    @get("arrangedContent")
-  ).property("arrangedContent.@each")
-)
-
-
-FishLang.LessonsController = Ember.ArrayController.extend(
-  sortProperties: [ "id" ]
-  sortAscending: true
-  filteredContent: (->
-    @get("arrangedContent")
-  ).property("arrangedContent.@each")
+FishLang.LessonController = Ember.ObjectController.extend(
+  
+  start: ->
+    @transitionToRoute 'sentence', FishLang.Sentence.find($('#start_btn').val())
+      
 )
 
 
@@ -75,6 +57,6 @@ FishLang.Router.map ->
     @resource "lesson",
       path: ":lesson_id", ->
 
-        @resource "sentences", ->
-          @resource "sentence",
-            path: ":sentence_id", ->
+  @resource "sentences", ->
+    @resource "sentence",
+      path: ":sentence_id", ->

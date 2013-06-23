@@ -1,44 +1,4 @@
-<script type="text/x-handlebars">
-  <div class="navbar">
-    <div class="navbar-inner">
-      <a class="brand" href="/">FishLang</a>
-      <ul class="nav">
-        <li>{{#linkTo 'lessons'}}lessons{{/linkTo}}</li>
-      </ul>
 
-    </div>
-  </div>
-  {{outlet}}
-</script>
-
-<script type="text/x-handlebars" id="lessons">
-
-  <div class='container-fluid'>
-    <div class='row-fluid'>
-      <div class='span3'>
-        <table class='table'>
-          
-          {{#each lesson in filteredContent}}
-          <tr>
-            <td>
-              {{#linkTo lesson lesson}} {{lesson.name}} {{/linkTo}}
-            </td>
-          </tr>
-          {{/each}}
-        </table>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="span9">
-    {{outlet}}
-  </div>
-</script>
-
-<script type="text/x-handlebars" id="lesson">
-
-</script>
 
 
 <script type="text/x-handlebars" id="sentence">

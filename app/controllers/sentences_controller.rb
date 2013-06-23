@@ -3,12 +3,14 @@ class SentencesController < ApplicationController
   before_filter :pre_load
   
   def pre_load
+    @lesson = Lesson.find(params[:lesson_id]) if params[:lesson_id]
     @sentence = Sentence.find(params[:id]) if params[:id]
   end
 
 
   def index
-    render json: Sentence.all
+    sentences = @lesson.sentences
+    render json: sentences
   end
 
   def show
