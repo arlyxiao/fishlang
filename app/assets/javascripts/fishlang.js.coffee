@@ -18,6 +18,15 @@ FishLang.Sentence = DS.Model.extend(
   subject: DS.attr("string")
 )
 
+FishLang.LessonsRoute = Ember.Route.extend(
+  model: ->
+    FishLang.Lesson.find()
+)
+
+
+FishLang.Lesson = DS.Model.extend(
+  name: DS.attr("string")
+)
 
 
 FishLang.SentencesController = Ember.ArrayController.extend(
@@ -52,7 +61,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
 
 
 FishLang.Router.map ->
+  @resource "lessons", ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
-

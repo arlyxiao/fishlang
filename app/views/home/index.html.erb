@@ -3,7 +3,7 @@
     <div class="navbar-inner">
       <a class="brand" href="/">FishLang</a>
       <ul class="nav">
-        <li>{{#linkTo 'sentences'}}sentences{{/linkTo}}</li>
+        <li>{{#linkTo 'lessons'}}lessons{{/linkTo}}</li>
       </ul>
 
     </div>
@@ -11,17 +11,17 @@
   {{outlet}}
 </script>
 
-<script type="text/x-handlebars" id="sentences">
+<script type="text/x-handlebars" id="lessons">
 
   <div class='container-fluid'>
     <div class='row-fluid'>
       <div class='span3'>
         <table class='table'>
           
-          {{#each sentence in filteredContent}}
+          {{#each lesson in filteredContent}}
           <tr>
             <td>
-              {{#linkTo sentence sentence}} {{sentence.subject}} {{/linkTo}}
+              {{#linkTo lesson lesson}} {{lesson.name}} {{/linkTo}}
             </td>
           </tr>
           {{/each}}
