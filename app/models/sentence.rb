@@ -1,6 +1,7 @@
 class Sentence < ActiveRecord::Base
   attr_accessible :subject
 
+  belongs_to :lesson
   has_many :translations, :class_name => 'SentenceTranslation', :foreign_key => :sentence_id
 
   validates :subject, :presence => true

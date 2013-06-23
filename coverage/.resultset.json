@@ -258,6 +258,7 @@
         1,
         null,
         1,
+        1,
         null,
         1,
         null,
@@ -269,6 +270,16 @@
         1,
         15,
         5,
+        null,
+        null
+      ],
+      "/Users/xiaorich/www/fishlang/app/models/lesson.rb": [
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
         null,
         null
       ],
@@ -301,6 +312,6 @@
         null
       ]
     },
-    "timestamp": 1371962079
+    "timestamp": 1371963076
   }
 }
