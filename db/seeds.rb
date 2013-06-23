@@ -1,3 +1,4 @@
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 

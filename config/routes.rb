@@ -1,17 +1,21 @@
 Fishlang::Application.routes.draw do
   get "home/index"
 
-  resources :sentences do
-    member do
-      post :check
-      get :continue
+  
+
+  resources :lessons, :shallow => true do
+
+    resources :sentences, :shallow => true do
+      
+      member do
+        post :check
+        get :continue
+      end
+
     end
 
-    collection do
-    end
+
   end
-
-  resources :lessons
 
   root :to => 'home#index'
 end

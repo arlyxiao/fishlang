@@ -75,6 +75,6 @@ FishLang.Router.map ->
     @resource "lesson",
       path: ":lesson_id", ->
 
-  @resource "sentences", ->
-    @resource "sentence",
-      path: ":sentence_id", ->
+        @resource "sentences", ->
+          @resource "sentence",
+            path: ":sentence_id", ->

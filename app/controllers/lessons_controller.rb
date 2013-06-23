@@ -13,7 +13,7 @@ class LessonsController < ApplicationController
   end
 
   def show
-    
+    render json: @lesson
   end
 
 end
