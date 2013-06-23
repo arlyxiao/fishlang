@@ -38,6 +38,16 @@ FishLang.SentencesController = Ember.ArrayController.extend(
 )
 
 
+FishLang.LessonsController = Ember.ArrayController.extend(
+  sortProperties: [ "id" ]
+  sortAscending: true
+  filteredContent: (->
+    @get("arrangedContent")
+  ).property("arrangedContent.@each")
+)
+
+
+
 FishLang.SentenceController = Ember.ObjectController.extend(
   
   check: ->
@@ -62,6 +72,9 @@ FishLang.SentenceController = Ember.ObjectController.extend(
 
 FishLang.Router.map ->
   @resource "lessons", ->
+    @resource "lesson",
+      path: ":lesson_id", ->
+
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
