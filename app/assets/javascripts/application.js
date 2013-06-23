@@ -24,3 +24,4 @@
 FishLang = Ember.Application.create();
 
 //= require_tree .
+

@@ -38,11 +38,14 @@
 
 
 <script type="text/x-handlebars" id="sentence">
- 
-  <p>{{view Ember.TextField valueBinding='subject' cols="50" rows="10"}}</p>
-  <button {{action 'check'}} class='btn'>Check</button>
+  {{subject}}
+  <p><input type="text" name="subject" id="subject" class='translation_box' /></p>
+  <button {{action 'check'}} id='check_btn' class='btn'>Check</button>
+  <button {{action 'continue'}} id='continue_btn' class='btn' disabled="disabled">Continue</button>
 
 </script>
+
+
 
 
 

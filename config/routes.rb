@@ -4,6 +4,7 @@ Fishlang::Application.routes.draw do
   resources :sentences do
     member do
       post :check
+      get :continue
     end
 
     collection do

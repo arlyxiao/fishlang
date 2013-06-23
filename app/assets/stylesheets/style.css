@@ -6,3 +6,8 @@ html, body {
 .ember-text-field, .ember-text-area {
   width: 100%;
 }
+
+.translation_box {
+  width: 500px;
+  height: 100px;
+}
