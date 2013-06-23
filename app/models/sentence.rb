@@ -6,9 +6,10 @@ class Sentence < ActiveRecord::Base
 
   validates :subject, :presence => true
 
+  scope :by_lesson, lambda{|lesson| {:conditions => ['lesson_id = ?', lesson.id]} }
 
   def next_id
-    self.class.where('id > ?', self.id).first.id
+    self.class.by_lesson.where('id > ?', self.id).first.id
   end
 
   def translate?(subject)
