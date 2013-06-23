@@ -11,5 +11,7 @@ Fishlang::Application.routes.draw do
     end
   end
 
+  resources :lessons
+
   root :to => 'home#index'
 end
