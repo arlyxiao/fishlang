@@ -1,15 +1,15 @@
 class Sentence < ActiveRecord::Base
-  attr_accessible :lesson, :subject
+  attr_accessible :practice, :subject
 
-  belongs_to :lesson
+  belongs_to :practice
   has_many :translations, :class_name => 'SentenceTranslation', :foreign_key => :sentence_id
 
-  validates :lesson, :subject, :presence => true
+  validates :practice, :subject, :presence => true
 
-  scope :by_lesson, lambda{|lesson| {:conditions => ['lesson_id = ?', lesson.id]} }
+  scope :by_practice, lambda{|practice| {:conditions => ['practice_id = ?', practice.id]} }
 
   def next_id
-    self.class.by_lesson(self.lesson).where('id > ?', self.id).first.id
+    self.class.by_practice(self.practice).where('id > ?', self.id).first.id
   end
 
   def translate?(subject)

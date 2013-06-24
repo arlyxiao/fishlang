@@ -3,19 +3,21 @@ require "spec_helper"
 describe Sentence do
   before {
     @lesson_1 = Lesson.create(:name => 'Present')
-    @lesson_2 = Lesson.create(:name => 'Present Perfect')
+
+    @practice_1 = Practice.create(:lesson => @lesson_1, :name => 'Practice 1')
+    @practice_2 = Practice.create(:lesson => @lesson_1, :name => 'Practice 2')
   }
 
   describe "Validate next_id" do
     before {
-      @sentence_1_1 = FactoryGirl.create(:sentence, :lesson => @lesson_1)
-      @sentence_2_1 = FactoryGirl.create(:sentence, :lesson => @lesson_2)
-      @sentence_1_2 = FactoryGirl.create(:sentence, :lesson => @lesson_1)
-      @sentence_1_3 = FactoryGirl.create(:sentence, :lesson => @lesson_1)
-      @sentence_2_2 = FactoryGirl.create(:sentence, :lesson => @lesson_2)
+      @sentence_1_1 = FactoryGirl.create(:sentence, :practice => @practice_1)
+      @sentence_2_1 = FactoryGirl.create(:sentence, :practice => @practice_2)
+      @sentence_1_2 = FactoryGirl.create(:sentence, :practice => @practice_1)
+      @sentence_1_3 = FactoryGirl.create(:sentence, :practice => @practice_1)
+      @sentence_2_2 = FactoryGirl.create(:sentence, :practice => @practice_2)
     }
 
-    describe "order in lesson_1" do
+    describe "order in practice_1" do
       it "next_id of sentence_1_1" do
         @sentence_1_1.next_id.should == @sentence_1_2.id
       end
@@ -25,7 +27,7 @@ describe Sentence do
       end
     end
 
-    describe "order in lesson_2" do
+    describe "order in practice_2" do
       it "next_id of sentence_2_1" do
         @sentence_2_1.next_id.should == @sentence_2_2.id
       end
@@ -35,7 +37,7 @@ describe Sentence do
   describe "Validate translate" do
 
     before {
-      @sentence = FactoryGirl.create(:sentence, :lesson => @lesson_1, :subject => 'estoy bien')
+      @sentence = FactoryGirl.create(:sentence, :practice => @practice_1, :subject => 'estoy bien')
       @sentence_translation_1 = FactoryGirl.create(:sentence_translation, 
         :sentence => @sentence,
         :subject => "I'm file"
