@@ -11,8 +11,4 @@ class PracticesController < ApplicationController
     @practices = Practice.all
   end
 
-  def show
-    @sentence = @practice.sentences.first
-  end
-
 end

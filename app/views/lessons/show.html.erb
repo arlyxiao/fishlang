@@ -1,3 +1,3 @@
 <% @practices.each do |practice| %>
-  <p><%=link_to practice.name, "/practices/#{practice.id}" %></p>
+  <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
 <% end %>
