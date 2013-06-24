@@ -16,7 +16,7 @@ l9 = Lesson.create(:name => 'Conditional Perfect')
 l10 = Lesson.create(:name => 'Preterite Perfect')
 
 
-p1 = Practice.create(:name => 'Practice 1')
+p1 = Practice.create(:lesson => l1, :name => 'Practice 1')
 
 
 

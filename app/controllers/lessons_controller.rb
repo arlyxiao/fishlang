@@ -12,7 +12,7 @@ class LessonsController < ApplicationController
   end
 
   def show
-    @sentence = @lesson.sentences.first
+    @practices = @lesson.practices
   end
 
 end
