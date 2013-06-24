@@ -1,14 +1,18 @@
+<style type="text/css">
+  .ember-view {
+    margin: 0 auto;
+    width: 580px;
+    padding-top: 50px;
+  }
+</style>
 
+  <script type="text/x-handlebars" id="sentence">
+    <p>{{subject}}</p>
+    <p><input type="text" name="subject" id="subject" class='translation_box' style="height: 35px;" /></p>
+    <button {{action 'check'}} id='check_btn' class='btn' disabled="disabled">Check</button>
+    <button {{action 'continue'}} id='continue_btn' class='btn' disabled="disabled">Continue</button>
 
-
-<script type="text/x-handlebars" id="sentence">
-  {{subject}}
-  <p><input type="text" name="subject" id="subject" class='translation_box' /></p>
-  <button {{action 'check'}} id='check_btn' class='btn' disabled="disabled">Check</button>
-  <button {{action 'continue'}} id='continue_btn' class='btn' disabled="disabled">Continue</button>
-
-</script>
-
+  </script>
 
 
 
