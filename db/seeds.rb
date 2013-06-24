@@ -1,4 +1,5 @@
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 
@@ -15,12 +16,14 @@ l9 = Lesson.create(:name => 'Conditional Perfect')
 l10 = Lesson.create(:name => 'Preterite Perfect')
 
 
+p1 = Practice.create(:name => 'Practice 1')
 
 
-s1 = Sentence.create(:lesson => l1, :subject => "Sí, estoy cansada")
-s2 = Sentence.create(:lesson => l1, :subject => "él es muy interesante")
-s3 = Sentence.create(:lesson => l1, :subject => "eres feliz")
-s4 = Sentence.create(:lesson => l1, :subject => "mañana es bien")
+
+s1 = Sentence.create(:practice => p1, :subject => "Sí, estoy cansada")
+s2 = Sentence.create(:practice => p1, :subject => "él es muy interesante")
+s3 = Sentence.create(:practice => p1, :subject => "eres feliz")
+s4 = Sentence.create(:practice => p1, :subject => "mañana es bien")
 
 
 
