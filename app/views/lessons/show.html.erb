@@ -1,3 +1,5 @@
+<%= render 'menus', :lessons => @lessons %>
+
 <% @practices.each do |practice| %>
   <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
 <% end %>

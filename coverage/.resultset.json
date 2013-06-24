@@ -194,6 +194,8 @@
         1,
         null,
         1,
+        null,
+        1,
         1,
         1,
         1,
@@ -246,6 +248,33 @@
         1,
         1,
         null,
+        1,
+        null,
+        1,
+        null,
+        null
+      ],
+      "/Users/xiaorich/www/fishlang/app/controllers/practices_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null
+      ],
+      "/Users/xiaorich/www/fishlang/app/models/practice.rb": [
+        1,
+        1,
+        null,
+        1,
         1,
         null,
         1,
@@ -308,17 +337,6 @@
         null,
         null
       ],
-      "/Users/xiaorich/www/fishlang/app/models/practice.rb": [
-        1,
-        1,
-        null,
-        1,
-        1,
-        null,
-        1,
-        null,
-        null
-      ],
       "/Users/xiaorich/www/fishlang/app/models/sentence_translation.rb": [
         1,
         1,
@@ -353,6 +371,6 @@
         null
       ]
     },
-    "timestamp": 1372037788
+    "timestamp": 1372040714
   }
 }

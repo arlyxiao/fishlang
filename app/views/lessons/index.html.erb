@@ -1,17 +1,1 @@
-<div class='container-fluid'>
-  <div class='row-fluid'>
-    <div class='span3'>
-      <table class='table'>
-        
-        <% @lessons.each do |lesson| %>
-        <tr>
-          <td>
-            <%= link_to lesson.name, "/lessons/#{lesson.id}" %>
-          </td>
-        </tr>
-        <% end %>
-      </table>
-    </div>
-
-  </div>
-</div>
+<%= render 'menus', :lessons => @lessons %>
