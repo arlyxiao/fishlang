@@ -1,17 +1,14 @@
 # source 'https://rubygems.org'
 source 'http://ruby.taobao.org'
 
+gem 'puma'
 
 gem 'rails', '3.2.12'
-
-
 gem 'mysql2', '0.3.11'
 gem 'devise', '2.2.4'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'turbolinks'
-
-
 
 # emberjs
 gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'

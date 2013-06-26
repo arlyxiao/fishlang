@@ -118,6 +118,8 @@ GEM
     orm_adapter (0.4.0)
     polyglot (0.3.3)
     pr_geohash (1.0.0)
+    puma (2.0.1)
+      rack (>= 1.1, < 2.0)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -227,6 +229,7 @@ DEPENDENCIES
   handlebars-source (= 1.0.0.rc4)
   jquery-rails
   mysql2 (= 0.3.11)
+  puma
   rails (= 3.2.12)
   rspec-cells (= 0.1.7)
   rspec-rails (= 2.13.0)
