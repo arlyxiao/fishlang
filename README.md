@@ -11,3 +11,12 @@ It helps you increase the memory of Spanish words, especially the verbs change. 
 Ruby 2.0.0 <br />
 Rails 3.2.12 <br/>
 
+### Installation:
+
+bundle install <br />
+rake db:migrate <br />
+rake db:seed <br />
+
+### Todo:    
+
+
