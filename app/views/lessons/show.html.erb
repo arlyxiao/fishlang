@@ -1,9 +1,19 @@
 <%= render 'menus', :lessons => @lessons %>
 
 <div class="row">
-  <div class="span3">
-  <% @practices.each do |practice| %>
-    <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
-  <% end %>
+  <div class="row-fluid">
+    
+    <% @practices.each do |practice| %>
+      <div class="span8" style="margin: 0px 0px 20px 9px;">
+        <h4>
+        <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
+        </h4>
+
+        <% practice.verbs.each do |verb| %>
+          <span class="span2"><%= verb.name %></span>
+        <% end %>
+      </div>
+    <% end %>
+
   </div>
 </div>
