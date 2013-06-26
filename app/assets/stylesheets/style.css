@@ -3,6 +3,10 @@ html, body {
     margin: 20px;
 }
 
+.black {
+  color: black;
+}
+
 .ember-text-field, .ember-text-area {
   width: 100%;
 }
@@ -10,4 +14,10 @@ html, body {
 .translation_box {
   width: 500px;
   height: 100px;
+}
+
+.ember-view {
+  margin: 0 auto;
+  width: 580px;
+  padding-top: 50px;
 }
