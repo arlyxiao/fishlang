@@ -5,6 +5,6 @@ It helps you increase the memory of Spanish words, especially the verbs change
 
 ### Requirements:    
 
-Ruby 2.0.0
-Rails 3.2.12
+Ruby 2.0.0 <br />
+Rails 3.2.12 <br/>
 
