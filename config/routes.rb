@@ -16,5 +16,10 @@ Fishlang::Application.routes.draw do
   end
 
 
+  namespace :admin do
+    resources :practices
+  end
+
+
   root :to => 'home#index'
 end
