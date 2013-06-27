@@ -16,10 +16,10 @@ class Admin::SentencesController < ApplicationController
 
   def destroy
     practice_id = @sentence.practice.id
-    @practice.destroy
+    @sentence.destroy
 
     redirect_to "/admin/practices/#{practice_id}"
   end
 
-
+  
 end

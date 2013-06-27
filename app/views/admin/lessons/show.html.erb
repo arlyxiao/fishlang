@@ -17,10 +17,22 @@
   <div class="row-fluid">
     <h4>Practices</h4>
     <% @lesson.practices.each do |p| %>
-      <span class="span5"><%= link_to p.name, "/admin/practices/#{p.id}" %></span>
-      <span class="span2">
-        <%= link_to 'X', "/admin/practices/#{p.id}", :method => :delete, :confirm => "Remove #{p.name}?" %>
-      </span>
+
+      <div class="row-fluid">
+        <span class="span9"><%= link_to p.name, "/admin/practices/#{p.id}" %></span>
+        <span class="span1">
+          <%= link_to 'X', "/admin/practices/#{p.id}", :method => :delete, :confirm => "Remove #{p.name}?" %>
+        </span>
+      </div>
+
+      <div class="well">
+        <% p.sentences.each do |s| %>
+          <span class="span2">
+            <a href="http://www.123teachme.com/spanish_verb_conjugation/<%= s.verb %>" class="black" target="_blank"><%= s.verb %></a>
+          </span>
+        <% end %>
+      </div>
+
     <% end %>
   </div>
 
