@@ -7,5 +7,7 @@ class Admin::LessonsController < ApplicationController
     @lesson = Lesson.find(params[:id]) if params[:id]
   end
 
+  def show
+  end
 
 end
