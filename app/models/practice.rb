@@ -3,7 +3,6 @@ class Practice < ActiveRecord::Base
 
   belongs_to :lesson
   has_many :sentences
-  has_many :verbs
 
   validates :lesson, :name, :presence => true
 

@@ -1,7 +1,5 @@
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE verbs")
-
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 
@@ -22,10 +20,6 @@ l10 = Lesson.create(:name => 'Preterite Perfect')
 # practices
 p1 = Practice.create(:lesson => l1, :name => 'Practice 1')
 p2 = Practice.create(:lesson => l1, :name => 'Practice 2')
-
-# practice verbs
-v1 = Verb.create(:practice => p1, :name => 'ser')
-v2 = Verb.create(:practice => p1, :name => 'estar')
 
 
 # sentences
