@@ -2,7 +2,10 @@ class Sentence < ActiveRecord::Base
   attr_accessible :practice, :subject, :verb
 
   belongs_to :practice
-  has_many :translations, :class_name => 'SentenceTranslation', :foreign_key => :sentence_id
+  has_many :translations, 
+           :class_name => 'SentenceTranslation', 
+           :foreign_key => :sentence_id,
+           :dependent => :destroy
 
   validates :practice, :subject, :verb, :presence => true
 
