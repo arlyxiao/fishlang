@@ -23,14 +23,14 @@ p2 = Practice.create(:lesson => l1, :name => 'Practice 2')
 
 
 # sentences
-s1 = Sentence.create(:practice => p1, :subject => "Sí, estoy cansada")
-s2 = Sentence.create(:practice => p1, :subject => "él es muy interesante")
-s3 = Sentence.create(:practice => p1, :subject => "eres feliz")
-s4 = Sentence.create(:practice => p1, :subject => "mañana es bien")
+s1 = Sentence.create(:practice => p1, :verb => 'abrir', :subject => "puedo abrir la puerta")
+s2 = Sentence.create(:practice => p1, :verb => 'pasar', :subject => "tú pasas la calle")
+s3 = Sentence.create(:practice => p1, :verb => 'terminar', :subject => "la película termina")
+s4 = Sentence.create(:practice => p1, :verb => 'empezar', :subject => "empiezo caminar")
 
 
 # sentence translations
-SentenceTranslation.create(:sentence => s1, :subject => "Yes, I am tired")
-SentenceTranslation.create(:sentence => s2, :subject => "he is very interesting")
-SentenceTranslation.create(:sentence => s3, :subject => "you are happy")
-SentenceTranslation.create(:sentence => s4, :subject => "tomorrow is fine")
+SentenceTranslation.create(:sentence => s1, :subject => "I can open the door")
+SentenceTranslation.create(:sentence => s2, :subject => "You pass the street")
+SentenceTranslation.create(:sentence => s3, :subject => "The movie ends")
+SentenceTranslation.create(:sentence => s4, :subject => "I start to walk")
