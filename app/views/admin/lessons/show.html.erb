@@ -18,7 +18,7 @@
     <% @lesson.practices.each do |p| %>
       <span class="span5"><%= p.name %></span>
       <span class="span2">
-        <%= link_to 'X', "/admin/practices/#{p.id}", :method => :delete, :confirm => "Delete?" %>
+        <%= link_to 'X', "/admin/practices/#{p.id}", :method => :delete, :confirm => "Remove #{p.name}?" %>
       </span>
     <% end %>
   </div>
