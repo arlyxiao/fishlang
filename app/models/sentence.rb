@@ -1,10 +1,10 @@
 class Sentence < ActiveRecord::Base
-  attr_accessible :practice, :subject
+  attr_accessible :practice, :subject, :verb
 
   belongs_to :practice
   has_many :translations, :class_name => 'SentenceTranslation', :foreign_key => :sentence_id
 
-  validates :practice, :subject, :presence => true
+  validates :practice, :subject, :verb, :presence => true
 
   scope :by_practice, lambda{|practice| {:conditions => ['practice_id = ?', practice.id]} }
 

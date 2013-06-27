@@ -9,8 +9,8 @@
         <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
         </h4>
 
-        <% practice.verbs.each do |verb| %>
-          <span class="span2"><a href="http://www.123teachme.com/spanish_verb_conjugation/<%= verb.name %>" class="black" target="_blank"><%= verb.name %></a></span>
+        <% practice.sentences.each do |s| %>
+          <span class="span2"><a href="http://www.123teachme.com/spanish_verb_conjugation/<%= s.verb %>" class="black" target="_blank"><%= s.verb %></a></span>
         <% end %>
       </div>
     <% end %>
