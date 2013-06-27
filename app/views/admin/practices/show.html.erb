@@ -1,4 +1,4 @@
-<%= render 'lessons/menus', :lessons => @lessons %>
+<%= render 'admin/lessons/menus', :lessons => @lessons %>
 
 <div class="span8">
   <h4><%= @practice.lesson.name %> / <%= @practice.name %></h4>
@@ -6,7 +6,8 @@
     <p>Create Sentence</p>
     <%= simple_form_for Sentence.new, :url => "/admin/practices/#{@practice.id}/sentences" do |f| %>
       <div class="form-inputs">
-        <%= f.input :subject, :input_html => { :class => "span5" } %>
+        <%= f.input :verb, :input_html => { :class => "span3" } %>
+        <%= f.input :subject, :input_html => { :class => "span7" } %>
       </div>
 
       <%= f.button :submit, :value => 'Save' %>

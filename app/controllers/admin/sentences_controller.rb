@@ -3,12 +3,12 @@ class Admin::SentencesController < ApplicationController
   before_filter :pre_load
   
   def pre_load
-    @practice = Lesson.find(params[:practice_id]) if params[:practice_id]
-    @sentence = Practice.find(params[:id]) if params[:id]
+    @practice = Practice.find(params[:practice_id]) if params[:practice_id]
+    @sentence = Sentence.find(params[:id]) if params[:id]
   end
 
   
-  def create
+  def create    
     @practice.sentences.create(params[:sentence])
 
     redirect_to "/admin/practices/#{@practice.id}"

@@ -20,9 +20,10 @@ Fishlang::Application.routes.draw do
 
     resources :lessons, :shallow => true do
       resources :practices, :shallow => true do
+        resources :sentences, :shallow => true
       end
     end
-    
+
   end
 
 
