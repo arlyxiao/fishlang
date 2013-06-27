@@ -17,7 +17,12 @@ Fishlang::Application.routes.draw do
 
 
   namespace :admin do
-    resources :practices
+
+    resources :lessons, :shallow => true do
+      resources :practices, :shallow => true do
+      end
+    end
+    
   end
 
 

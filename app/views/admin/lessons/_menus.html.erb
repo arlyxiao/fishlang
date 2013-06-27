@@ -1,0 +1,12 @@
+<div class='span3'>
+
+  <div class="well">
+    <ul class="nav nav-list">
+      <% lessons.each do |lesson| %>
+      <li style="padding-bottom: 6px;"><%= link_to lesson.name, "/admin/lessons/#{lesson.id}" %></li>
+      <% end %>
+    </ul>
+  </div>
+
+</div>
+
