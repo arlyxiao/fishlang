@@ -9,6 +9,7 @@ gem 'devise', '2.2.4'
 gem 'jquery-rails'
 gem 'active_model_serializers'
 gem 'turbolinks'
+gem 'simple_form'
 
 # emberjs
 gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'

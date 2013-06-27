@@ -175,6 +175,9 @@ GEM
       multi_json (~> 1.0)
       rubyzip
       websocket (~> 1.0.4)
+    simple_form (2.0.2)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     simplecov (0.7.1)
       multi_json (~> 1.0)
       simplecov-html (~> 0.7.1)
@@ -234,6 +237,7 @@ DEPENDENCIES
   rspec-cells (= 0.1.7)
   rspec-rails (= 2.13.0)
   sass-rails (~> 3.2.3)
+  simple_form
   sunspot-rails-tester (= 1.0.0)
   timecop (= 0.6.1)
   turbolinks
