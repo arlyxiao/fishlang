@@ -11,17 +11,19 @@ Fishlang::Application.routes.draw do
       get :continue
     end
 
-    collection do
-    end
   end
 
 
   namespace :admin do
 
     resources :lessons, :shallow => true do
+
       resources :practices, :shallow => true do
-        resources :sentences, :shallow => true
+        resources :sentences, :shallow => true do
+          resources :sentence_translations
+        end
       end
+
     end
 
   end

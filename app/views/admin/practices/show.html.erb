@@ -17,11 +17,32 @@
 
   <div class="row-fluid">
     <h4>Sentences</h4>
-    <% @practice.sentences.each do |p| %>
-      <span class="span5"><%= p.subject %></span>
-      <span class="span2">
-        <%= link_to 'X', "/admin/sentences/#{p.id}", :method => :delete, :confirm => "Remove '#{p.subject}' ?" %>
-      </span>
+    <% @practice.sentences.each do |s| %>
+      <div class="row-fluid">
+        <span class="span10"><%= s.subject %></span>
+        <span class="span1">
+          <%= link_to 'X', "/admin/sentences/#{s.id}", :method => :delete, :confirm => "Remove '#{s.subject}' ?" %>
+        </span>
+      </div>
+
+      <div class="well form-actions">
+        <form action="/admin/sentences/<%= s.id %>/sentence_translations" method="post">
+          <input type="text" name="sentence_translation[subject]" class="span10" />
+          <input type="submit" name="submit" value="Save" />
+        </form>
+
+        <div class="row-fluid">
+          <% s.translations.each do |t| %>
+            <div class="row-fluid">
+              <span class="span10"><%= t.subject %></span>
+              <span class="span1">
+                <%= link_to 'X', "/admin/sentence_translations/#{t.id}/", :method => :delete, :confirm => "Remove '#{t.subject}' ?" %>
+              </span>
+            </div>
+          <% end %>
+        </div>
+
+      </div>
     <% end %>
   </div>
 
