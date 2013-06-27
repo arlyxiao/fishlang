@@ -17,7 +17,7 @@
   <div class="row-fluid">
     <h4>Practices</h4>
     <% @lesson.practices.each do |p| %>
-      <span class="span5"><%= p.name %></span>
+      <span class="span5"><%= link_to p.name, "/admin/practices/#{p.id}" %></span>
       <span class="span2">
         <%= link_to 'X', "/admin/practices/#{p.id}", :method => :delete, :confirm => "Remove #{p.name}?" %>
       </span>

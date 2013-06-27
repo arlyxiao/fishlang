@@ -21,5 +21,9 @@ class Admin::PracticesController < ApplicationController
     redirect_to "/admin/lessons/#{lesson_id}"
   end
 
+  def show
+    @lessons = Lesson.all
+  end
+
 
 end
