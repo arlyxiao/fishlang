@@ -2,6 +2,7 @@
 
 <div class="span8">
   <h4><%= @lesson.name %></h4>
+ 
   <div class="well form-actions">
     <p>Create Practice</p>
     <%= simple_form_for Practice.new, :url => "/admin/lessons/#{@lesson.id}/practices" do |f| %>
@@ -26,11 +27,18 @@
       </div>
 
       <div class="well">
-        <% p.sentences.each do |s| %>
-          <span class="span2">
-            <a href="http://www.123teachme.com/spanish_verb_conjugation/<%= s.verb %>" class="black" target="_blank"><%= s.verb %></a>
-          </span>
+        <%= simple_form_for p, :url => "/admin/practices/#{p.id}" do |f| %>
+          <input type="text" name="practice[name]" value="<%= p.name %>" class="span8" />
+          <input type="submit" name="submit" value="Edit" />
         <% end %>
+
+        <div class="row-fluid">
+          <% p.sentences.each do |s| %>
+            <span class="span2">
+              <a href="http://www.123teachme.com/spanish_verb_conjugation/<%= s.verb %>" class="black" target="_blank"><%= s.verb %></a>
+            </span>
+          <% end %>
+        </div>
       </div>
 
     <% end %>

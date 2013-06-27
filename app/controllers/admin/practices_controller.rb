@@ -7,6 +7,12 @@ class Admin::PracticesController < ApplicationController
     @practice = Practice.find(params[:id]) if params[:id]
   end
 
+  def update
+    @practice.update_attributes(params[:practice])
+
+    redirect_to "/admin/lessons/#{@practice.lesson.id}"
+  end
+
 
   def create
     @lesson.practices.create(params[:practice])

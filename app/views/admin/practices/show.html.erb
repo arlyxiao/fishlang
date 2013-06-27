@@ -2,6 +2,8 @@
 
 <div class="span8">
   <h4><%= @practice.lesson.name %> / <%= @practice.name %></h4>
+
+  
   <div class="well form-actions">
     <p>Create Sentence</p>
     <%= simple_form_for Sentence.new, :url => "/admin/practices/#{@practice.id}/sentences" do |f| %>
