@@ -14,5 +14,12 @@ class Admin::PracticesController < ApplicationController
     redirect_to "/admin/lessons/#{@lesson.id}"
   end
 
+  def destroy
+    lesson_id = @practice.lesson.id
+    @practice.destroy
+
+    redirect_to "/admin/lessons/#{lesson_id}"
+  end
+
 
 end
