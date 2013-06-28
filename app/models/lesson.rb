@@ -6,4 +6,5 @@ class Lesson < ActiveRecord::Base
 
   validates :category, :name, :presence => true
 
+
 end
