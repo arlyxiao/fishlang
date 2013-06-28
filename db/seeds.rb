@@ -1,20 +1,25 @@
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE categories")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 
+c1 = Category.create(:name => 'Indicative')
+c2 = Category.create(:name => 'Subjunctive')
+c3 = Category.create(:name => 'Imperative')
+
 
 # Lessons
-l1 = Lesson.create(:name => 'Present')
-l2 = Lesson.create(:name => 'Present Perfect')
-l3 = Lesson.create(:name => 'Imperfect')
-l4 = Lesson.create(:name => 'Preterite')
-l5 = Lesson.create(:name => 'Past Perfect - Pluperfect')
-l6 = Lesson.create(:name => 'Future')
-l7 = Lesson.create(:name => 'Future Perfect')
-l8 = Lesson.create(:name => 'Condicional')
-l9 = Lesson.create(:name => 'Conditional Perfect')
-l10 = Lesson.create(:name => 'Preterite Perfect')
+l1 = Lesson.create(:category => c1, :name => 'Present')
+l2 = Lesson.create(:category => c1, :name => 'Present Perfect')
+l3 = Lesson.create(:category => c1, :name => 'Imperfect')
+l4 = Lesson.create(:category => c1, :name => 'Preterite')
+l5 = Lesson.create(:category => c1, :name => 'Past Perfect - Pluperfect')
+l6 = Lesson.create(:category => c1, :name => 'Future')
+l7 = Lesson.create(:category => c1, :name => 'Future Perfect')
+l8 = Lesson.create(:category => c1, :name => 'Condicional')
+l9 = Lesson.create(:category => c1, :name => 'Conditional Perfect')
+l10 = Lesson.create(:category => c1, :name => 'Preterite Perfect')
 
 
 # practices
