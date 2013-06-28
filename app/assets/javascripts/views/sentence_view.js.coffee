@@ -3,6 +3,11 @@ FishLang.SentenceView = Ember.View.extend(
     $('#subject').focus()
 
   keyPress: (event) ->
+    if $.trim($('#subject').val()) == ''
+      $("#check_btn").attr('disabled', 'disabled')
+      $("#continue_btn").attr('disabled', 'disabled')
+      return
+
     $("#check_btn").removeAttr('disabled')
     if event.keyCode == 13
       if $("#check_btn").is(":disabled") && !$("#continue_btn").is(":disabled")

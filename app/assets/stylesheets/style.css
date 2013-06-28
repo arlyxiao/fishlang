@@ -12,9 +12,28 @@ html, body {
 }
 
 .translation_box {
-  width: 500px;
+  width: 560px;
   height: 100px;
 }
+
+#correct_box {
+  display: none;
+  background-color: #a3c964;
+  height: 30px;
+  padding: 5px;
+  line-height: 25px;
+  font-size: 18px;
+}
+
+#wrong_box {
+  display: none;
+  background-color: red;
+  height: 30px;
+  padding: 5px;
+  line-height: 25px;
+  font-size: 18px;
+}
+
 
 .ember-view {
   margin: 0 auto;

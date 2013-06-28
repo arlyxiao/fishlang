@@ -21,8 +21,8 @@ class SentencesController < ApplicationController
   def check
     result = @sentence.translate?(params[:subject])
     
-    render json: @sentence.next_id if result
-    render json: result unless result
+    render json: {:next_id => @sentence.next_id, :result => true} if result
+    render json: {:next_id => @sentence.next_id, :result => false} unless result
   end
 
 
