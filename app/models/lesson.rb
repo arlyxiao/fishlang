@@ -1,8 +1,9 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :category, :name
 
+  belongs_to :category
   has_many :practices
 
-  validates :name, :presence => true
+  validates :category, :name, :presence => true
 
 end
