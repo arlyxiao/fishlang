@@ -1,11 +1,17 @@
 <div class='span3'>
 
   <div class="well">
-    <ul class="nav nav-list">
-      <% lessons.each do |lesson| %>
-      <li style="padding-bottom: 6px;"><%= link_to lesson.name, "/admin/lessons/#{lesson.id}" %></li>
-      <% end %>
-    </ul>
+
+    <% Category.all.each do |c| %>
+      <ul class="nav nav-list">
+        <li class=""><h5><%= c.name %></h5></li>
+        <% c.lessons.each do |lesson| %>
+        <li style="padding-bottom: 6px;"><%= link_to lesson.name, "/admin/lessons/#{lesson.id}" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+
   </div>
 
 </div>

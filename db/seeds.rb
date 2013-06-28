@@ -7,7 +7,6 @@ ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 c1 = Category.create(:name => 'Indicative')
 c2 = Category.create(:name => 'Subjunctive')
 c3 = Category.create(:name => 'Imperative')
-c3 = Category.create(:name => 'Conditional')
 
 
 # Lessons
@@ -21,6 +20,21 @@ l7 = Lesson.create(:category => c1, :name => 'Future Perfect')
 l8 = Lesson.create(:category => c1, :name => 'Condicional')
 l9 = Lesson.create(:category => c1, :name => 'Conditional Perfect')
 l10 = Lesson.create(:category => c1, :name => 'Preterite Perfect')
+
+
+l2_1 = Lesson.create(:category => c2, :name => 'Present')
+l2_2 = Lesson.create(:category => c2, :name => 'Present Perfect')
+l2_3 = Lesson.create(:category => c2, :name => 'Imperfect')
+l2_4 = Lesson.create(:category => c2, :name => 'Past Perfect - Pluperfect')
+l2_5 = Lesson.create(:category => c2, :name => 'Future')
+l2_6 = Lesson.create(:category => c2, :name => 'Future Perfect')
+
+
+l3_1 = Lesson.create(:category => c3, :name => 'Affirmative Imperative')
+l3_2 = Lesson.create(:category => c3, :name => 'Negative Commands')
+
+
+
 
 
 # practices

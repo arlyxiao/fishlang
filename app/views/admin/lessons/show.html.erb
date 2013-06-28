@@ -1,7 +1,7 @@
 <%= render 'menus', :lessons => @lessons %>
 
 <div class="span8">
-  <h4><%= @lesson.name %></h4>
+  <h4><%= @lesson.category.name %> / <%= @lesson.name %></h4>
  
   <div class="well form-actions">
     <%= simple_form_for Practice.new, :url => "/admin/lessons/#{@lesson.id}/practices" do |f| %>
