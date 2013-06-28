@@ -2,7 +2,9 @@ require "spec_helper"
 
 describe Sentence do
   before {
-    @lesson_1 = Lesson.create(:name => 'Present')
+    @c1 = Category.create(:name => 'Indicative')
+
+    @lesson_1 = Lesson.create(:category => @c1, :name => 'Present')
 
     @practice_1 = Practice.create(:lesson => @lesson_1, :name => 'Practice 1')
     @practice_2 = Practice.create(:lesson => @lesson_1, :name => 'Practice 2')

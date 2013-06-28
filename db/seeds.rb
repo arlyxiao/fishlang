@@ -7,6 +7,7 @@ ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 c1 = Category.create(:name => 'Indicative')
 c2 = Category.create(:name => 'Subjunctive')
 c3 = Category.create(:name => 'Imperative')
+c3 = Category.create(:name => 'Conditional')
 
 
 # Lessons
