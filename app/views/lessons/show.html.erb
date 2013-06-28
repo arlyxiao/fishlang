@@ -2,11 +2,14 @@
 
 <div class="row">
   <div class="row-fluid">
-    
+    <div class="span8" style="margin: 20px 0px 10px 9px;">
+      <h4><%= @lesson.category.name %> / <%= @lesson.name %></h4>
+    </div>
+
     <% @practices.each do |practice| %>
-      <div class="span8" style="margin: 0px 0px 20px 9px;">
+      <div class="span8">
         <h4>
-        <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
+          <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= @practices.first.sentences.first.id %>'"><%= practice.name %></a>
         </h4>
 
         <% practice.sentences.each do |s| %>
