@@ -6,4 +6,8 @@ class Practice < ActiveRecord::Base
 
   validates :lesson, :name, :presence => true
 
+  def exam_sentences
+    sentences.sample(10)
+  end
+
 end
