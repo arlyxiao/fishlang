@@ -31,10 +31,10 @@
           <ul class="nav pull-right" id="main-menu-right">
             <% if user_signed_in? %>
               <li><a href="#"><%= current_user.id %></a></li>
-              <li><a href="/users/sign_out">Signout</a></li>
+              <li><a href="/users/sign_out">Sign out</a></li>
             <% else %>
-              <li><a href="/users/sign_in">Signin</a></li>
-              <li><a href="/users/sign_up">Signup</a></li>
+              <li><a href="/users/sign_in">Sign in</a></li>
+              <li><a href="/users/sign_up">Sign up</a></li>
             <% end %>
           </ul>
         </ul>

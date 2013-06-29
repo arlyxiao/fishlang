@@ -9,5 +9,10 @@ class User < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
   # attr_accessible :title, :body
 
-  validate :name, :presence => true
+  validates :name, :format => {:with => /\A\w+\z/, :message => 'Incorrect format'},
+                    :length => {:in => 4..20},
+                    :presence => true,
+                    :uniqueness => {:case_sensitive => false}
+
+  validates :email, :uniqueness => {:case_sensitive => false}
 end
