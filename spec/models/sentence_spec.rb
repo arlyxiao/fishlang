@@ -18,6 +18,10 @@ describe Sentence do
       @u2_practice_sentences = @u2.get_practice_sentences(@p1)
     }
 
+    it "validate get_practice of user" do
+      @u1.get_practice(@p1).exam.split(',').count.should == 10
+    end
+
     it "u1 practice are not equal to u2 practice" do
       @u1_practice_sentences.should_not == @u2_practice_sentences
     end
