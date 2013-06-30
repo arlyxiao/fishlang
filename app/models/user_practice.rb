@@ -9,12 +9,28 @@ class UserPractice < ActiveRecord::Base
 
   module UserMethods
     def self.included(base)
-      base.has_one :practice, :class_name => 'UserPractice', :foreign_key => :user_id
+      base.has_many :practices, :class_name => 'UserPractice', :foreign_key => :user_id
     end
 
-    def has_practice?(practice)
-      ExamPractice.where(:user_id => self.id, :practice_id => practice.id).exists?
+    def get_practice(practice)
+      _store_practice(practice) unless _has_practice?(practice)
+
+      p = practices.where(:practice_id => practice.id).first
+
+      sentences = p.exam.split(',').map {
+        |sentence_id| Sentence.find(sentence_id)
+      }
     end
+
+    private
+      def _has_practice?(practice)
+        practices.where(:practice_id => practice.id).exists?
+      end
+
+      def _store_practice(practice)
+        exam = practice.sentences.sample(10).map(&:id).join(',')
+        practices.create(:practice => practice, :exam => exam)
+      end
 
   end
 

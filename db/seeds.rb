@@ -39,7 +39,6 @@ l3_2 = Lesson.create(:category => c3, :name => 'Negative Commands')
 
 # practices
 p1 = Practice.create(:lesson => l1, :name => 'Practice 1')
-p2 = Practice.create(:lesson => l1, :name => 'Practice 2')
 
 
 # sentences

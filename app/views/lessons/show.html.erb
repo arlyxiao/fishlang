@@ -9,11 +9,7 @@
     <% @practices.each do |p| %>
       <div class="span8">
         <h4>
-          <% if p.exam_sentences.blank? %>
-            <a href="#"><%= p.name %></a>
-          <% else %>
-            <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= p.exam_sentences.first.id %>'"><%= p.name %></a>
-          <% end %>
+          <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= current_user.get_practice(p).first.id %>'"><%= p.name %></a>
         </h4>
 
         <% p.sentences.each do |s| %>
