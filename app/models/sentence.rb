@@ -11,8 +11,12 @@ class Sentence < ActiveRecord::Base
 
   scope :by_practice, lambda{|practice| {:conditions => ['practice_id = ?', practice.id]} }
 
-  def next_id
-    self.class.by_practice(self.practice).where('id > ?', self.id).first.id
+  def next_id_by(user)
+    sentences = user.get_practice(practice)
+    return nil if sentences.last == self
+
+    ids = sentences.map(&:id)
+    ids.each_with_index { |val, index| return ids[index + 1] if self.id == val }
   end
 
   def translate?(subject)

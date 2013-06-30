@@ -15,7 +15,7 @@ class SentencesController < ApplicationController
   def check
     result = @sentence.translate?(params[:subject])
     
-    render json: {:next_id => @sentence.next_id_of_practice, :result => result}
+    render json: {:next_id => @sentence.next_id_by(current_user), :result => result}
   end
 
 

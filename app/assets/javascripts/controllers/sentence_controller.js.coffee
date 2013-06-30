@@ -4,6 +4,8 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     data = {subject: $('#subject').val()}
     url = '/sentences/' + @get('id') + '/check'
     Ember.$.post(url, data).then (response) ->
+      window.location.href = '/' if response.next_id == null
+
       if response.result == true
         $('#continue_btn').val(response.next_id)
         $("#check_btn").attr('disabled', 'disabled')
