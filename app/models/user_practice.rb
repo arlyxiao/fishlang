@@ -4,6 +4,7 @@ class UserPractice < ActiveRecord::Base
   belongs_to :user
   belongs_to :practice
 
+
   validates :user, :practice, :exam, :presence => true
 
 
@@ -13,11 +14,13 @@ class UserPractice < ActiveRecord::Base
     end
 
     def get_practice(practice)
+      practices.where(:practice_id => practice.id).first
+    end
+
+    def get_practice_sentences(practice)
       _store_practice(practice) unless _has_practice?(practice)
 
-      p = practices.where(:practice_id => practice.id).first
-
-      sentences = p.exam.split(',').map {
+      sentences = get_practice(practice).exam.split(',').map {
         |sentence_id| Sentence.find(sentence_id)
       }
     end

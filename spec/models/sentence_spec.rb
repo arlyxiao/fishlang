@@ -14,36 +14,42 @@ describe Sentence do
       12.times { FactoryGirl.create(:sentence, :practice => @p1) }
       12.times { FactoryGirl.create(:sentence, :practice => @p2) }
 
-      @u1_practice = @u1.get_practice(@p1)
-      @u2_practice = @u2.get_practice(@p1)
-
-      @u1_ids = @u1_practice.map(&:id)
+      @u1_practice_sentences = @u1.get_practice_sentences(@p1)
+      @u2_practice_sentences = @u2.get_practice_sentences(@p1)
     }
 
     it "u1 practice are not equal to u2 practice" do
-      @u1_practice.should_not == @u2_practice
+      @u1_practice_sentences.should_not == @u2_practice_sentences
     end
 
     it "sentences number should be equal" do
-      @u1_practice.count.should == @u2_practice.count
+      @u1_practice_sentences.count.should == @u2_practice_sentences.count
     end
 
     describe "next id should be correct" do
       before {
-        @u1_ids = @u1_practice.map(&:id)
+        @u1_ids = @u1_practice_sentences.map(&:id)
       }
 
-      it "the next of first" do
-        @u1_practice.first.next_id_by(@u1).should == @u1_ids[1]
+      it "next of each element" do
+        (0..9).each do |i|
+          break if i == 9
+          @u1_practice_sentences[i].next_id_by(@u1).should == @u1_ids[i + 1]
+        end
       end
 
-      it "the next of second" do
-        @u1_practice.second.next_id_by(@u1).should == @u1_ids[2]
+      it "same practice" do
+        @u1.get_practice_sentences(@p1).should == @u1_practice_sentences
       end
 
-      it "the next of third" do
-        @u1_practice.third.next_id_by(@u1).should == @u1_ids[3]
+      it "different practice" do
+        (0..9).each do |i|
+          @u1_practice_sentences[i].next_id_by(@u1)
+        end
+
+        @u1.get_practice_sentences(@p1).should_not == @u1_practice_sentences
       end
+
     end
 
 

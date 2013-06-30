@@ -12,8 +12,11 @@ class Sentence < ActiveRecord::Base
   scope :by_practice, lambda{|practice| {:conditions => ['practice_id = ?', practice.id]} }
 
   def next_id_by(user)
-    sentences = user.get_practice(practice)
-    return nil if sentences.last == self
+    sentences = user.get_practice_sentences(practice)
+    if sentences.last == self
+      user.get_practice(practice).destroy
+      return nil
+    end
 
     ids = sentences.map(&:id)
     ids.each_with_index { |val, index| return ids[index + 1] if self.id == val }
