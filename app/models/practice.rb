@@ -10,4 +10,9 @@ class Practice < ActiveRecord::Base
     sentences.sample(10)
   end
 
+  def exam_practice_of_user(user)
+    user.exam_practice(self) if user.has_exam_practice?
+  end
+
+
 end
