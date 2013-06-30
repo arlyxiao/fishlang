@@ -2,44 +2,57 @@ require "spec_helper"
 
 describe Sentence do
   before {
-    @c1 = Category.create(:name => 'Indicative')
+    @u1 = FactoryGirl.create(:user)
+    @u2 = FactoryGirl.create(:user)
 
-    @lesson_1 = Lesson.create(:category => @c1, :name => 'Present')
-
-    @practice_1 = Practice.create(:lesson => @lesson_1, :name => 'Practice 1')
-    @practice_2 = Practice.create(:lesson => @lesson_1, :name => 'Practice 2')
+    @p1 = FactoryGirl.create(:practice)
+    @p2 = FactoryGirl.create(:practice)
   }
 
   describe "Validate next_id" do
     before {
-      @sentence_1_1 = FactoryGirl.create(:sentence, :practice => @practice_1)
-      @sentence_2_1 = FactoryGirl.create(:sentence, :practice => @practice_2)
-      @sentence_1_2 = FactoryGirl.create(:sentence, :practice => @practice_1)
-      @sentence_1_3 = FactoryGirl.create(:sentence, :practice => @practice_1)
-      @sentence_2_2 = FactoryGirl.create(:sentence, :practice => @practice_2)
+      12.times { FactoryGirl.create(:sentence, :practice => @p1) }
+      12.times { FactoryGirl.create(:sentence, :practice => @p2) }
+
+      @u1_practice = @u1.get_practice(@p1)
+      @u2_practice = @u2.get_practice(@p1)
+
+      @u1_ids = @u1_practice.map(&:id)
     }
 
-    describe "order in practice_1" do
-      it "next_id of sentence_1_1" do
-        @sentence_1_1.next_id.should == @sentence_1_2.id
+    it "u1 practice are not equal to u2 practice" do
+      @u1_practice.should_not == @u2_practice
+    end
+
+    it "sentences number should be equal" do
+      @u1_practice.count.should == @u2_practice.count
+    end
+
+    describe "next id should be correct" do
+      before {
+        @u1_ids = @u1_practice.map(&:id)
+      }
+
+      it "the next of first" do
+        @u1_practice.first.next_id_by(@u1).should == @u1_ids[1]
       end
 
-      it "next_id of sentence_1_2" do
-        @sentence_1_2.next_id.should == @sentence_1_3.id
+      it "the next of second" do
+        @u1_practice.second.next_id_by(@u1).should == @u1_ids[2]
+      end
+
+      it "the next of third" do
+        @u1_practice.third.next_id_by(@u1).should == @u1_ids[3]
       end
     end
 
-    describe "order in practice_2" do
-      it "next_id of sentence_2_1" do
-        @sentence_2_1.next_id.should == @sentence_2_2.id
-      end
-    end
+
   end
 
   describe "Validate translate" do
 
     before {
-      @sentence = FactoryGirl.create(:sentence, :practice => @practice_1, :subject => 'estoy bien')
+      @sentence = FactoryGirl.create(:sentence, :practice => @p1, :subject => 'estoy bien')
       @sentence_translation_1 = FactoryGirl.create(:sentence_translation, 
         :sentence => @sentence,
         :subject => "I'm file"
