@@ -11,10 +11,6 @@
         <h4>
           <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= current_user.get_practice_sentences(p).first.id %>'"><%= p.name %></a>
         </h4>
-
-        <% p.sentences.each do |s| %>
-          <span class="span2"><a href="http://www.123teachme.com/spanish_verb_conjugation/<%= s.verb %>" class="black" target="_blank"><%= s.verb %></a></span>
-        <% end %>
       </div>
     <% end %>
 
