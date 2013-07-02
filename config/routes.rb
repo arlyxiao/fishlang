@@ -5,7 +5,11 @@ Fishlang::Application.routes.draw do
 
   resources :lessons
 
-  resources :practices
+  resources :practices do
+    collection do
+      get :exam
+    end
+  end
 
   resources :sentences do
     member do
@@ -31,5 +35,5 @@ Fishlang::Application.routes.draw do
   end
 
 
-  root :to => 'home#index'
+  root :to => 'lessons#index'
 end

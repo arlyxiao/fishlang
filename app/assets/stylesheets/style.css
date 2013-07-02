@@ -16,22 +16,8 @@ html, body {
   height: 100px;
 }
 
-#correct_box {
+#correct_box, #wrong_box {
   display: none;
-  background-color: #a3c964;
-  height: 30px;
-  padding: 5px;
-  line-height: 25px;
-  font-size: 18px;
-}
-
-#wrong_box {
-  display: none;
-  background-color: red;
-  height: 30px;
-  padding: 5px;
-  line-height: 25px;
-  font-size: 18px;
 }
 
 
