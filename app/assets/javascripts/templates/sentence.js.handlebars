@@ -11,7 +11,15 @@
   </div>
 
   <div class="span6" id="wrong_box">
-    <p class="alert alert-error">Oops, that’s wrong</p>
+    <p class="alert alert-error">
+      Oops, that’s wrong
+    </p>
+    <div class="well">
+      <h5>Correct Answers:</h5>
+      {{#each t in translations}}
+        <span style="color: green;">{{t.subject}}</span>
+      {{/each}}
+    </div>
   </div>
 
 </div>

@@ -2,12 +2,12 @@ FishLang.SentenceController = Ember.ObjectController.extend(
   
   check: ->
     data = {subject: $('#subject').val()}
-    url = '/sentences/' + @get('id') + '/check'
-    redirect_url = '/practices/' + @get('practice.id')
+    check_url = '/sentences/' + @get('id') + '/check'
+    success_url = '/practices/' + @get('practice.id')
 
-    Ember.$.post(url, data).then (response) ->
+    Ember.$.post(check_url, data).then (response) ->
 
-      window.location.href = redirect_url if response.next_id == null
+      window.location.href = success_url if response.next_id == null
 
       if response.result == true
         $('#continue_btn').val(response.next_id)
