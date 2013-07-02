@@ -2,6 +2,7 @@
   # match('/').to('index')
 
 
+
 FishLang.Router.map ->
   @resource "practices", ->
     @resource "practice",
@@ -10,4 +11,3 @@ FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
-
