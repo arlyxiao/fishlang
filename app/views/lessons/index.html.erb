@@ -2,7 +2,7 @@
   <h4><%= c.name %></h4>
   <div class="well">
     <% c.lessons.each do |l| %>
-      <div class="row-fluid">
+      <div class="row-fluid" style="padding: 5px;">
         <a href="/lessons/<%= l.id %>"><%= l.name %></a>
       </div>
     <% end %>

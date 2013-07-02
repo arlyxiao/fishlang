@@ -3,14 +3,14 @@
 <div class="row">
   <div class="row-fluid">
     <div class="span8" style="margin: 20px 0px 0px 9px;">
-      <h4><%= @lesson.category.name %> / <%= @lesson.name %></h4>
+      <h5><%= @lesson.category.name %> / <%= @lesson.name %></h5>
     </div>
 
     <% @practices.each do |p| %>
       <div class="span8">
-        <h4>
+        <h5>
           <a href="/practices/<%= p.id %>"><%= p.name %></a>
-        </h4>
+        </h5>
       </div>
     <% end %>
 
