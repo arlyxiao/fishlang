@@ -9,7 +9,7 @@
     <% @practices.each do |p| %>
       <div class="span8">
         <h4>
-          <a href="#" onclick="javascript: window.location.reload(); window.location.href = '/#/sentences/<%= current_user.get_practice_sentences(p).first.id %>'"><%= p.name %></a>
+          <a href="/practices/<%= p.id %>"><%= p.name %></a>
         </h4>
       </div>
     <% end %>
