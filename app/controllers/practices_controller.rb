@@ -11,7 +11,14 @@ class PracticesController < ApplicationController
     @practices = Practice.all
   end
 
+  def show
+    session[:practice_id] = @practice.id
+  end
+
   def exam
+    @practice = Practice.find(session[:practice_id])
+
+    p @practice
   end
 
 end
