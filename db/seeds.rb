@@ -49,6 +49,9 @@ s4 = Sentence.create(:practice => p1, :verb => 'empezar', :subject => "empiezo c
 s5 = Sentence.create(:practice => p1, :verb => 'dar', :subject => "te doy el libro")
 s6 = Sentence.create(:practice => p1, :verb => 'usar', :subject => "él usa el computador")
 s7 = Sentence.create(:practice => p1, :verb => 'perder', :subject => "el hombre pierde la llave")
+s8 = Sentence.create(:practice => p1, :verb => 'saber', :subject => "tú sabes leer el libro")
+s9 = Sentence.create(:practice => p1, :verb => 'correr', :subject => "tú corres en la playa")
+s10 = Sentence.create(:practice => p1, :verb => 'querer', :subject => "mi hermano quiere un libro")
 
 
 
@@ -60,3 +63,6 @@ SentenceTranslation.create(:sentence => s4, :subject => "I start to walk")
 SentenceTranslation.create(:sentence => s5, :subject => "I give the book to you")
 SentenceTranslation.create(:sentence => s6, :subject => "He uses the computer")
 SentenceTranslation.create(:sentence => s7, :subject => "The man loses the key")
+SentenceTranslation.create(:sentence => s8, :subject => "You know how to read the book")
+SentenceTranslation.create(:sentence => s9, :subject => "you run in the garden")
+SentenceTranslation.create(:sentence => s10, :subject => "my brother wants a book")

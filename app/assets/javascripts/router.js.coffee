@@ -3,9 +3,9 @@
 
 
 FishLang.Router.map ->
-  @resource "lessons", ->
-    @resource "lesson",
-      path: ":lesson_id", ->
+  @resource "practices", ->
+    @resource "practice",
+      path: ":practice_id", ->
 
   @resource "sentences", ->
     @resource "sentence",

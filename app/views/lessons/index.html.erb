@@ -1,1 +1,10 @@
-<%= render 'menus', :lessons => @lessons %>
+<% Category.all.each do |c| %>
+  <h4><%= c.name %></h4>
+  <div class="well">
+    <% c.lessons.each do |l| %>
+      <div class="row-fluid">
+        <a href="/lessons/<%= l.id %>"><%= l.name %></a>
+      </div>
+    <% end %>
+  </div>
+<% end %>

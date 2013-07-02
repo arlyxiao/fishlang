@@ -11,4 +11,7 @@ class PracticesController < ApplicationController
     @practices = Practice.all
   end
 
+  def show
+  end
+
 end
