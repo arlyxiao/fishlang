@@ -13,12 +13,12 @@ class PracticesController < ApplicationController
 
   def show
     session[:practice_id] = @practice.id
+
+    current_user.build_sentences(@practice)
   end
 
   def exam
     @practice = Practice.find(session[:practice_id])
-
-    p @practice
   end
 
 end

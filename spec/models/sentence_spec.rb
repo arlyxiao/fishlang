@@ -14,47 +14,57 @@ describe Sentence do
       12.times { FactoryGirl.create(:sentence, :practice => @p1) }
       12.times { FactoryGirl.create(:sentence, :practice => @p2) }
 
-      @u1_practice_sentences = @u1.get_practice_sentences(@p1)
-      @u2_practice_sentences = @u2.get_practice_sentences(@p1)
+      @u1.build_sentences(@p1)
+      @u2.build_sentences(@p1)
     }
 
-    it "validate get_practice of user" do
-      @u1.get_practice(@p1).exam.split(',').count.should == 10
-    end
-
-    it "u1 practice are not equal to u2 practice" do
-      @u1_practice_sentences.should_not == @u2_practice_sentences
-    end
-
-    it "sentences number should be equal" do
-      @u1_practice_sentences.count.should == @u2_practice_sentences.count
-    end
-
-    describe "next id should be correct" do
+    describe "Validate sentences" do
       before {
-        @u1_ids = @u1_practice_sentences.map(&:id)
+        @u1_sentences = @u1.get_sentences(@p1)
+        @u2_sentences = @u2.get_sentences(@p1)
       }
 
-      it "next of each element" do
-        (0..9).each do |i|
-          break if i == 9
-          @u1_practice_sentences[i].next_id_by(@u1).should == @u1_ids[i + 1]
-        end
+      it "validate get_practice of user" do
+        @u1.get_practice(@p1).exam.split(',').count.should == 10
       end
 
-      it "same practice" do
-        @u1.get_practice_sentences(@p1).should == @u1_practice_sentences
+      it "u1 practice are not equal to u2 practice" do
+        @u1_sentences.should_not == @u2_sentences
       end
 
-      it "different practice" do
-        (0..9).each do |i|
-          @u1_practice_sentences[i].next_id_by(@u1)
+      it "sentences number should be equal" do
+        @u1_sentences.count.should == @u2_sentences.count
+      end
+
+      describe "next id should be correct" do
+        before {
+          @u1_ids = @u1_sentences.map(&:id)
+        }
+
+        it "next of each element" do
+          (0..9).each do |i|
+            break if i == 9
+            @u1_sentences[i].next_id_by(@u1).should == @u1_ids[i + 1]
+          end
         end
 
-        @u1.get_practice_sentences(@p1).should_not == @u1_practice_sentences
+        it "same practice" do
+          @u1.get_sentences(@p1).should == @u1_sentences
+        end
+
+        it "practice removed" do
+          (0..9).each do |i|
+            @u1_sentences[i].next_id_by(@u1)
+          end
+
+          @u1.get_sentences(@p1).should == nil
+        end
+
       end
 
     end
+
+    
 
 
   end

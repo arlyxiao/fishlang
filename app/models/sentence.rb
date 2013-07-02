@@ -9,10 +9,8 @@ class Sentence < ActiveRecord::Base
 
   validates :practice, :subject, :verb, :presence => true
 
-  scope :by_practice, lambda{|practice| {:conditions => ['practice_id = ?', practice.id]} }
-
   def next_id_by(user)
-    sentences = user.get_practice_sentences(practice)
+    sentences = user.get_sentences(practice)
     if sentences.last == self
       user.get_practice(practice).destroy
       return nil
