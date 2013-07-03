@@ -8,6 +8,10 @@ class UserPractice < ActiveRecord::Base
   validates :user, :practice, :exam, :presence => true
 
 
+  def refresh_error_count
+    self.error_count = self.error_count + 1
+    self.save
+  end
 
   module UserMethods
     def self.included(base)
