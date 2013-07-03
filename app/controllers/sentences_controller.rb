@@ -14,6 +14,8 @@ class SentencesController < ApplicationController
 
   def check
     result = @sentence.translate?(params[:subject])
+
+    current_user.get_practice(@sentence.practice).refresh_error_count unless result
     
     render json: {:next_id => @sentence.next_id_by(current_user), :result => result}
   end

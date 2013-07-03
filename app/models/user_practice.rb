@@ -8,6 +8,7 @@ class UserPractice < ActiveRecord::Base
   validates :user, :practice, :exam, :presence => true
 
 
+
   module UserMethods
     def self.included(base)
       base.has_many :practices, :class_name => 'UserPractice', :foreign_key => :user_id
@@ -30,6 +31,12 @@ class UserPractice < ActiveRecord::Base
       sentences = get_practice(practice).exam.split(',').map {
         |sentence_id| Sentence.find(sentence_id)
       }
+    end
+
+    def refresh_error_count(practice)
+      user_practice = get_practice(practice)
+      user_practice.error_count = user_practice.error_count + 1
+      user_practice.save
     end
 
     private
