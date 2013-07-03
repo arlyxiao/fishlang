@@ -36,12 +36,7 @@ class UserPractice < ActiveRecord::Base
         |sentence_id| Sentence.find(sentence_id)
       }
     end
-
-    def refresh_error_count(practice)
-      user_practice = get_practice(practice)
-      user_practice.error_count = user_practice.error_count + 1
-      user_practice.save
-    end
+    
 
     private
       def _has_practice?(practice)
