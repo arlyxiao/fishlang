@@ -1,5 +1,5 @@
 class UserPractice < ActiveRecord::Base
-  attr_accessible :user, :practice, :exam
+  attr_accessible :user, :practice, :exam, :error_count, :has_finished
 
   belongs_to :user
   belongs_to :practice
@@ -23,7 +23,11 @@ class UserPractice < ActiveRecord::Base
     end
 
     def build_sentences(practice)
-      get_practice(practice).destroy if _has_practice?(practice)
+      if _has_practice?(practice)
+        u_p = get_practice(practice)
+        u_p.update_attributes({:has_finished => false, :error_count => 0})
+        return
+      end
 
       exam = practice.sentences.sample(10).map(&:id).join(',')
       practices.create(:practice => practice, :exam => exam)
