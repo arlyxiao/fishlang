@@ -13,6 +13,7 @@ class UserPractice < ActiveRecord::Base
     self.error_count = 0
     self.has_finished = false
     self.save
+    self
   end
 
 
@@ -31,11 +32,7 @@ class UserPractice < ActiveRecord::Base
     end
 
     def build_sentences(practice)
-      if _has_practice?(practice)
-        u_p = get_practice(practice)
-        u_p.update_attributes({:has_finished => false, :error_count => 0})
-        return
-      end
+      return get_practice(practice).init_default_value if _has_practice?(practice)
 
       exam = practice.sentences.sample(10).map(&:id).join(',')
       practices.create(:practice => practice, :exam => exam)
