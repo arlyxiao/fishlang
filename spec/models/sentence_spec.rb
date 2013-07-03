@@ -9,24 +9,68 @@ describe Sentence do
     @p2 = FactoryGirl.create(:practice)
   }
 
-  describe "Validate next_id" do
+  describe "Validate sentence" do
     before {
       12.times { FactoryGirl.create(:sentence, :practice => @p1) }
       12.times { FactoryGirl.create(:sentence, :practice => @p2) }
-
-      @u1.build_sentences(@p1)
-      @u2.build_sentences(@p1)
     }
+
+    describe "validate build_sentences and get_sentences" do
+      before {
+        @u1.build_sentences(@p1)
+        @u1_sentences = @u1.get_sentences(@p1)
+        @u1_practice = @u1.get_practice(@p1)
+      }
+
+      it "validate exam field" do
+        @u1_practice.exam.split(',').count.should == 10
+      end
+
+      it "error_count should be 0" do
+        @u1_practice.error_count.should == 0
+      end
+
+      it "has_finished should be 0" do
+        @u1_practice.has_finished.should == false
+      end
+
+      it "same when build_sentences again" do
+        @u1.build_sentences(@p1)
+        @u1.get_sentences(@p1).should == @u1_sentences
+      end
+
+      describe "destroy user practice" do
+        before {
+          @u1_practice.destroy
+        }
+        
+
+        it "nil sentences" do
+          @u1.get_sentences(@p1).should == nil
+        end
+
+        it "sentences are different after build_sentences again" do
+          @u1.build_sentences(@p1)
+          @u1.get_sentences(@p1).should_not == @u1_sentences
+        end
+
+      end
+
+    end
+
+    
 
     describe "Validate sentences" do
       before {
+        @u1.build_sentences(@p1)
+        @u2.build_sentences(@p1)
+
         @u1_sentences = @u1.get_sentences(@p1)
         @u2_sentences = @u2.get_sentences(@p1)
+
+        @u1_practice = @u1.get_practice(@p1)
       }
 
-      it "validate get_practice of user" do
-        @u1.get_practice(@p1).exam.split(',').count.should == 10
-      end
 
       it "u1 practice are not equal to u2 practice" do
         @u1_sentences.should_not == @u2_sentences
@@ -46,10 +90,6 @@ describe Sentence do
             break if i == 9
             @u1_sentences[i].next_id_by(@u1).should == @u1_ids[i + 1]
           end
-        end
-
-        it "same practice" do
-          @u1.get_sentences(@p1).should == @u1_sentences
         end
 
         it "practice removed" do

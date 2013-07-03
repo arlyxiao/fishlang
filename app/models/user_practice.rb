@@ -7,6 +7,14 @@ class UserPractice < ActiveRecord::Base
 
   validates :user, :practice, :exam, :presence => true
 
+  after_create :init_default_value
+
+  def init_default_value
+    self.error_count = 0
+    self.has_finished = false
+    self.save
+  end
+
 
   def refresh_error_count
     self.error_count = self.error_count + 1
