@@ -18,5 +18,6 @@ class User < ActiveRecord::Base
 
 
   include UserPractice::UserMethods
+  include UserPracticePoint::UserMethods
 
 end

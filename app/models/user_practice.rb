@@ -22,6 +22,7 @@ class UserPractice < ActiveRecord::Base
     self.save
   end
 
+
   module UserMethods
     def self.included(base)
       base.has_many :practices, :class_name => 'UserPractice', :foreign_key => :user_id
