@@ -12,7 +12,9 @@ class Sentence < ActiveRecord::Base
   def next_id_by(user)
     sentences = user.get_sentences(practice)
     if sentences.last == self
-      user.get_practice(practice).destroy
+      u_p = user.get_practice(practice)
+      # user.get_practice_point(practice).set_number(u_p)
+      u_p.destroy
       return nil
     end
 

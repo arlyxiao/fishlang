@@ -6,13 +6,10 @@ class UserPracticePoint < ActiveRecord::Base
 
   validates :user, :practice, :number, :presence => true
 
-  def set_full_number
-    self.number = self.number + 10
-    self.save
-  end
 
-  def set_junior_number
-    self.number = self.number + 1
+  def set_number(user_practice)
+    self.number = self.number + 10 if user_practice.error_count == 0
+    self.number = self.number + 1 if user_practice.error_count > 0
     self.save
   end
 
