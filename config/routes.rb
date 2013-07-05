@@ -9,6 +9,10 @@ Fishlang::Application.routes.draw do
     collection do
       get :exam
     end
+
+    member do
+      get :done
+    end
   end
 
   resources :sentences do

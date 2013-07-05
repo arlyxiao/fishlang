@@ -21,4 +21,8 @@ class PracticesController < ApplicationController
     @practice = Practice.find(session[:practice_id])
   end
 
+  def done
+    @user_practice = current_user.get_practice(@practice)
+  end
+
 end
