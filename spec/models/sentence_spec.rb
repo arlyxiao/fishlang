@@ -92,12 +92,20 @@ describe Sentence do
           end
         end
 
-        it "practice removed" do
-          (0..9).each do |i|
-            @u1_sentences[i].next_id_by(@u1)
+        describe "finish practice" do
+          before {
+            (0..9).each do |i|
+              @u1_sentences[i].next_id_by(@u1)
+            end
+          }
+          
+          it "has_finished should be true" do
+            @u1.get_practice(@p1).has_finished.should == true
           end
 
-          @u1.get_practice(@p1).has_finished.should == true
+          it "points added" do
+            @u1.get_practice(@p1).points.should == 10
+          end
         end
 
       end

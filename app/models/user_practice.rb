@@ -21,9 +21,14 @@ class UserPractice < ActiveRecord::Base
   def refresh_error_count
     self.error_count = self.error_count + 1
     self.save
+    self.error_count
   end
 
   def disable
+    number = 1 if self.error_count == 1
+    number = 10 if self.error_count == 0
+
+    self.points = self.points + number
     self.has_finished = true
     self.save
   end

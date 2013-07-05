@@ -48,14 +48,6 @@ ActiveRecord::Schema.define(:version => 20130705001554) do
     t.string   "verb"
   end
 
-  create_table "user_practice_points", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "practice_id"
-    t.integer  "number",      :default => 0
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
-  end
-
   create_table "user_practices", :force => true do |t|
     t.integer  "user_id"
     t.integer  "practice_id"
