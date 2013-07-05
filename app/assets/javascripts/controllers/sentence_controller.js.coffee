@@ -3,7 +3,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
   check: ->
     data = {subject: $('#subject').val()}
     check_url = '/sentences/' + @get('id') + '/check'
-    success_url = '/practices/' + @get('practice.id')
+    success_url = '/practices/' + @get('practice.id') + '/done'
 
     Ember.$.post(check_url, data).then (response) ->
 

@@ -9,7 +9,8 @@
     <% @practices.each do |p| %>
       <div class="span8">
         <h5>
-          <a href="/practices/<%= p.id %>"><%= p.name %></a>
+          <a href="/practices/<%= p.id %>"><%= p.name %></a> 
+          <%= render 'practices/points', :practice => p %>
         </h5>
       </div>
     <% end %>

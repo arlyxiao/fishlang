@@ -3,5 +3,6 @@
     <%= practice.lesson.category.name %> / 
     <a href="/lessons/<%= practice.lesson.id %>"><%= practice.lesson.name %></a> / 
     <a href="/practices/<%= practice.id %>"><%= practice.name %></a>
+    <%= render 'points', :practice => practice %>
   </h5>
 </div>

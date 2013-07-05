@@ -1,7 +1,13 @@
 <%= render 'top', :practice => @practice %>
 
 <div class="well" style="margin: 100px 0px 0px 0px;">
-  <p><%= @user_practice.error_count %> errors</p>
+  <h5><%= @user_practice.error_count %> errors, got 
+    <span class="number"><%= got_point_by(@user_practice) %></span>
+   points</h5>
 
-  <p>Got total <%= @user_practice.points %> points</p>
+  <h5>You have <span class="number"><%= @user_practice.points %></span> points now</h5>
+
+  <div style="margin-top: 20px;">
+    <button class="btn btn-primary" type="button" onclick="window.location.href = '/practices/<%= @practice.id %>'">Continue</button>
+  </div>
 </div>
