@@ -25,4 +25,5 @@ describe PracticesController do
       @user.get_practice(@practice).valid?.should == true
     end
   end
+
 end

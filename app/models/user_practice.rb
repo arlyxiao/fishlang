@@ -25,12 +25,16 @@ class UserPractice < ActiveRecord::Base
   end
 
   def disable
-    number = 1 if self.error_count == 1
-    number = 10 if self.error_count == 0
-
-    self.points = self.points + number
+    self.points = self.points + added_points
     self.has_finished = true
     self.save
+  end
+
+  def added_points
+    number = 0
+    number = 1 if self.error_count == 1
+    number = 10 if self.error_count == 0
+    number
   end
 
 
