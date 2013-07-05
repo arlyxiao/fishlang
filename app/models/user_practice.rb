@@ -1,5 +1,5 @@
 class UserPractice < ActiveRecord::Base
-  attr_accessible :user, :practice, :exam, :error_count, :has_finished
+  attr_accessible :user, :practice, :exam, :error_count, :has_finished, :points
 
   belongs_to :user
   belongs_to :practice
@@ -10,6 +10,7 @@ class UserPractice < ActiveRecord::Base
   after_create :init_default_value
 
   def init_default_value
+    self.exam = practice.generate_exam
     self.error_count = 0
     self.has_finished = false
     self.save
@@ -22,6 +23,12 @@ class UserPractice < ActiveRecord::Base
     self.save
   end
 
+  def disable
+    self.has_finished = true
+    self.save
+  end
+
+
 
   module UserMethods
     def self.included(base)
@@ -33,10 +40,9 @@ class UserPractice < ActiveRecord::Base
     end
 
     def build_sentences(practice)
-      return get_practice(practice).init_default_value if _has_practice?(practice)
+      return get_practice(practice).init_default_value if _has_disabled?(practice)
 
-      exam = practice.sentences.sample(10).map(&:id).join(',')
-      practices.create(:practice => practice, :exam => exam)
+      return _create_sentences(practice) unless _has_practice?(practice)
     end
 
     def get_sentences(practice)
@@ -51,6 +57,14 @@ class UserPractice < ActiveRecord::Base
     private
       def _has_practice?(practice)
         practices.where(:practice_id => practice.id).exists?
+      end
+
+      def _has_disabled?(practice)
+        practices.where(:practice_id => practice.id, :has_finished => true).exists?
+      end
+
+      def _create_sentences(practice)
+        practices.create(:practice => practice, :exam => practice.generate_exam)
       end
 
   end

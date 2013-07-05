@@ -97,7 +97,7 @@ describe Sentence do
             @u1_sentences[i].next_id_by(@u1)
           end
 
-          @u1.get_sentences(@p1).should == nil
+          @u1.get_practice(@p1).has_finished.should == true
         end
 
       end
