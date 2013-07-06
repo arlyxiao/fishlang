@@ -15,6 +15,7 @@ class PracticesController < ApplicationController
     session[:practice_id] = @practice.id
 
     current_user.build_sentences(@practice)
+    @sentences = current_user.get_sentences(@practice)
   end
 
   def exam
