@@ -5,4 +5,11 @@ class SentenceReport < ActiveRecord::Base
   belongs_to :user
 
   validates :sentence, :user, :content, :presence => true
+
+  module UserMethods
+    def self.included(base)
+      base.has_many :sentence_reports
+    end
+	end
+
 end
