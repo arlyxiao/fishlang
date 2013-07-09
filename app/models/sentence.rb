@@ -24,4 +24,5 @@ class Sentence < ActiveRecord::Base
     subjects = translations.map!{|c| c.subject.downcase.strip.squeeze(' ')}
     subjects.include? subject.downcase.strip.squeeze(' ')
   end
+  
 end

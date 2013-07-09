@@ -21,6 +21,7 @@ class UserPractice < ActiveRecord::Base
   def refresh_error_count
     self.error_count = self.error_count + 1
     self.save
+    self.reload
     self.error_count
   end
 
@@ -49,7 +50,9 @@ class UserPractice < ActiveRecord::Base
     end
 
     def build_sentences(practice)
-      return get_practice(practice).init_default_value if _has_disabled?(practice)
+      if _has_disabled?(practice) || _has_practice?(practice)
+        return get_practice(practice).init_default_value
+      end
 
       return _create_sentences(practice) unless _has_practice?(practice)
     end

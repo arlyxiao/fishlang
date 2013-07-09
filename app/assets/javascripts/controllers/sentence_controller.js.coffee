@@ -6,7 +6,8 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     success_url = '/practices/' + @get('practice.id') + '/done'
 
     Ember.$.post(check_url, data).then (response) ->
-    
+      $('#practice_error_count').html(response.error_count)
+
       if response.next_id == null
         $("#check_btn").attr('disabled', 'disabled')
         $("#continue_btn").attr('disabled', 'disabled')

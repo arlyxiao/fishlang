@@ -8,16 +8,22 @@ class SentencesController < ApplicationController
 
 
   def show
-    render json: @sentence
+    render json: {:sentence => @sentence}
   end
 
 
   def check
     result = @sentence.translate?(params[:subject])
 
-    current_user.get_practice(@sentence.practice).refresh_error_count unless result
+    p = current_user.get_practice(@sentence.practice)
+    p.refresh_error_count unless result
     
-    render json: {:next_id => @sentence.next_id_by(current_user), :result => result}
+    render json: {
+      :next_id => @sentence.next_id_by(current_user), 
+      :result => result, 
+      :error_count => p.error_count,
+      :done_count => 10 - p.error_count
+    }
   end
 
 

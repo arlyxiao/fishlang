@@ -20,6 +20,8 @@ class PracticesController < ApplicationController
 
   def exam
     @practice = Practice.find(session[:practice_id])
+
+    @user_practice = current_user.get_practice(@practice)
   end
 
   def done
