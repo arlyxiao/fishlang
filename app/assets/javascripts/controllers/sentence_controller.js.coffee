@@ -45,6 +45,9 @@ FishLang.SentenceController = Ember.ObjectController.extend(
   cancel_report: ->
     $('.dropdown-menu').hide()
 
+  submit_report: ->
+    contents = $('#contents').val()
+
 )
 
 
