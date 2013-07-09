@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th>#</th>
+      <th>Date</th>
       <th>Content</th>
       <th>User</th>
       <th></th>
@@ -11,6 +12,7 @@
     <% @sentence_reports.each do |r| %>
       <tr>
         <td><%= r.id %></td>
+        <td><%= r.created_at.strftime('%Y-%m-%d, %H:%M:%S') %></td>
         <td><a href="/admin/sentence_reports/<%= r.id %>"><%= r.content %></a></td>
         <td><%= r.user.name %></td>
         <td>

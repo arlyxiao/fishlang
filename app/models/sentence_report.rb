@@ -6,10 +6,12 @@ class SentenceReport < ActiveRecord::Base
 
   validates :sentence, :user, :content, :presence => true
 
+  default_scope order('id desc')
+
   module UserMethods
     def self.included(base)
       base.has_many :sentence_reports
     end
-	end
+  end
 
 end

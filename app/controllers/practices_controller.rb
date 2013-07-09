@@ -28,7 +28,6 @@ class PracticesController < ApplicationController
 
   def done
     @user_practice = current_user.get_practice(@practice)
-    session[:practice_id] = nil
   end
 
 end
