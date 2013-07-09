@@ -51,7 +51,10 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     report_url = '/sentences/' + @get('id') + '/report'
     content = ''
     user_answer = $('#subject').val()
-    others_content = $('#others_content').val()
+    others_content1 = $('#wrong_box .others_content').val()
+    others_content2 = $('#correct_box .others_content').val()
+    others_content = others_content1 + others_content2
+
     $("input[name='contents']:checked").each ->
       content = content + @value + ' '
 

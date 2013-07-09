@@ -1,6 +1,8 @@
 FishLang.SentenceView = Ember.View.extend(
+
   didInsertElement: ->
     $('#subject').focus()
+    
 
   keyPress: (event) ->
     if $.trim($('#subject').val()) == ''
