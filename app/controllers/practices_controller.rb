@@ -15,6 +15,8 @@ class PracticesController < ApplicationController
     session[:practice_id] = @practice.id
 
     current_user.build_sentences(@practice)
+    current_user.get_practice(@practice).init_default_value
+
     @sentences = current_user.get_sentences(@practice)
   end
 

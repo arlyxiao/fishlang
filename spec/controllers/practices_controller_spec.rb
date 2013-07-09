@@ -15,6 +15,7 @@ describe PracticesController do
     before {
       sign_in @user
       get 'show', :id => @practice.id
+      @user_practice = @user.get_practice(@practice)
     }
 
     it "practice_id in session should be correct" do
@@ -22,8 +23,40 @@ describe PracticesController do
     end
 
     it "user has practice" do
-      @user.get_practice(@practice).valid?.should == true
+      @user_practice.valid?.should == true
     end
+
+    it "error_count" do
+      @user_practice.error_count.should == 0
+    end
+
+    it "done_count" do
+      @user_practice.done_count.should == 0
+    end
+
+    it "has_finished" do
+      @user_practice.has_finished.should == false
+    end
+
+    describe "go into show page again" do
+      before {
+        @user_practice.error_count = 5
+        @user_practice.done_count = 3
+        @user_practice.save
+
+        get 'show', :id => @practice.id
+        @user_practice = @user.get_practice(@practice)
+      }
+
+      it "error_count" do
+        @user_practice.error_count.should == 0
+      end
+
+      it "done_count" do
+        @user_practice.done_count.should == 0
+      end
+    end
+
   end
 
 end
