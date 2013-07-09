@@ -2,6 +2,13 @@
 	<h5>User: </h5>
   <p><%= @sentence_report.user.name %></p>
 
+  <h5>Practice: </h5>
+  <p>
+    <a href="/admin/practices/<%= @sentence_report.sentence.practice.id %>">
+    <%= @sentence_report.sentence.practice.name %>
+    </a>
+  </p>
+
   <h5>Sentence: </h5>
   <p><%= @sentence_report.sentence.subject %></p>
 
