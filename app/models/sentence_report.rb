@@ -1,4 +1,4 @@
-class SentenceTranslation < ActiveRecord::Base
+class SentenceReport < ActiveRecord::Base
   attr_accessible :sentence, :user, :choice, :content
 
   belongs_to :sentence
