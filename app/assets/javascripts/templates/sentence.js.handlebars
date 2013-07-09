@@ -8,9 +8,57 @@
 
   <div class="span8" id="correct_box">
     <p class="alert alert-success">You are correct</p>
+
+    <div class="well">
+      <p>
+        <div class="btn-group">
+          <a href="javascript:void(0);" {{action 'report'}} class="btn btn-warning">Report a Problem</a>
+          <a href="javascript:void(0);" {{action 'report'}} data-toggle="dropdown" class="btn btn-warning dropdown-toggle"><span class="caret"></span></a>
+          <ul class="dropdown-menu span7">
+            <li>
+
+              <div style="margin: 0px 0px 0px 10px;">
+
+                <span class="row-fluid report_text">
+                  <input type="checkbox" name="contents" value="The spanish sentence is unnatural or has an error." /> 
+                  The spanish sentence is unnatural or has an error
+                </span>
+
+                <span class="row-fluid report_text">
+                  <input type="checkbox" name="contents" value="The translation is unnatural or has an error." /> 
+                  The translation is unnatural or has an error
+                </span>
+
+                <span class="row-fluid report_text">
+                  <textarea style="height: 50px; font-size:12px;" id="others_content" class="span11" placeholder="Have a different problem?"></textarea>
+                </span>
+
+      
+
+
+                <span class="row-fluid" style="margin-bottom:10px; float: left;">
+
+                  <button {{action 'cancel_report'}} id='cancel_btn' class='btn'>Cancel</button>
+                  <button {{action 'submit_report'}} id='submit_btn' class='btn'>Submit</button>
+                </span>
+
+              </div>
+            </li>
+          </ul>
+
+          
+        </div>
+
+      </p>
+
+      <p>
+         <span id="notice" class="alert alert-success" style="display:none; margin-top: 5px;">Thanks</span>
+      </p>
+
+    </div>
   </div>
 
-  <div class="span8" id="">
+  <div class="span8" id="wrong_box">
     <p class="alert alert-error">
       <a class="close">×</a>
       Oops, that’s wrong
