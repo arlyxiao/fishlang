@@ -37,5 +37,14 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     $("#wrong_box").hide();
     $("#correct_box").hide();
     $(".translation_box").removeAttr('disabled')
+
+  report: ->
+    return $('.dropdown-menu').hide() if $('.dropdown-menu').is(":visible")
+    $('.dropdown-menu').show()
+
+  cancel_report: ->
+    $('.dropdown-menu').hide()
+
 )
+
 

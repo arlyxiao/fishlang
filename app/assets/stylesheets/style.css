@@ -12,7 +12,6 @@ html, body {
 }
 
 .translation_box {
-  width: 560px;
   height: 100px;
 }
 
@@ -31,4 +30,9 @@ html, body {
 .number {
   font-size: 12px;
   color: green;
+}
+
+.report_text {
+  margin-bottom:10px; 
+  float: left;
 }
