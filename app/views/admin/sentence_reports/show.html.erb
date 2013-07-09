@@ -1,0 +1,22 @@
+<div class="well">
+	<h5>User: </h5>
+  <p><%= @sentence_report.user.name %></p>
+
+  <h5>Sentence: </h5>
+  <p><%= @sentence_report.sentence.subject %></p>
+
+  <h5>Translations: </h5>
+  <p>
+  	<% @sentence_report.sentence.translations.each do |t| %>
+      <span><%= t.subject %></span> <br />
+    <% end %>
+  </p>
+
+  <h5>User Answer: </h5>
+  <p><%= @sentence_report.user_answer %></p>
+
+
+  <h5>Content: </h5>
+  <p><%= @sentence_report.content %></p>
+
+</div>

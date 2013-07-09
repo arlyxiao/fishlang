@@ -1,0 +1,25 @@
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Content</th>
+      <th>User</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sentence_reports.each do |r| %>
+      <tr>
+        <td><%= r.id %></td>
+        <td><a href="/admin/sentence_reports/<%= r.id %>"><%= r.content %></a></td>
+        <td><%= r.user.name %></td>
+        <td>
+          <%= link_to 'Delete', "/admin/sentence_reports/#{r.id}", :method => :delete, :confirm => "Remove '#{r.content}'?" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= paginate @sentence_reports %>

@@ -11,6 +11,9 @@ gem 'active_model_serializers'
 gem 'turbolinks'
 gem 'simple_form'
 
+gem 'kaminari', '0.14.1'
+
+
 # emberjs
 gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'
 gem 'ember-source', '1.0.0.rc4'

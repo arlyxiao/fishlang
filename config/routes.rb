@@ -37,6 +37,8 @@ Fishlang::Application.routes.draw do
 
     end
 
+    resources :sentence_reports
+
   end
 
 
