@@ -8,7 +8,7 @@ class SentencesController < ApplicationController
 
 
   def show
-    render json: {:sentence => @sentence}
+    render json: @sentence
   end
 
 
