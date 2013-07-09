@@ -23,8 +23,8 @@
         {{/each}}
       </p>
 
+ 
       <p>
-
         <div class="btn-group">
           <a href="javascript:void(0);" {{action 'report'}} class="btn btn-warning">Report a Problem</a>
           <a href="javascript:void(0);" {{action 'report'}} data-toggle="dropdown" class="btn btn-warning dropdown-toggle"><span class="caret"></span></a>
@@ -33,22 +33,22 @@
 
               <div style="margin: 0px 0px 0px 10px;">
                 <span class="row-fluid report_text">
-                  <input type="checkbox" name="content" value="My answer is correct" /> 
+                  <input type="checkbox" name="contents" value="My answer is correct." /> 
                   My answer is correct
                 </span>
 
                 <span class="row-fluid report_text">
-                  <input type="checkbox" name="contents[]" value="The spanish sentence is unnatural or has an error" /> 
+                  <input type="checkbox" name="contents" value="The spanish sentence is unnatural or has an error." /> 
                   The spanish sentence is unnatural or has an error
                 </span>
 
                 <span class="row-fluid report_text">
-                  <input type="checkbox" name="contents[]" value="The translation is unnatural or has an error" /> 
+                  <input type="checkbox" name="contents" value="The translation is unnatural or has an error." /> 
                   The translation is unnatural or has an error
                 </span>
 
                 <span class="row-fluid report_text">
-                  <textarea style="height: 50px; font-size:12px;" name="contents[]" class="span11" placeholder="Have a different problem?"></textarea>
+                  <textarea style="height: 50px; font-size:12px;" id="others_content" class="span11" placeholder="Have a different problem?"></textarea>
                 </span>
 
       
@@ -63,8 +63,14 @@
               </div>
             </li>
           </ul>
+
+          
         </div>
 
+      </p>
+
+      <p>
+         <span id="notice" class="alert alert-success" style="display:none; margin-top: 5px;">Thanks</span>
       </p>
 
     </div>

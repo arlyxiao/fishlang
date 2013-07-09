@@ -21,4 +21,16 @@ class SentencesController < ApplicationController
   end
 
 
+  def report
+    SentenceReport.create(
+      :user => current_user, 
+      :sentence => @sentence, 
+      :user_answer => params[:user_answer],
+      :content => params[:content]
+    )
+
+    render :nothing => true
+  end
+
+
 end

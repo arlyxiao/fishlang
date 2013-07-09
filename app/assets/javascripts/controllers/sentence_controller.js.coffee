@@ -46,8 +46,23 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     $('.dropdown-menu').hide()
 
   submit_report: ->
-    contents = $('#contents').val()
+    report_url = '/sentences/' + @get('id') + '/report'
+    content = ''
+    user_answer = $('#subject').val()
+    others_content = $('#others_content').val()
+    $("input[name='contents']:checked").each ->
+      content = content + @value + ' '
 
+    content = content + others_content
+
+    data = {user_answer: user_answer, content: content}
+
+    Ember.$.post(report_url, data).then (response) ->
+      $('.dropdown-menu').hide()
+      $('#notice').attr('display', 'block')
+      $("#notice").show();
+      $("#notice").hide(5000);
+    
 )
 
 

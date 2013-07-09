@@ -19,6 +19,7 @@ Fishlang::Application.routes.draw do
     member do
       post :check
       get :continue
+      post :report
     end
 
   end
