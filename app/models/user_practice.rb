@@ -1,5 +1,5 @@
 class UserPractice < ActiveRecord::Base
-  attr_accessible :user, :practice, :exam, :error_count, :has_finished, :points
+  attr_accessible :user, :practice, :exam, :error_count, :has_finished, :points, :done_count
 
   belongs_to :user
   belongs_to :practice
@@ -12,6 +12,7 @@ class UserPractice < ActiveRecord::Base
   def init_default_value
     self.exam = practice.generate_exam
     self.error_count = 0
+    self.done_count = 0
     self.has_finished = false
     self.save
     self
@@ -23,6 +24,13 @@ class UserPractice < ActiveRecord::Base
     self.save
     self.reload
     self.error_count
+  end
+
+  def refresh_done_count
+    self.done_count = self.done_count + 1
+    self.save
+    self.reload
+    self.done_count
   end
 
   def disable

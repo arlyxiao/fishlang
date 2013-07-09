@@ -16,13 +16,14 @@ class SentencesController < ApplicationController
     result = @sentence.translate?(params[:subject])
 
     p = current_user.get_practice(@sentence.practice)
+    p.refresh_done_count
     p.refresh_error_count unless result
     
     render json: {
       :next_id => @sentence.next_id_by(current_user), 
       :result => result, 
       :error_count => p.error_count,
-      :done_count => 10 - p.error_count
+      :done_count => p.done_count
     }
   end
 
