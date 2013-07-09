@@ -63,6 +63,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
       $('.dropdown-menu').hide()
       $('.notice_report').attr('display', 'block')
       $(".notice_report").show();
+      $('#continue_btn').focus()
       $(".notice_report").hide(5000);
     
 )

@@ -1,9 +1,11 @@
 <%= render 'top', :practice => @practice %>
 
 <div class="well" style="margin: 100px 0px 0px 0px;">
-  <h5><span style="color: red;"><%= @user_practice.error_count %></span> errors, got 
+	<% unless session[:practice_id].nil? %>
+    <h5><span style="color: red;"><%= @user_practice.error_count %></span> errors, got 
     <span class="number"><%= @user_practice.added_points %></span>
    points</h5>
+  <% end %>
 
   <h5>You have <span class="number"><%= @user_practice.points %></span> points now</h5>
 
