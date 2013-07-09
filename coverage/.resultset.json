@@ -393,6 +393,18 @@
         null,
         null
       ],
+      "/Users/xiaorich/www/fishlang/config/initializers/kaminari_config.rb": [
+        1,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
       "/Users/xiaorich/www/fishlang/config/initializers/mime_types.rb": [
         null,
         null,
@@ -655,6 +667,8 @@
         null,
         null,
         null,
+        1,
+        null,
         null,
         null,
         null,
@@ -870,6 +884,32 @@
         null,
         1,
         116,
+        null,
+        null,
+        null,
+        null
+      ],
+      "/Users/xiaorich/www/fishlang/app/controllers/admin/sentence_reports_controller.rb": [
+        1,
+        null,
+        1,
+        null,
+        1,
+        0,
+        null,
+        null,
+        null,
+        1,
+        0,
+        null,
+        null,
+        1,
+        null,
+        null,
+        1,
+        0,
+        null,
+        0,
         null,
         null,
         null,
@@ -1674,6 +1714,6 @@
         null
       ]
     },
-    "timestamp": 1373356296
+    "timestamp": 1373362006
   }
 }
