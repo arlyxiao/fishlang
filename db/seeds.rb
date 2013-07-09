@@ -3,6 +3,8 @@ ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_reports")
+
 
 c1 = Category.create(:name => 'Indicative')
 c2 = Category.create(:name => 'Subjunctive')
