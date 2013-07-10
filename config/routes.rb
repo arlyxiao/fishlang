@@ -28,6 +28,7 @@ Fishlang::Application.routes.draw do
 
 
   namespace :admin do
+    root :to => 'index#index'
 
     resources :users
 
