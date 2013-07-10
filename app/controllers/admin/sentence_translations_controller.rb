@@ -1,5 +1,5 @@
 class Admin::SentenceTranslationsController < ApplicationController
-
+  layout 'admin'
   before_filter :pre_load
   
   def pre_load
