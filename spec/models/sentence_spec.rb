@@ -15,12 +15,24 @@ describe Sentence do
       12.times { FactoryGirl.create(:sentence, :practice => @p2) }
     }
 
+    
+
     describe "validate build_sentences and get_sentence_ids" do
       before {
         @u1.build_sentences(@p1)
         @u1_sentence_ids = @u1.get_sentence_ids(@p1)
         @u1_practice = @u1.get_practice(@p1)
       }
+
+      describe "not in exam" do
+        before {
+          @s = FactoryGirl.create(:sentence, :practice => @p1)
+        }
+
+        it "should be false" do
+          @s.is_in_exam?(@u1_practice).should == false
+        end
+      end
 
       it "validate exam field" do
         JSON.parse(@u1_practice.exam).count.should == 10
@@ -81,6 +93,10 @@ describe Sentence do
           id = @u1_sentence_ids.sample(1).first
           @sentence = Sentence.find(id)
         }
+
+        it "is in exam" do
+          @sentence.is_in_exam?(@u1_practice).should == true
+        end
 
         it "not done in exam" do
           @sentence.done_exam_in?(@u1_practice).should == false

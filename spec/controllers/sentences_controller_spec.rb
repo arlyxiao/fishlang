@@ -200,6 +200,21 @@ describe SentencesController do
   end
 
 
+  describe "#check any sentence id not in the exam" do
+    before {
+      @s = FactoryGirl.create(:sentence, :practice => @practice)
+      get 'check', :id => @s.id, :subject => 'test subject'
+      @result = response.body
+    }
+
+    it "empty response" do
+      @result.should == 'null'
+    end
+
+  end
+
+
+
   describe "validate user practice" do
     before {
       @user_practice = @user.get_practice(@practice)

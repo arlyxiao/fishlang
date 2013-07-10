@@ -10,6 +10,9 @@ class Sentence < ActiveRecord::Base
   validates :practice, :subject, :verb, :presence => true
 
   def next_id_by(user)
+    user_practice = user.get_practice(practice)
+    return nil unless self.is_in_exam?(user_practice)
+
     ids = user.get_sentence_ids(practice)
     if ids.last == self.id
       user.get_practice(practice).disable
@@ -36,6 +39,12 @@ class Sentence < ActiveRecord::Base
   def done_exam_in?(user_practice)
     ids = [] if user_practice.done_exam.blank?
     ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
+
+    ids.include? self.id
+  end
+
+  def is_in_exam?(user_practice)
+    ids = JSON.parse(user_practice.exam) unless user_practice.exam.blank?
 
     ids.include? self.id
   end

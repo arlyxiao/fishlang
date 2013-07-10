@@ -6,6 +6,8 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     success_url = '/practices/' + @get('practice.id') + '/done'
 
     Ember.$.post(check_url, data).then (response) ->
+      return if response == null
+
       $('#practice_error_count').html(response.error_count)
       $('#practice_done_count').html(response.done_count)
 
@@ -31,7 +33,10 @@ FishLang.SentenceController = Ember.ObjectController.extend(
       
 
   continue: ->
-    @transitionToRoute 'sentence', FishLang.Sentence.find($('#continue_btn').val())
+    id = $('#continue_btn').val()
+    window.location.href = "/lessons" if id == null
+
+    @transitionToRoute 'sentence', FishLang.Sentence.find(id)
     $("#continue_btn").attr('disabled', 'disabled')
     $("#check_btn").removeAttr('disabled')
     $('#translation_box').focus()

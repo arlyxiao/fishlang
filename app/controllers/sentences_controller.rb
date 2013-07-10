@@ -8,14 +8,14 @@ class SentencesController < ApplicationController
 
 
   def show
-    p = current_user.get_practice(@sentence.practice)
-
     render json: @sentence
   end
 
 
   def check
     p = current_user.get_practice(@sentence.practice)
+
+    return render json: nil unless @sentence.is_in_exam?(p)
 
     result = @sentence.translate?(params[:subject])
 
