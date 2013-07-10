@@ -115,8 +115,10 @@ describe SentencesController do
   describe "#check, other sentence id" do
     before {
       @sentence_ids = @user.get_sentence_ids(@practice)
-      @id = @sentence_ids[1]
+      @id = @sentence_ids[1..8].sample(1).first
+      @next_id = @sentence_ids[@sentence_ids.index(@id) + 1]
     }
+
 
     describe "incorrect translation" do
 
@@ -135,11 +137,21 @@ describe SentencesController do
       end
 
       it "next_id should be correct" do
-        @body['next_id'].should == @sentence_ids[2]
+        @body['next_id'].should == @next_id
       end
 
       it "result should be correct" do
         @body['result'].should == false
+      end
+
+      describe "go into sentence page again" do
+        before {
+          get 'check', :id => @id, :subject => 'test subject'
+        }
+
+        it "redirect_to done page" do
+          response.should redirect_to("/practices/#{@practice.id}/done")
+        end
       end
 
     end
@@ -161,11 +173,21 @@ describe SentencesController do
       end
 
       it "next_id should be correct" do
-        @body['next_id'].should == @sentence_ids[2]
+        @body['next_id'].should == @next_id
       end
 
       it "result should be correct" do
         @body['result'].should == true
+      end
+
+      describe "go into sentence page again" do
+        before {
+          get 'check', :id => @id, :subject => 'test'
+        }
+
+        it "redirect_to done page" do
+          response.should redirect_to("/practices/#{@practice.id}/done")
+        end
       end
 
     end
@@ -293,7 +315,7 @@ end
 describe SentencesController do
 
   describe "report sentence exam errors" do
-    
+
     before {
       @user = FactoryGirl.create :user
       sign_in @user
