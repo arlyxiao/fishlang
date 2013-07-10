@@ -11,7 +11,7 @@ class UserPractice < ActiveRecord::Base
   after_create :init_default_value
 
   def init_default_value
-    self.exam = practice.generate_exam if self.has_finished
+    self.exam = practice.generate_exam if self.has_finished || self.exam.blank?
     self.error_count = 0
     self.done_count = 0
     self.has_finished = false
@@ -66,7 +66,9 @@ class UserPractice < ActiveRecord::Base
     def get_sentence_ids(practice)
       return nil unless _has_practice?(practice)
 
-      JSON.parse(get_practice(practice).exam)
+      exam = get_practice(practice).exam
+      exam = [].to_json if exam.blank?
+      JSON.parse(exam)
     end
     
 

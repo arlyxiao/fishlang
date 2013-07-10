@@ -6,6 +6,11 @@ html, body {
 .hr {
 }
 
+.center {
+  width: 550px;
+  margin: 0 auto;
+}
+
 .black {
   color: black;
 }
