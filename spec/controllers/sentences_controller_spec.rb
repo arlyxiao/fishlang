@@ -26,7 +26,7 @@ describe SentencesController do
     end
 
     it "exam" do
-      @user_practice.exam.split(',').count.should == 10
+      JSON.parse(@user_practice.exam).count.should == 10
     end
 
     it "has_finished" do
@@ -144,16 +144,7 @@ describe SentencesController do
         @body['result'].should == false
       end
 
-      describe "go into sentence page again" do
-        before {
-          get 'check', :id => @id, :subject => 'test subject'
-        }
-
-        it "redirect_to done page" do
-          response.should redirect_to("/practices/#{@practice.id}/done")
-        end
-      end
-
+       
     end
 
     describe "correct translation" do
@@ -162,6 +153,10 @@ describe SentencesController do
         get 'check', :id => @id, :subject => 'test'
         @user_practice = @user.get_practice(@practice)
         @body = JSON::parse(response.body)
+
+        @error_count = @user_practice.error_count
+        @done_count = @user_practice.done_count
+        @done_exam = @user_practice.done_exam
       }
 
       it "error_count should be correct" do
@@ -180,13 +175,22 @@ describe SentencesController do
         @body['result'].should == true
       end
 
-      describe "go into sentence page again" do
+      describe "go into check page again" do
         before {
           get 'check', :id => @id, :subject => 'test'
+          @user_practice = @user.get_practice(@practice)
         }
 
-        it "redirect_to done page" do
-          response.should redirect_to("/practices/#{@practice.id}/done")
+        it "same done_exam" do
+          @user_practice.done_exam.should == @done_exam
+        end
+
+        it "same done_count" do
+          @user_practice.done_count.should == @done_count
+        end
+
+        it "same error_count" do
+          @user_practice.error_count.should == @error_count
         end
       end
 
@@ -202,12 +206,16 @@ describe SentencesController do
       @exam = @user_practice.exam
     }
 
+    it "nil done_exam" do
+      @user_practice.done_exam.should be_nil
+    end
+
     it "error_count" do
       @user_practice.error_count.should == 0
     end
 
     it "exam" do
-      @user_practice.exam.split(',').count.should == 10
+      JSON.parse(@user_practice.exam).count.should == 10
     end
 
     it "has_finished" do
@@ -243,6 +251,9 @@ describe SentencesController do
         @user_practice.points.should == 10
       end
 
+      it "done_exam = exam" do
+        @user_practice.done_exam.should == @user_practice.exam
+      end
 
     end
 

@@ -38,10 +38,16 @@ describe PracticesController do
       @user_practice.has_finished.should == false
     end
 
+    it "done_exam" do
+      @user_practice.done_exam.should be_nil
+    end
+
+
     describe "go into show page again" do
       before {
         @user_practice.error_count = 5
         @user_practice.done_count = 3
+        @user_practice.done_exam = 'sss'
         @user_practice.save
 
         get 'show', :id => @practice.id
@@ -55,6 +61,10 @@ describe PracticesController do
       it "done_count" do
         @user_practice.done_count.should == 0
       end
+
+      it "done_exam" do
+      @user_practice.done_exam.should be_nil
+    end
     end
 
   end

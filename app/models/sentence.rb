@@ -23,5 +23,21 @@ class Sentence < ActiveRecord::Base
     subjects = translations.map!{|c| c.subject.downcase.strip.squeeze(' ')}
     subjects.include? subject.downcase.strip.squeeze(' ')
   end
+
+  def move_done_in(user_practice)
+    ids = [] if user_practice.done_exam.blank?
+    ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
+
+    ids << self.id
+    user_practice.done_exam = ids.to_json
+    user_practice.save
+  end
+
+  def done_exam_in?(user_practice)
+    ids = [] if user_practice.done_exam.blank?
+    ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
+
+    ids.include? self.id
+  end
   
 end

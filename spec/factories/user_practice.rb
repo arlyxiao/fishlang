@@ -7,5 +7,6 @@ FactoryGirl.define do
     done_count 0
     has_finished false
     points 0
+    done_exam nil
   end
 end

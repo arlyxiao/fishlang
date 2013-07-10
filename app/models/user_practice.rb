@@ -1,5 +1,6 @@
 class UserPractice < ActiveRecord::Base
-  attr_accessible :user, :practice, :exam, :error_count, :has_finished, :points, :done_count
+  attr_accessible :user, :practice, :exam, :error_count, 
+                  :has_finished, :points, :done_count, :done_exam
 
   belongs_to :user
   belongs_to :practice
@@ -14,6 +15,7 @@ class UserPractice < ActiveRecord::Base
     self.error_count = 0
     self.done_count = 0
     self.has_finished = false
+    self.done_exam = nil
     self.save
     self
   end

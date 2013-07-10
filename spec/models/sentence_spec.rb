@@ -23,7 +23,7 @@ describe Sentence do
       }
 
       it "validate exam field" do
-        @u1_practice.exam.split(',').count.should == 10
+        JSON.parse(@u1_practice.exam).count.should == 10
       end
 
       it "error_count should be 0" do
@@ -34,9 +34,14 @@ describe Sentence do
         @u1_practice.has_finished.should == false
       end
 
+
       it "same when build_sentences again" do
         @u1.build_sentences(@p1)
         @u1.get_sentence_ids(@p1).should == @u1_sentence_ids
+      end
+
+      describe "validate done exam" do
+
       end
 
       describe "destroy user practice" do
@@ -70,6 +75,27 @@ describe Sentence do
 
         @u1_practice = @u1.get_practice(@p1)
       }
+
+      describe "validate sentence done" do
+        before {
+          id = @u1_sentence_ids.sample(1).first
+          @sentence = Sentence.find(id)
+        }
+
+        it "not done in exam" do
+          @sentence.done_exam_in?(@u1_practice).should == false
+        end
+
+        describe "done" do
+          before {
+            @sentence.move_done_in(@u1_practice)
+          }
+
+          it "done in exam" do
+            @sentence.done_exam_in?(@u1_practice).should == true
+          end 
+        end
+      end
 
 
       it "u1 practice are not equal to u2 practice" do
