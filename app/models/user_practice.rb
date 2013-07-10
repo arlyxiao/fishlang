@@ -10,7 +10,7 @@ class UserPractice < ActiveRecord::Base
   after_create :init_default_value
 
   def init_default_value
-    self.exam = practice.generate_exam
+    self.exam = practice.generate_exam if self.has_finished
     self.error_count = 0
     self.done_count = 0
     self.has_finished = false
@@ -56,9 +56,9 @@ class UserPractice < ActiveRecord::Base
     end
 
     def build_sentences(practice)
-      return get_practice(practice).init_default_value if _has_disabled?(practice)
-
       return _create_sentences(practice) unless _has_practice?(practice)
+
+      get_practice(practice).init_default_value
     end
 
     def get_sentence_ids(practice)
