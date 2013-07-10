@@ -52,15 +52,16 @@
     <%= yield %>
   </div>
 
-  <div class="container" style="display: none;">
-    <footer id="footer">
-      <hr style="border: 1px solid #987;" />
-        <p class="pull-right"><a href="#top">Back to top</a></p>
+  <% unless @at_exam %>
+    <div class="container">
+      <footer id="footer">
+        <hr class="hr" />
         <div class="links">
           <a href="">About</a>
         </div>
       </footer>
-  </div>
+    </div>
+  <% end %>
 
   
 

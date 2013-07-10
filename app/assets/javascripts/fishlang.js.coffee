@@ -7,3 +7,9 @@
 #= require_tree ./routes
 #= require ./router
 #= require_self
+
+
+FishLang.SentenceRoute = Ember.Route.extend(events:
+  error: ->
+  	@transitionTo "welcome"
+)

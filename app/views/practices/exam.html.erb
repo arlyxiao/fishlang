@@ -1,1 +1,19 @@
-<%= render 'top', :practice => @practice %>
+<div id="top-menu">
+	<%= render 'top', :practice => @practice %>
+</div>
+
+
+<script type="text/x-handlebars">
+ 
+  {{outlet}}
+  
+  <div class="container" style="display: block;">
+    <footer id="footer">
+      <hr  class="hr" />
+        <div class="links">
+          <a href="">About</a>
+        </div>
+      </footer>
+  </div>
+
+</script>

@@ -5,6 +5,7 @@
 
 
 FishLang.Router.map ->
+
   @resource "practices", ->
     @resource "practice",
       path: ":practice_id", ->
@@ -12,3 +13,5 @@ FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
+
+  @resource "welcome"

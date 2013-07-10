@@ -3,6 +3,9 @@ html, body {
   margin: 20px;
 }
 
+.hr {
+  border: 1px solid #E3E3E3;
+}
 
 .black {
   color: black;
@@ -28,10 +31,7 @@ html, body {
 
 
 .ember-view {
-  margin: 0 auto;
-  width: 580px;
-  padding-top: 50px;
-
+  padding-top: 30px;
 }
 
 
