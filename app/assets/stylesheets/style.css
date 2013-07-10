@@ -8,6 +8,10 @@ html, body {
   color: black;
 }
 
+.top20 {
+  margin-top: 20px;
+}
+
 .ember-text-field, .ember-text-area {
   width: 100%;
 }
