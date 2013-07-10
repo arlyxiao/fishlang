@@ -1,0 +1,27 @@
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>created date</th>
+      <th>name</th>
+      <th>email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |u| %>
+      <tr>
+        <td><%= u.id %></td>
+        <td><%= u.created_at.strftime('%Y-%m-%d, %H:%M:%S') %></td>
+        <td><a href=""><%= u.name %></a></td>
+        <td><%= u.email %></td>
+        <td>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<%= paginate @users %>
