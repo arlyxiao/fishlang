@@ -5,7 +5,7 @@ ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
 user = User.create!(
 	{
 		email: 'admin@fishlang.com', 
-		name: 'boss', 
+		name: 'jefe', 
 		password: '111111', 
 		password_confirmation: '111111' 
 	}
