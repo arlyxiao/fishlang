@@ -16,7 +16,7 @@ class Sentence < ActiveRecord::Base
       return nil
     end
 
-    ids.each_with_index { |val, index| return ids[index + 1] if self.id == val }
+    ids[ids.index(self.id) + 1]
   end
 
   def translate?(subject)

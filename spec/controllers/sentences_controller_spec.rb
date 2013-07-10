@@ -291,30 +291,37 @@ describe SentencesController do
 end
 
 describe SentencesController do
-  before {
-    @user = FactoryGirl.create :user
-    sign_in @user
 
-    @s = FactoryGirl.create(:sentence)
+  describe "report sentence exam errors" do
+    
+    before {
+      @user = FactoryGirl.create :user
+      sign_in @user
 
-    post 'report', :id => @s.id, :user_answer => 'test user answer', :content => 'test content'
+      @s = FactoryGirl.create(:sentence)
 
-    @r = @user.sentence_reports.first
-  }
+      post 'report', :id => @s.id, :user_answer => 'test user answer', :content => 'test content'
 
-  it "user" do
-    @r.user.should == @user
+      @r = @user.sentence_reports.first
+    }
+
+    it "user" do
+      @r.user.should == @user
+    end
+
+    it "user_answer" do
+      @r.user_answer.should == 'test user answer'
+    end
+
+    it "content" do
+      @r.content.should == 'test content'
+    end
+
+    it "sentence" do
+      @r.sentence.should == @s
+    end
+
   end
 
-  it "user_answer" do
-    @r.user_answer.should == 'test user answer'
-  end
-
-  it "content" do
-    @r.content.should == 'test content'
-  end
-
-  it "sentence" do
-    @r.sentence.should == @s
-  end
+  
 end

@@ -12,8 +12,3 @@ FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
-
-
-
-
-
