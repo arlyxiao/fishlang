@@ -18,8 +18,8 @@ rake db:migrate <br />
 rake db:seed <br />
 
 ### admin account:
-email: admin@fishlang.com
-password: 111111
+email: admin@fishlang.com <br />
+password: 111111 <br />
 
 
 ### Getting started:
@@ -30,5 +30,5 @@ rails s
 
 
 ### Todo:    
-
+You need to fill the practice data by yourself
 
