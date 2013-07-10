@@ -1,3 +1,19 @@
+# User
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
+
+
+user = User.create!(
+	{
+		email: 'admin@fishlang.com', 
+		name: 'boss', 
+		password: '111111', 
+		password_confirmation: '111111' 
+	}
+)
+user.update_attribute :admin, true
+
+
+# lessons
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE categories")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
