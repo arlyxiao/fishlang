@@ -1,2 +1,2 @@
-class UsersController < InheritedResources::Base
+class UsersController < Devise::RegistrationsController
 end
