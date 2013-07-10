@@ -15,10 +15,10 @@ describe Sentence do
       12.times { FactoryGirl.create(:sentence, :practice => @p2) }
     }
 
-    describe "validate build_sentences and get_sentences" do
+    describe "validate build_sentences and get_sentence_ids" do
       before {
         @u1.build_sentences(@p1)
-        @u1_sentences = @u1.get_sentences(@p1)
+        @u1_sentence_ids = @u1.get_sentence_ids(@p1)
         @u1_practice = @u1.get_practice(@p1)
       }
 
@@ -36,7 +36,7 @@ describe Sentence do
 
       it "same when build_sentences again" do
         @u1.build_sentences(@p1)
-        @u1.get_sentences(@p1).should == @u1_sentences
+        @u1.get_sentence_ids(@p1).should == @u1_sentence_ids
       end
 
       describe "destroy user practice" do
@@ -46,12 +46,12 @@ describe Sentence do
         
 
         it "nil sentences" do
-          @u1.get_sentences(@p1).should == nil
+          @u1.get_sentence_ids(@p1).should == nil
         end
 
         it "sentences are different after build_sentences again" do
           @u1.build_sentences(@p1)
-          @u1.get_sentences(@p1).should_not == @u1_sentences
+          @u1.get_sentence_ids(@p1).should_not == @u1_sentence_ids
         end
 
       end
@@ -65,37 +65,34 @@ describe Sentence do
         @u1.build_sentences(@p1)
         @u2.build_sentences(@p1)
 
-        @u1_sentences = @u1.get_sentences(@p1)
-        @u2_sentences = @u2.get_sentences(@p1)
+        @u1_sentence_ids = @u1.get_sentence_ids(@p1)
+        @u2_sentence_ids = @u2.get_sentence_ids(@p1)
 
         @u1_practice = @u1.get_practice(@p1)
       }
 
 
       it "u1 practice are not equal to u2 practice" do
-        @u1_sentences.should_not == @u2_sentences
+        @u1_sentence_ids.should_not == @u2_sentence_ids
       end
 
       it "sentences number should be equal" do
-        @u1_sentences.count.should == @u2_sentences.count
+        @u1_sentence_ids.count.should == @u2_sentence_ids.count
       end
 
       describe "next id should be correct" do
-        before {
-          @u1_ids = @u1_sentences.map(&:id)
-        }
 
         it "next of each element" do
           (0..9).each do |i|
             break if i == 9
-            @u1_sentences[i].next_id_by(@u1).should == @u1_ids[i + 1]
+            Sentence.find(@u1_sentence_ids[i]).next_id_by(@u1).should == @u1_sentence_ids[i + 1]
           end
         end
 
         describe "finish practice" do
           before {
             (0..9).each do |i|
-              @u1_sentences[i].next_id_by(@u1)
+              Sentence.find(@u1_sentence_ids[i]).next_id_by(@u1)
             end
           }
           

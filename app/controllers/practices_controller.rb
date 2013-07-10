@@ -17,7 +17,7 @@ class PracticesController < ApplicationController
     current_user.build_sentences(@practice)
     current_user.get_practice(@practice).init_default_value
 
-    @sentences = current_user.get_sentences(@practice)
+    @sentence_ids = current_user.get_sentence_ids(@practice)
   end
 
   def exam

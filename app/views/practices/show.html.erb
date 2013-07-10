@@ -10,8 +10,8 @@
     </div>
 
     <div class="span8">
-      <% unless @sentences.nil? %>
-        <button class="btn btn-primary" type="button" onclick="javascript: window.location.reload(); window.location.href = '/practices/exam/#/sentences/<%= current_user.get_sentences(@practice).first.id %>'">Start Exercise</button>
+      <% unless @sentence_ids.nil? %>
+        <button class="btn btn-primary" type="button" onclick="javascript: window.location.reload(); window.location.href = '/practices/exam/#/sentences/<%= @sentence_ids.first %>'">Start Exercise</button>
       <% end %>
     </div>
 

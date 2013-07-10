@@ -61,12 +61,10 @@ class UserPractice < ActiveRecord::Base
       return _create_sentences(practice) unless _has_practice?(practice)
     end
 
-    def get_sentences(practice)
+    def get_sentence_ids(practice)
       return nil unless _has_practice?(practice)
 
-      sentences = get_practice(practice).exam.split(',').map {
-        |sentence_id| Sentence.find(sentence_id)
-      }
+      JSON.parse(get_practice(practice).exam)
     end
     
 

@@ -7,7 +7,7 @@ class Practice < ActiveRecord::Base
   validates :lesson, :name, :presence => true
 
   def generate_exam
-    sentences.sample(10).map(&:id).join(',')
+    sentences.sample(10).map(&:id).to_json
   end
 
 

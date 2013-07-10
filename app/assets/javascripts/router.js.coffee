@@ -1,6 +1,7 @@
 #FishLang.Router.map (match)->
   # match('/').to('index')
 
+# FishLang.Router.reopen location: "history"
 
 
 FishLang.Router.map ->
@@ -11,3 +12,8 @@ FishLang.Router.map ->
   @resource "sentences", ->
     @resource "sentence",
       path: ":sentence_id", ->
+
+
+
+
+

@@ -10,13 +10,12 @@ class Sentence < ActiveRecord::Base
   validates :practice, :subject, :verb, :presence => true
 
   def next_id_by(user)
-    sentences = user.get_sentences(practice)
-    if sentences.last == self
+    ids = user.get_sentence_ids(practice)
+    if ids.last == self.id
       user.get_practice(practice).disable
       return nil
     end
 
-    ids = sentences.map(&:id)
     ids.each_with_index { |val, index| return ids[index + 1] if self.id == val }
   end
 

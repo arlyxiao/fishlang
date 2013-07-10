@@ -43,8 +43,8 @@ describe SentencesController do
   describe "#check, last sentence id" do
     before {
       sign_in @user
-      @sentences = @user.get_sentences(@practice)
-      @id = @sentences[9].id
+      @sentence_ids = @user.get_sentence_ids(@practice)
+      @id = @sentence_ids[9]
     }
 
     describe "incorrect translation" do
@@ -114,8 +114,8 @@ describe SentencesController do
 
   describe "#check, other sentence id" do
     before {
-      @sentences = @user.get_sentences(@practice)
-      @id = @sentences[1].id
+      @sentence_ids = @user.get_sentence_ids(@practice)
+      @id = @sentence_ids[1]
     }
 
     describe "incorrect translation" do
@@ -135,7 +135,7 @@ describe SentencesController do
       end
 
       it "next_id should be correct" do
-        @body['next_id'].should == @sentences[2].id
+        @body['next_id'].should == @sentence_ids[2]
       end
 
       it "result should be correct" do
@@ -161,7 +161,7 @@ describe SentencesController do
       end
 
       it "next_id should be correct" do
-        @body['next_id'].should == @sentences[2].id
+        @body['next_id'].should == @sentence_ids[2]
       end
 
       it "result should be correct" do
@@ -198,9 +198,9 @@ describe SentencesController do
 
     describe "validate the whole practice by sentences, correct answers" do
       before {
-        @sentences = @user.get_sentences(@practice)
-        @sentences.each do |s|
-          get 'check', :id => s.id, :subject => 'test'
+        @sentence_ids = @user.get_sentence_ids(@practice)
+        @sentence_ids.each do |id|
+          get 'check', :id => id, :subject => 'test'
         end
         @user_practice = @user.get_practice(@practice)
       }
@@ -227,9 +227,9 @@ describe SentencesController do
 
     describe "validate the whole practice by sentences, incorrect answers" do
       before {
-        @sentences = @user.get_sentences(@practice)
-        @sentences.each do |s|
-          get 'check', :id => s.id, :subject => 'test111'
+        @sentence_ids = @user.get_sentence_ids(@practice)
+        @sentence_ids.each do |id|
+          get 'check', :id => id, :subject => 'test111'
         end
         @user_practice = @user.get_practice(@practice)
       }
@@ -256,12 +256,12 @@ describe SentencesController do
 
     describe "validate the whole practice by sentences, incorrect with correct answers" do
       before {
-        @sentences = @user.get_sentences(@practice)
+        @sentence_ids = @user.get_sentence_ids(@practice)
         8.times do |i|
-          get 'check', :id => @sentences[i].id, :subject => 'test'
+          get 'check', :id => @sentence_ids[i], :subject => 'test'
         end
-        get 'check', :id => @sentences[8].id, :subject => 'test1'
-        get 'check', :id => @sentences[9].id, :subject => 'test'
+        get 'check', :id => @sentence_ids[8], :subject => 'test1'
+        get 'check', :id => @sentence_ids[9], :subject => 'test'
 
         @user_practice = @user.get_practice(@practice)
       }
