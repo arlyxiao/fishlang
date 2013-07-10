@@ -1,7 +1,7 @@
 FishLang
 ===================================  
 
-FishLang based on emberjs and rails. <br />
+FishLang based on bootstrap, emberjs and rails. <br />
 It's a big trouble for most of poeple to remember the changes of Spanish verbs. <br />
 So I decided to design one tool to practise the verbs change. <br />
 It helps you increase the memory of Spanish words, especially the verbs change. <br />
@@ -16,6 +16,18 @@ Rails 3.2.12 <br/>
 bundle install <br />
 rake db:migrate <br />
 rake db:seed <br />
+
+### admin account:
+email: admin@fishlang.com
+password: 111111
+
+
+### Getting started:
+
+```ruby
+rails s
+```
+
 
 ### Todo:    
 
