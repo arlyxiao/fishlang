@@ -67,7 +67,7 @@ class UserPractice < ActiveRecord::Base
       return nil unless _has_practice?(practice)
 
       exam = get_practice(practice).exam
-      exam = [].to_json if exam.blank?
+      return [] if exam.blank?
       JSON.parse(exam)
     end
     
