@@ -45,7 +45,14 @@ describe SentencesController do
       sign_in @user
       @sentence_ids = @user.get_sentence_ids(@practice)
       @id = @sentence_ids[9]
+      @sentence = Sentence.find(@id)
+      @sentence_failure = @sentence.user_failure(@user)
     }
+
+    it "correct failure count" do
+      @sentence_failure.count.should == 0
+    end
+
 
     describe "incorrect translation" do
 
@@ -54,6 +61,10 @@ describe SentencesController do
         @user_practice = @user.get_practice(@practice)
         @body = JSON::parse(response.body)
       }
+
+      it "correct failure count" do
+        @sentence_failure.count.should == 1
+      end
 
       it "error_count should be correct" do
         @user_practice.error_count.should == 1
@@ -83,6 +94,10 @@ describe SentencesController do
         @user_practice = @user.get_practice(@practice)
         @body = JSON::parse(response.body)
       }
+
+      it "correct failure count" do
+        @sentence_failure.count.should == 0
+      end
 
       it "error_count should be correct" do
         @user_practice.error_count.should == 0
@@ -175,10 +190,11 @@ describe SentencesController do
         @body['result'].should == true
       end
 
-      describe "go into check page again" do
+      describe "go into check page again with correct answer" do
         before {
           get 'check', :id => @id, :subject => 'test'
           @user_practice = @user.get_practice(@practice)
+          @sentence_failure = Sentence.find(@id).user_failure(@user)
         }
 
         it "same done_exam" do
@@ -192,6 +208,36 @@ describe SentencesController do
         it "same error_count" do
           @user_practice.error_count.should == @error_count
         end
+
+        it "correct failure count" do
+          @sentence_failure.count.should == 0
+        end
+
+      end
+
+      describe "go into check page again with incorrect answer" do
+        before {
+          get 'check', :id => @id, :subject => 'test3333'
+          @user_practice = @user.get_practice(@practice)
+          @sentence_failure = Sentence.find(@id).user_failure(@user)
+        }
+
+        it "same done_exam" do
+          @user_practice.done_exam.should == @done_exam
+        end
+
+        it "same done_count" do
+          @user_practice.done_count.should == @done_count
+        end
+
+        it "same error_count" do
+          @user_practice.error_count.should == @error_count
+        end
+
+        it "correct failure count" do
+          @sentence_failure.count.should == 0
+        end
+
       end
 
     end
@@ -202,13 +248,19 @@ describe SentencesController do
 
   describe "#check any sentence id not in the exam" do
     before {
-      @s = FactoryGirl.create(:sentence, :practice => @practice)
-      get 'check', :id => @s.id, :subject => 'test subject'
+      @sentence = FactoryGirl.create(:sentence, :practice => @practice)
+      @sentence_failure = @sentence.user_failure(@user)
+
+      get 'check', :id => @sentence.id, :subject => 'test subject'
       @result = response.body
     }
 
     it "empty response" do
       @result.should == 'null'
+    end
+
+    it "correct failure count" do
+      @sentence_failure.count.should == 0
     end
 
   end
