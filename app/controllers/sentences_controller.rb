@@ -24,7 +24,10 @@ class SentencesController < ApplicationController
 
     unless @sentence.done_exam_in?(p)
       p.refresh_done_count
-      p.refresh_error_count unless result
+      unless result
+        p.refresh_error_count
+        @sentence.user_failure(current_user).refresh
+      end
       @sentence.move_done_in(p)
     end
     

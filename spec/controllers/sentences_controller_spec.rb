@@ -45,8 +45,7 @@ describe SentencesController do
       sign_in @user
       @sentence_ids = @user.get_sentence_ids(@practice)
       @id = @sentence_ids[9]
-      @sentence = Sentence.find(@id)
-      @sentence_failure = @sentence.user_failure(@user)
+      @sentence_failure = Sentence.find(@id).user_failure(@user)
     }
 
     it "correct failure count" do
@@ -63,6 +62,7 @@ describe SentencesController do
       }
 
       it "correct failure count" do
+        @sentence_failure.reload
         @sentence_failure.count.should == 1
       end
 

@@ -7,13 +7,21 @@ class SentenceFailure < ActiveRecord::Base
   validates :user, :sentence, :count, :presence => true
 
 
+  def refresh
+  	self.count = self.count + 1
+  	self.save
+  end
+
+
   module SentenceMethods
     def self.included(base)
       base.has_many :failures, :class_name => 'SentenceFailure', :foreign_key => :sentence_id
     end
 
     def user_failure(user)
-      failures.where(:user_id => user.id).first
+    	rows = failures.where(:user_id => user.id)
+    	return rows.first if rows.exists?
+    	failures.create(:user => user)
     end
   end
 
