@@ -6,6 +6,8 @@ class SentenceFailure < ActiveRecord::Base
 
   validates :user, :sentence, :count, :presence => true
 
+  default_scope :order => "count DESC"
+
 
   def refresh
   	self.count = self.count + 1
@@ -22,6 +24,12 @@ class SentenceFailure < ActiveRecord::Base
     	rows = failures.where(:user_id => user.id)
     	return rows.first if rows.exists?
     	failures.create(:user => user)
+    end
+  end
+
+  module UserMethods
+    def self.included(base)
+      base.has_many :sentence_failures
     end
   end
 

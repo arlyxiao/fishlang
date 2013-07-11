@@ -23,6 +23,8 @@ Fishlang::Application.routes.draw do
 
   end
 
+  resources :sentence_failures
+
 
   namespace :admin do
     root :to => 'index#index'

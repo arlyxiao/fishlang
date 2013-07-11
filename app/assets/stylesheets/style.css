@@ -3,6 +3,10 @@ html, body {
   margin: 20px;
 }
 
+.hide {
+  display: none;
+}
+
 .hr {
 }
 
