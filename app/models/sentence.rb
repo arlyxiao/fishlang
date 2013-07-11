@@ -48,5 +48,8 @@ class Sentence < ActiveRecord::Base
 
     ids.include? self.id
   end
+
+
+  include SentenceFailure::SentenceMethods
   
 end
