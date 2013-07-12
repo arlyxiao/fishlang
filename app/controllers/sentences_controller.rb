@@ -9,33 +9,26 @@ class SentencesController < ApplicationController
 
   def show
     p = @sentence.practice.user_practice(current_user)
-    return render json: nil unless @sentence.is_in_exam?(p)
+    return render json: nil unless @sentence.is_exam?(p)
 
     render json: @sentence
   end
 
 
   def check
-    p = @sentence.practice.user_practice(current_user)
+    user_practice = @sentence.practice.user_practice(current_user)
 
-    return render json: nil unless @sentence.is_in_exam?(p)
+    return render json: nil unless @sentence.is_exam?(user_practice)
 
-    result = @sentence.translate?(params[:subject])
+    user_practice.result = @sentence.translate?(params[:subject])
 
-    unless @sentence.done_exam_in?(p)
-      p.refresh_done_count
-      unless result
-        p.refresh_error_count
-        @sentence.user_failure(current_user).refresh
-      end
-      @sentence.move_done_in(p)
-    end
+    user_practice.refresh(@sentence)
     
     render json: {
       :next_id => @sentence.next_id_by(current_user), 
-      :result => result, 
-      :error_count => p.error_count,
-      :done_count => p.done_count
+      :result => user_practice.result, 
+      :error_count => user_practice.error_count,
+      :done_count => user_practice.done_count
     }
   end
 

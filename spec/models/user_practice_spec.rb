@@ -2,18 +2,28 @@ require "spec_helper"
 
 describe UserPractice do
   before {
-    @user_practice = FactoryGirl.create(:user_practice)
-    @error_count = @user_practice.error_count
-    @done_count = @user_practice.error_count
+    @user = FactoryGirl.create(:user)
+    @practice = FactoryGirl.create(:practice)
+
+    10.times { @sentence = FactoryGirl.create(:sentence, :practice => @practice) }
+
+    @user.build_sentences(@practice)
+    @user_practice = @practice.user_practice(@user)
+
+    @user_practice.result = false
   }
 
 
   it "validate error count" do
-    (@user_practice.refresh_error_count - @error_count).should == 1
+    expect{
+      @user_practice.refresh(@sentence)
+    }.to change{@user_practice.error_count}.by(1)
   end
 
   it "validate done count" do
-    (@user_practice.refresh_done_count - @done_count).should == 1
+    expect{
+      @user_practice.refresh(@sentence)
+    }.to change{@user_practice.done_count}.by(1)
   end
 
   describe "validate disable" do

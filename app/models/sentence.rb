@@ -11,7 +11,7 @@ class Sentence < ActiveRecord::Base
 
   def next_id_by(user)
     user_practice = practice.user_practice(user)
-    return nil unless self.is_in_exam?(user_practice)
+    return nil unless self.is_exam?(user_practice)
 
     ids = user.get_sentence_ids(practice)
     if ids.last == self.id
@@ -27,7 +27,7 @@ class Sentence < ActiveRecord::Base
     subjects.include? subject.downcase.strip.squeeze(' ')
   end
 
-  def move_done_in(user_practice)
+  def move_done(user_practice)
     ids = [] if user_practice.done_exam.blank?
     ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
 
@@ -36,14 +36,14 @@ class Sentence < ActiveRecord::Base
     user_practice.save
   end
 
-  def done_exam_in?(user_practice)
+  def done_exam?(user_practice)
     ids = [] if user_practice.done_exam.blank?
     ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
 
     ids.include? self.id
   end
 
-  def is_in_exam?(user_practice)
+  def is_exam?(user_practice)
     ids = JSON.parse(user_practice.exam) unless user_practice.exam.blank?
 
     ids.include? self.id

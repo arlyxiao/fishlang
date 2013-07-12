@@ -2,6 +2,8 @@ class UserPractice < ActiveRecord::Base
   attr_accessible :user, :practice, :exam, :error_count, 
                   :has_finished, :points, :done_count, :done_exam
 
+  attr_accessor :result
+
   belongs_to :user
   belongs_to :practice
 
@@ -20,18 +22,19 @@ class UserPractice < ActiveRecord::Base
     self
   end
 
+  def refresh(sentence)
+    return self if sentence.done_exam?(self)
 
-  def refresh_error_count
-    self.error_count = self.error_count + 1
-    self.save
-    self.error_count
-  end
+    sentence.move_done(self)
 
-  def refresh_done_count
+    sentence.user_failure(user).refresh unless result
+    self.error_count = self.error_count + 1 unless result
+
     self.done_count = self.done_count + 1
     self.save
-    self.done_count
+    self
   end
+
 
   def disable
     self.points = self.points + added_points

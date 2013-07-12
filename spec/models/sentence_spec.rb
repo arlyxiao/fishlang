@@ -30,7 +30,7 @@ describe Sentence do
         }
 
         it "should be false" do
-          @s.is_in_exam?(@user_practice_1).should == false
+          @s.is_exam?(@user_practice_1).should == false
         end
       end
 
@@ -95,20 +95,20 @@ describe Sentence do
         }
 
         it "is in exam" do
-          @sentence.is_in_exam?(@user_practice_1).should == true
+          @sentence.is_exam?(@user_practice_1).should == true
         end
 
         it "not done in exam" do
-          @sentence.done_exam_in?(@user_practice_1).should == false
+          @sentence.done_exam?(@user_practice_1).should == false
         end
 
         describe "done" do
           before {
-            @sentence.move_done_in(@user_practice_1)
+            @sentence.move_done(@user_practice_1)
           }
 
           it "done in exam" do
-            @sentence.done_exam_in?(@user_practice_1).should == true
+            @sentence.done_exam?(@user_practice_1).should == true
           end 
         end
       end
