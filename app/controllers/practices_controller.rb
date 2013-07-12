@@ -14,20 +14,20 @@ class PracticesController < ApplicationController
   def show
     session[:practice_id] = @practice.id
 
-    current_user.build_sentences(@practice)
+    current_user.build_exercise(@practice)
 
-    @sentence_ids = current_user.get_sentence_ids(@practice)
+    @sentence_ids = current_user.build_exercise(@practice).sentence_ids
   end
 
   def exam
     @at_exam = true
     @practice = Practice.find(session[:practice_id])
 
-    @user_practice = @practice.user_practice(current_user)
+    @user_practice = current_user.exercise
   end
 
   def done
-    @user_practice = @practice.user_practice(current_user)
+    @user_practice = current_user.exercise
   end
 
 end

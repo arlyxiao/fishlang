@@ -11,7 +11,4 @@ class Practice < ActiveRecord::Base
   end
 
 
-  include UserPractice::PracticeMethods
-
-
 end

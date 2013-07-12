@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => {:case_sensitive => false}
 
 
-  include UserPractice::UserMethods
   include UserExercise::UserMethods
   include SentenceReport::UserMethods
   include SentenceFailure::UserMethods

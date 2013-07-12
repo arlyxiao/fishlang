@@ -2,73 +2,74 @@ require "spec_helper"
 
 describe Sentence do
   before {
-    @u1 = FactoryGirl.create(:user)
-    @u2 = FactoryGirl.create(:user)
+    @user_1 = FactoryGirl.create(:user)
+    @user_2 = FactoryGirl.create(:user)
 
-    @p1 = FactoryGirl.create(:practice)
-    @p2 = FactoryGirl.create(:practice)
+    @practice_1 = FactoryGirl.create(:practice)
+    @practice_2 = FactoryGirl.create(:practice)
   }
 
   describe "Validate sentence" do
     before {
-      12.times { FactoryGirl.create(:sentence, :practice => @p1) }
-      12.times { FactoryGirl.create(:sentence, :practice => @p2) }
+      12.times { FactoryGirl.create(:sentence, :practice => @practice_1) }
+      12.times { FactoryGirl.create(:sentence, :practice => @practice_2) }
     }
 
     
 
     describe "validate build_sentences and get_sentence_ids" do
       before {
-        @u1.build_sentences(@p1)
-        @u1_sentence_ids = @u1.get_sentence_ids(@p1)
-        @user_practice_1 = @p1.user_practice(@u1)
+        @user_1.build_exercise(@practice_1)
+        @user_exercise_1 = @user_1.exercise
+        @sentence_ids_1 = @user_exercise_1.sentence_ids
       }
 
       describe "not in exam" do
         before {
-          @s = FactoryGirl.create(:sentence, :practice => @p1)
+          @s = FactoryGirl.create(:sentence, :practice => @practice_1)
         }
 
         it "should be false" do
-          @s.is_exam?(@user_practice_1).should == false
+          @s.is_exam?(@user_exercise_1).should == false
         end
       end
 
       it "validate exam field" do
-        JSON.parse(@user_practice_1.exam).count.should == 10
+        JSON.parse(@user_exercise_1.exam).count.should == 10
       end
 
       it "error_count should be 0" do
-        @user_practice_1.error_count.should == 0
+        @user_exercise_1.error_count.should == 0
       end
 
       it "has_finished should be 0" do
-        @user_practice_1.has_finished.should == false
+        @user_exercise_1.has_finished?.should == false
       end
 
 
       it "same when build_sentences again" do
-        @u1.build_sentences(@p1)
-        @u1.get_sentence_ids(@p1).should == @u1_sentence_ids
+        @user_1.build_exercise(@practice_1)
+        @user_1.exercise.sentence_ids.should == @sentence_ids_1
       end
 
       describe "validate done exam" do
 
       end
 
-      describe "destroy user practice" do
+      describe "destroy user exercise" do
         before {
-          @user_practice_1.destroy
+          @user_exercise_1.destroy
+          @user_1.reload
         }
         
 
-        it "nil sentences" do
-          @u1.get_sentence_ids(@p1).should == nil
+        it "nil exercise" do
+          @user_1.exercise.nil?.should == true
         end
 
         it "sentences are different after build_sentences again" do
-          @u1.build_sentences(@p1)
-          @u1.get_sentence_ids(@p1).should_not == @u1_sentence_ids
+          @user_1.build_exercise(@practice_1)
+          @user_1.exercise.sentence_ids.should_not == @sentence_ids_1
         end
 
       end
@@ -79,47 +80,47 @@ describe Sentence do
 
     describe "Validate sentences" do
       before {
-        @u1.build_sentences(@p1)
-        @u2.build_sentences(@p1)
+        @user_1.build_exercise(@practice_1)
+        @user_2.build_exercise(@practice_1)
 
-        @u1_sentence_ids = @u1.get_sentence_ids(@p1)
-        @u2_sentence_ids = @u2.get_sentence_ids(@p1)
+        @sentence_ids_1 = @user_1.exercise.sentence_ids
+        @sentence_ids_2 = @user_2.exercise.sentence_ids
 
-        @user_practice_1 = @p1.user_practice(@u1)
+        @user_exercise_1 = @user_1.exercise
       }
 
       describe "validate sentence done" do
         before {
-          id = @u1_sentence_ids.sample(1).first
+          id = @sentence_ids_1.sample(1).first
           @sentence = Sentence.find(id)
         }
 
         it "is in exam" do
-          @sentence.is_exam?(@user_practice_1).should == true
+          @sentence.is_exam?(@user_exercise_1).should == true
         end
 
         it "not done in exam" do
-          @sentence.done_exam?(@user_practice_1).should == false
+          @sentence.done_exam?(@user_exercise_1).should == false
         end
 
         describe "done" do
           before {
-            @sentence.move_done(@user_practice_1)
+            @sentence.move_done(@user_exercise_1)
           }
 
           it "done in exam" do
-            @sentence.done_exam?(@user_practice_1).should == true
+            @sentence.done_exam?(@user_exercise_1).should == true
           end 
         end
       end
 
 
       it "u1 practice are not equal to u2 practice" do
-        @u1_sentence_ids.should_not == @u2_sentence_ids
+        @sentence_ids_1.should_not == @sentence_ids_2
       end
 
       it "sentences number should be equal" do
-        @u1_sentence_ids.count.should == @u2_sentence_ids.count
+        @sentence_ids_1.count.should == @sentence_ids_2.count
       end
 
       describe "next id should be correct" do
@@ -127,7 +128,7 @@ describe Sentence do
         it "next of each element" do
           (0..9).each do |i|
             break if i == 9
-            Sentence.find(@u1_sentence_ids[i]).next_id_by(@u1).should == @u1_sentence_ids[i + 1]
+            Sentence.find(@sentence_ids_1[i]).next_id_by(@user_1).should == @sentence_ids_1[i + 1]
           end
         end
 
@@ -144,7 +145,7 @@ describe Sentence do
   describe "Validate translate" do
 
     before {
-      @sentence = FactoryGirl.create(:sentence, :practice => @p1, :subject => 'estoy bien')
+      @sentence = FactoryGirl.create(:sentence, :practice => @practice_1, :subject => 'estoy bien')
       @sentence_translation_1 = FactoryGirl.create(:sentence_translation, 
         :sentence => @sentence,
         :subject => "I'm file"

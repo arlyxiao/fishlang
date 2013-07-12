@@ -7,15 +7,12 @@ describe PracticesController do
     12.times { FactoryGirl.create(:sentence, :practice => @practice) }
   }
 
-  it "user has no any practice" do
-    @practice.user_practice(@user).should == nil
-  end
 
   describe "#show" do
     before {
       sign_in @user
       get 'show', :id => @practice.id
-      @user_practice = @practice.user_practice(@user)
+      @user_exercise = @user.build_exercise(@practice)
     }
 
     it "practice_id in session should be correct" do
@@ -23,47 +20,47 @@ describe PracticesController do
     end
 
     it "user has practice" do
-      @user_practice.valid?.should == true
+      @user_exercise.valid?.should == true
     end
 
     it "error_count" do
-      @user_practice.error_count.should == 0
+      @user_exercise.error_count.should == 0
     end
 
     it "done_count" do
-      @user_practice.done_count.should == 0
+      @user_exercise.done_count.should == 0
     end
 
     it "has_finished" do
-      @user_practice.has_finished.should == false
+      @user_exercise.has_finished?.should == false
     end
 
     it "done_exam" do
-      @user_practice.done_exam.should be_nil
+      @user_exercise.done_exam.should be_nil
     end
 
 
     describe "go into show page again" do
       before {
-        @user_practice.error_count = 5
-        @user_practice.done_count = 3
-        @user_practice.done_exam = 'sss'
-        @user_practice.save
+        @user_exercise.error_count = 5
+        @user_exercise.done_count = 3
+        @user_exercise.done_exam = 'sss'
+        @user_exercise.save
 
         get 'show', :id => @practice.id
-        @user_practice = @practice.user_practice(@user)
+        @user_exercise = @user.build_exercise(@practice)
       }
 
       it "error_count" do
-        @user_practice.error_count.should == 0
+        @user_exercise.error_count.should == 0
       end
 
       it "done_count" do
-        @user_practice.done_count.should == 0
+        @user_exercise.done_count.should == 0
       end
 
       it "done_exam" do
-      @user_practice.done_exam.should be_nil
+      @user_exercise.done_exam.should be_nil
     end
     end
 

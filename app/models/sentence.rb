@@ -10,10 +10,10 @@ class Sentence < ActiveRecord::Base
   validates :practice, :subject, :verb, :presence => true
 
   def next_id_by(user)
-    user_practice = practice.user_practice(user)
-    return nil unless self.is_exam?(user_practice)
+    user_exercise = user.exercise
+    return nil unless self.is_exam?(user_exercise)
 
-    ids = user.get_sentence_ids(practice)
+    ids = user_exercise.sentence_ids
     return nil if ids.last == self.id
 
     ids[ids.index(self.id) + 1]
@@ -24,26 +24,24 @@ class Sentence < ActiveRecord::Base
     subjects.include? subject.downcase.strip.squeeze(' ')
   end
 
-  def move_done(user_practice)
-    ids = [] if user_practice.done_exam.blank?
-    ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
+  def move_done(user_exercise)
+    ids = [] if user_exercise.done_exam.blank?
+    ids = JSON.parse(user_exercise.done_exam) unless user_exercise.done_exam.blank?
 
     ids << self.id
-    user_practice.done_exam = ids.to_json
-    user_practice.save
+    user_exercise.done_exam = ids.to_json
+    user_exercise.save
   end
 
-  def done_exam?(user_practice)
-    ids = [] if user_practice.done_exam.blank?
-    ids = JSON.parse(user_practice.done_exam) unless user_practice.done_exam.blank?
+  def done_exam?(user_exercise)
+    ids = [] if user_exercise.done_exam.blank?
+    ids = JSON.parse(user_exercise.done_exam) unless user_exercise.done_exam.blank?
 
     ids.include? self.id
   end
 
-  def is_exam?(user_practice)
-    ids = JSON.parse(user_practice.exam) unless user_practice.exam.blank?
-
-    ids.include? self.id
+  def is_exam?(user_exercise)
+    user_exercise.sentence_ids.include? self.id
   end
 
 

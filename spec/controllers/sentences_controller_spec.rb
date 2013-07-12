@@ -12,29 +12,22 @@ describe SentencesController do
 
       t = FactoryGirl.create(:sentence_translation, :sentence => s, :subject => 'test')
     end
-    @user.build_sentences(@practice)
+    @user_exercise = @user.build_exercise(@practice)
     
   }
 
-  describe "validate user practice" do
-    before {
-      @user_practice = @practice.user_practice(@user)
-    }
+  describe "validate user exercise" do
 
     it "error_count" do
-      @user_practice.error_count.should == 0
+      @user_exercise.error_count.should == 0
     end
 
     it "exam" do
-      JSON.parse(@user_practice.exam).count.should == 10
+      JSON.parse(@user_exercise.exam).count.should == 10
     end
 
-    it "has_finished" do
-      @user_practice.has_finished.should == false
-    end
-
-    it "points" do
-      @user_practice.points.should == 0
+    it "has_finished?" do
+      @user_exercise.has_finished?.should == false
     end
 
   end
@@ -43,7 +36,7 @@ describe SentencesController do
   describe "#check, last sentence id" do
     before {
       sign_in @user
-      @sentence_ids = @user.get_sentence_ids(@practice)
+      @sentence_ids = @user_exercise.sentence_ids
       @id = @sentence_ids[9]
       @sentence_failure = Sentence.find(@id).user_failure(@user)
     }
@@ -57,8 +50,8 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test subject'
-        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
+        @user_exercise.reload
       }
 
       it "correct failure count" do
@@ -67,15 +60,11 @@ describe SentencesController do
       end
 
       it "error_count should be correct" do
-        @user_practice.error_count.should == 1
+        @user_exercise.error_count.should == 1
       end
 
-      it "has_finished should be false" do
-        @user_practice.has_finished.should == false
-      end
-
-      it "points should be correct" do
-        @user_practice.points.should == 0
+      it "has_finished? should be false" do
+        @user_exercise.has_finished?.should == false
       end
 
       it "next_id should be correct" do
@@ -91,8 +80,8 @@ describe SentencesController do
     describe "correct translation" do
       before {
         get 'check', :id => @id, :subject => 'test'
-        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
+        @user_exercise.reload
       }
 
       it "correct failure count" do
@@ -100,16 +89,13 @@ describe SentencesController do
       end
 
       it "error_count should be correct" do
-        @user_practice.error_count.should == 0
+        @user_exercise.error_count.should == 0
       end
 
-      it "has_finished should be true" do
-        @user_practice.has_finished.should == false
+      it "has_finished? should be true" do
+        @user_exercise.has_finished?.should == false
       end
 
-      it "points should be correct" do
-        @user_practice.points.should == 0
-      end
 
       it "next_id should be correct" do
         @body['next_id'].should == nil
@@ -129,7 +115,7 @@ describe SentencesController do
 
   describe "#check, other sentence id" do
     before {
-      @sentence_ids = @user.get_sentence_ids(@practice)
+      @sentence_ids = @user_exercise.sentence_ids
       @id = @sentence_ids[1..8].sample(1).first
       @next_id = @sentence_ids[@sentence_ids.index(@id) + 1]
     }
@@ -139,16 +125,16 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test subject'
-        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
+        @user_exercise.reload
       }
 
       it "error_count should be correct" do
-        @user_practice.error_count.should == 1
+        @user_exercise.error_count.should == 1
       end
 
-      it "has_finished should be true" do
-        @user_practice.has_finished.should == false
+      it "has_finished? should be true" do
+        @user_exercise.has_finished?.should == false
       end
 
       it "next_id should be correct" do
@@ -166,20 +152,19 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test'
-        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
 
-        @error_count = @user_practice.error_count
-        @done_count = @user_practice.done_count
-        @done_exam = @user_practice.done_exam
+        @error_count = @user_exercise.error_count
+        @done_count = @user_exercise.done_count
+        @done_exam = @user_exercise.done_exam
       }
 
       it "error_count should be correct" do
-        @user_practice.error_count.should == 0
+        @user_exercise.error_count.should == 0
       end
 
-      it "has_finished should be true" do
-        @user_practice.has_finished.should == false
+      it "has_finished? should be true" do
+        @user_exercise.has_finished?.should == false
       end
 
       it "next_id should be correct" do
@@ -193,20 +178,19 @@ describe SentencesController do
       describe "go into check page again with correct answer" do
         before {
           get 'check', :id => @id, :subject => 'test'
-          @user_practice = @practice.user_practice(@user)
           @sentence_failure = Sentence.find(@id).user_failure(@user)
         }
 
         it "same done_exam" do
-          @user_practice.done_exam.should == @done_exam
+          @user_exercise.done_exam.should == @done_exam
         end
 
         it "same done_count" do
-          @user_practice.done_count.should == @done_count
+          @user_exercise.done_count.should == @done_count
         end
 
         it "same error_count" do
-          @user_practice.error_count.should == @error_count
+          @user_exercise.error_count.should == @error_count
         end
 
         it "correct failure count" do
@@ -218,20 +202,20 @@ describe SentencesController do
       describe "go into check page again with incorrect answer" do
         before {
           get 'check', :id => @id, :subject => 'test3333'
-          @user_practice = @practice.user_practice(@user)
           @sentence_failure = Sentence.find(@id).user_failure(@user)
+          @user_exercise = @user.exercise
         }
 
         it "same done_exam" do
-          @user_practice.done_exam.should == @done_exam
+          @user_exercise.done_exam.should == @done_exam
         end
 
         it "same done_count" do
-          @user_practice.done_count.should == @done_count
+          @user_exercise.done_count.should == @done_count
         end
 
         it "same error_count" do
-          @user_practice.error_count.should == @error_count
+          @user_exercise.error_count.should == @error_count
         end
 
         it "correct failure count" do
@@ -269,57 +253,46 @@ describe SentencesController do
 
   describe "validate user practice" do
     before {
-      @user_practice = @practice.user_practice(@user)
-      @exam = @user_practice.exam
+      @user_exercise = @user.build_exercise(@practice)
+      @exam = @user_exercise.exam
     }
 
     it "nil done_exam" do
-      @user_practice.done_exam.should be_nil
+      @user_exercise.done_exam.should be_nil
     end
 
     it "error_count" do
-      @user_practice.error_count.should == 0
+      @user_exercise.error_count.should == 0
     end
 
     it "exam" do
-      JSON.parse(@user_practice.exam).count.should == 10
+      JSON.parse(@user_exercise.exam).count.should == 10
     end
 
-    it "has_finished" do
-      @user_practice.has_finished.should == false
+    it "has_finished?" do
+      @user_exercise.has_finished?.should == false
     end
 
-    it "points" do
-      @user_practice.points.should == 0
-    end
 
     describe "validate the whole practice by sentences, correct answers" do
       before {
-        @sentence_ids = @user.get_sentence_ids(@practice)
+        @sentence_ids = @user_exercise.sentence_ids
         @sentence_ids.each do |id|
           get 'check', :id => id, :subject => 'test'
         end
-        @user_practice = @practice.user_practice(@user)
+        @user_exercise.reload
       }
 
       it "error_count" do
-        @user_practice.error_count.should == 0
+        @user_exercise.error_count.should == 0
       end
 
       it "exam" do
-        @user_practice.exam.should == @exam
+        @user_exercise.exam.should == @exam
       end
 
-      it "has_finished" do
-        @user_practice.has_finished.should == true
-      end
-
-      it "points" do
-        @user_practice.points.should == 10
-      end
-
-      it "done_exam = exam" do
-        @user_practice.done_exam.should == @user_practice.exam
+      it "has_finished?" do
+        @user_exercise.has_finished?.should == true
       end
 
     end
@@ -327,27 +300,23 @@ describe SentencesController do
 
     describe "validate the whole practice by sentences, incorrect answers" do
       before {
-        @sentence_ids = @user.get_sentence_ids(@practice)
+        @sentence_ids = @user_exercise.sentence_ids
         @sentence_ids.each do |id|
           get 'check', :id => id, :subject => 'test111'
         end
-        @user_practice = @practice.user_practice(@user)
+        @user_exercise.reload
       }
 
       it "error_count" do
-        @user_practice.error_count.should == 10
+        @user_exercise.error_count.should == 10
       end
 
       it "exam" do
-        @user_practice.exam.should == @exam
+        @user_exercise.exam.should == @exam
       end
 
-      it "has_finished" do
-        @user_practice.has_finished.should == true
-      end
-
-      it "points" do
-        @user_practice.points.should == 0
+      it "has_finished?" do
+        @user_exercise.has_finished?.should == true
       end
 
 
@@ -356,30 +325,27 @@ describe SentencesController do
 
     describe "validate the whole practice by sentences, incorrect with correct answers" do
       before {
-        @sentence_ids = @user.get_sentence_ids(@practice)
+        @sentence_ids = @user_exercise.sentence_ids
         8.times do |i|
           get 'check', :id => @sentence_ids[i], :subject => 'test'
         end
         get 'check', :id => @sentence_ids[8], :subject => 'test1'
         get 'check', :id => @sentence_ids[9], :subject => 'test'
 
-        @user_practice = @practice.user_practice(@user)
+        @user_exercise.reload
+
       }
 
       it "error_count" do
-        @user_practice.error_count.should == 1
+        @user_exercise.error_count.should == 1
       end
 
       it "exam" do
-        @user_practice.exam.should == @exam
+        @user_exercise.exam.should == @exam
       end
 
-      it "has_finished" do
-        @user_practice.has_finished.should == true
-      end
-
-      it "points" do
-        @user_practice.points.should == 1
+      it "has_finished?" do
+        @user_exercise.has_finished?.should == true
       end
 
 

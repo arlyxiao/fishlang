@@ -8,27 +8,27 @@ class SentencesController < ApplicationController
 
 
   def show
-    p = @sentence.practice.user_practice(current_user)
-    return render json: nil unless @sentence.is_exam?(p)
+    user_exercise = current_user.exercise
+    return render json: nil unless @sentence.is_exam?(user_exercise)
 
     render json: @sentence
   end
 
 
   def check
-    user_practice = @sentence.practice.user_practice(current_user)
+    user_exercise = current_user.exercise
 
-    return render json: nil unless @sentence.is_exam?(user_practice)
+    return render json: nil unless @sentence.is_exam?(user_exercise)
 
-    user_practice.result = @sentence.translate?(params[:subject])
+    user_exercise.result = @sentence.translate?(params[:subject])
 
-    user_practice.refresh(@sentence)
+    user_exercise.refresh(@sentence)
     
     render json: {
       :next_id => @sentence.next_id_by(current_user), 
-      :result => user_practice.result, 
-      :error_count => user_practice.error_count,
-      :done_count => user_practice.done_count
+      :result => user_exercise.result, 
+      :error_count => user_exercise.error_count,
+      :done_count => user_exercise.done_count
     }
   end
 
