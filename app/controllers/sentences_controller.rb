@@ -8,7 +8,7 @@ class SentencesController < ApplicationController
 
 
   def show
-    p = current_user.get_practice(@sentence.practice)
+    p = @sentence.practice.user_practice(current_user)
     return render json: nil unless @sentence.is_in_exam?(p)
 
     render json: @sentence
@@ -16,7 +16,7 @@ class SentencesController < ApplicationController
 
 
   def check
-    p = current_user.get_practice(@sentence.practice)
+    p = @sentence.practice.user_practice(current_user)
 
     return render json: nil unless @sentence.is_in_exam?(p)
 

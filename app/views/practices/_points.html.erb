@@ -1,3 +1,3 @@
-<% unless current_user.get_practice(practice).nil? %>
-(<span class="number"><%= current_user.get_practice(practice).points %> points</span>)
+<% unless practice.user_practice(current_user).nil? %>
+(<span class="number"><%= practice.user_practice(current_user).points %> points</span>)
 <% end %>

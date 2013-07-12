@@ -47,26 +47,33 @@ class UserPractice < ActiveRecord::Base
   end
 
 
+  module PracticeMethods
+    def self.included(base)
+      base.has_many :user_practices
+    end
+
+    def user_practice(user)
+      user_practices.where(:user_id => user.id).first
+    end
+  end
+
+
 
   module UserMethods
     def self.included(base)
       base.has_many :practices, :class_name => 'UserPractice', :foreign_key => :user_id
     end
 
-    def get_practice(practice)
-      practices.where(:practice_id => practice.id).first
-    end
-
     def build_sentences(practice)
       return _create_sentences(practice) unless _has_practice?(practice)
 
-      get_practice(practice).init_default_value
+      practice.user_practice(self).init_default_value
     end
 
     def get_sentence_ids(practice)
       return nil unless _has_practice?(practice)
 
-      exam = get_practice(practice).exam
+      exam = practice.user_practice(self).exam
       return [] if exam.blank?
       JSON.parse(exam)
     end

@@ -10,12 +10,12 @@ class Sentence < ActiveRecord::Base
   validates :practice, :subject, :verb, :presence => true
 
   def next_id_by(user)
-    user_practice = user.get_practice(practice)
+    user_practice = practice.user_practice(user)
     return nil unless self.is_in_exam?(user_practice)
 
     ids = user.get_sentence_ids(practice)
     if ids.last == self.id
-      user.get_practice(practice).disable
+      user_practice.disable
       return nil
     end
 

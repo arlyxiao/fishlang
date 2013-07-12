@@ -23,11 +23,11 @@ class PracticesController < ApplicationController
     @at_exam = true
     @practice = Practice.find(session[:practice_id])
 
-    @user_practice = current_user.get_practice(@practice)
+    @user_practice = @practice.user_practice(current_user)
   end
 
   def done
-    @user_practice = current_user.get_practice(@practice)
+    @user_practice = @practice.user_practice(current_user)
   end
 
 end
