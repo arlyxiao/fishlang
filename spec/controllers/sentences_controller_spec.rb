@@ -18,7 +18,7 @@ describe SentencesController do
 
   describe "validate user practice" do
     before {
-      @user_practice = @user.get_practice(@practice)
+      @user_practice = @practice.user_practice(@user)
     }
 
     it "error_count" do
@@ -57,7 +57,7 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test subject'
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
       }
 
@@ -91,7 +91,7 @@ describe SentencesController do
     describe "correct translation" do
       before {
         get 'check', :id => @id, :subject => 'test'
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
       }
 
@@ -139,7 +139,7 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test subject'
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
       }
 
@@ -166,7 +166,7 @@ describe SentencesController do
 
       before {
         get 'check', :id => @id, :subject => 'test'
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
         @body = JSON::parse(response.body)
 
         @error_count = @user_practice.error_count
@@ -193,7 +193,7 @@ describe SentencesController do
       describe "go into check page again with correct answer" do
         before {
           get 'check', :id => @id, :subject => 'test'
-          @user_practice = @user.get_practice(@practice)
+          @user_practice = @practice.user_practice(@user)
           @sentence_failure = Sentence.find(@id).user_failure(@user)
         }
 
@@ -218,7 +218,7 @@ describe SentencesController do
       describe "go into check page again with incorrect answer" do
         before {
           get 'check', :id => @id, :subject => 'test3333'
-          @user_practice = @user.get_practice(@practice)
+          @user_practice = @practice.user_practice(@user)
           @sentence_failure = Sentence.find(@id).user_failure(@user)
         }
 
@@ -269,7 +269,7 @@ describe SentencesController do
 
   describe "validate user practice" do
     before {
-      @user_practice = @user.get_practice(@practice)
+      @user_practice = @practice.user_practice(@user)
       @exam = @user_practice.exam
     }
 
@@ -299,7 +299,7 @@ describe SentencesController do
         @sentence_ids.each do |id|
           get 'check', :id => id, :subject => 'test'
         end
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
       }
 
       it "error_count" do
@@ -331,7 +331,7 @@ describe SentencesController do
         @sentence_ids.each do |id|
           get 'check', :id => id, :subject => 'test111'
         end
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
       }
 
       it "error_count" do
@@ -363,7 +363,7 @@ describe SentencesController do
         get 'check', :id => @sentence_ids[8], :subject => 'test1'
         get 'check', :id => @sentence_ids[9], :subject => 'test'
 
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
       }
 
       it "error_count" do

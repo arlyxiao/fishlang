@@ -8,14 +8,14 @@ describe PracticesController do
   }
 
   it "user has no any practice" do
-    @user.get_practice(@practice).should == nil
+    @practice.user_practice(@user).should == nil
   end
 
   describe "#show" do
     before {
       sign_in @user
       get 'show', :id => @practice.id
-      @user_practice = @user.get_practice(@practice)
+      @user_practice = @practice.user_practice(@user)
     }
 
     it "practice_id in session should be correct" do
@@ -51,7 +51,7 @@ describe PracticesController do
         @user_practice.save
 
         get 'show', :id => @practice.id
-        @user_practice = @user.get_practice(@practice)
+        @user_practice = @practice.user_practice(@user)
       }
 
       it "error_count" do

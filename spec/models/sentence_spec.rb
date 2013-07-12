@@ -21,7 +21,7 @@ describe Sentence do
       before {
         @u1.build_sentences(@p1)
         @u1_sentence_ids = @u1.get_sentence_ids(@p1)
-        @u1_practice = @u1.get_practice(@p1)
+        @user_practice_1 = @p1.user_practice(@u1)
       }
 
       describe "not in exam" do
@@ -30,20 +30,20 @@ describe Sentence do
         }
 
         it "should be false" do
-          @s.is_in_exam?(@u1_practice).should == false
+          @s.is_in_exam?(@user_practice_1).should == false
         end
       end
 
       it "validate exam field" do
-        JSON.parse(@u1_practice.exam).count.should == 10
+        JSON.parse(@user_practice_1.exam).count.should == 10
       end
 
       it "error_count should be 0" do
-        @u1_practice.error_count.should == 0
+        @user_practice_1.error_count.should == 0
       end
 
       it "has_finished should be 0" do
-        @u1_practice.has_finished.should == false
+        @user_practice_1.has_finished.should == false
       end
 
 
@@ -58,7 +58,7 @@ describe Sentence do
 
       describe "destroy user practice" do
         before {
-          @u1_practice.destroy
+          @user_practice_1.destroy
         }
         
 
@@ -85,7 +85,7 @@ describe Sentence do
         @u1_sentence_ids = @u1.get_sentence_ids(@p1)
         @u2_sentence_ids = @u2.get_sentence_ids(@p1)
 
-        @u1_practice = @u1.get_practice(@p1)
+        @user_practice_1 = @p1.user_practice(@u1)
       }
 
       describe "validate sentence done" do
@@ -95,20 +95,20 @@ describe Sentence do
         }
 
         it "is in exam" do
-          @sentence.is_in_exam?(@u1_practice).should == true
+          @sentence.is_in_exam?(@user_practice_1).should == true
         end
 
         it "not done in exam" do
-          @sentence.done_exam_in?(@u1_practice).should == false
+          @sentence.done_exam_in?(@user_practice_1).should == false
         end
 
         describe "done" do
           before {
-            @sentence.move_done_in(@u1_practice)
+            @sentence.move_done_in(@user_practice_1)
           }
 
           it "done in exam" do
-            @sentence.done_exam_in?(@u1_practice).should == true
+            @sentence.done_exam_in?(@user_practice_1).should == true
           end 
         end
       end
@@ -136,14 +136,15 @@ describe Sentence do
             (0..9).each do |i|
               Sentence.find(@u1_sentence_ids[i]).next_id_by(@u1)
             end
+            @user_practice_1 = @p1.user_practice(@u1)
           }
           
           it "has_finished should be true" do
-            @u1.get_practice(@p1).has_finished.should == true
+            @user_practice_1.has_finished.should == true
           end
 
           it "points added" do
-            @u1.get_practice(@p1).points.should == 10
+            @user_practice_1.points.should == 10
           end
         end
 
