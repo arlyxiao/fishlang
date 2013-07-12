@@ -1,47 +1,59 @@
 <%= render 'users/menu' %>
 
-<div class="row">
-  <div class="span8">
-    <h5>Sentence Failures</h5>
-    <table class="table table-bordered table-striped table-hover">
-      <thead>
-        <tr>
-          <th>Sentence</th>
-          <th>Count</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @sentence_failures.each do |r| %>
-          <%
-            practice = r.sentence.practice
-          %>
-
-          <tr>
-            <td><%= r.sentence.subject %></td>
-            <td><%= r.count %></td>
-            <td>
-              <a href="javascript: void(0);" data-id="<%= r.id %>" class="show-translations">translations</a>
-            </td>
-          </tr>
-
-          <tr class="hide translations-<%= r.id %>" data-id="<%= r.id %>">
-            <td colspan="4">
-              <a href="/lessons/<%= practice.lesson.id %>"><%= practice.lesson.name %></a>
-               / 
-              <a href="/practices/<%= practice.id %>"><%= practice.name %></a>
-              <br />
-              <% r.sentence.translations.each do |t| %>
-                <%= t.subject %> <br />
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-
-    </table>
-
-    <%= paginate @sentence_failures %>
-
+<% unless @sentence_failures.any? %>
+  <div class="row">
+    <div class="span8">
+      <h5>Sentence Failures</h5>
+      <p >Great, empty failures now.</p>    
+    </div>
   </div>
-</div>
+
+<% else %>
+
+  <div class="row">
+    <div class="span8">
+      <h5>Sentence Failures</h5>
+      <table class="table table-bordered table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Sentence</th>
+            <th>Count</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @sentence_failures.each do |r| %>
+            <%
+              practice = r.sentence.practice
+            %>
+
+            <tr>
+              <td><%= r.sentence.subject %></td>
+              <td><%= r.count %></td>
+              <td>
+                <a href="javascript: void(0);" data-id="<%= r.id %>" class="show-translations">translations</a>
+              </td>
+            </tr>
+
+            <tr class="hide translations-<%= r.id %>" data-id="<%= r.id %>">
+              <td colspan="4">
+                <a href="/lessons/<%= practice.lesson.id %>"><%= practice.lesson.name %></a>
+                 / 
+                <a href="/practices/<%= practice.id %>"><%= practice.name %></a>
+                <br />
+                <% r.sentence.translations.each do |t| %>
+                  <%= t.subject %> <br />
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+
+      <%= paginate @sentence_failures %>
+
+    </div>
+  </div>
+
+<% end %>
