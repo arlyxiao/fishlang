@@ -717,11 +717,12 @@
         1,
         null,
         1,
-        242,
-        242,
-        242,
-        242,
-        242,
+        239,
+        239,
+        239,
+        239,
+        239,
+        239,
         null,
         null,
         1,
@@ -763,12 +764,12 @@
         null,
         null,
         1,
-        139,
+        136,
         98,
         98,
         null,
         null,
-        139,
+        136,
         null,
         null,
         null,
@@ -1301,20 +1302,6 @@
         1,
         null,
         null,
-        null,
-        null
-      ],
-      "/Users/xiaorich/www/fishlang/spec/factories/user_practice.rb": [
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         null,
         null
       ],
@@ -2040,6 +2027,7 @@
         1,
         1,
         1,
+        1,
         null,
         null,
         null,
@@ -2086,6 +2074,7 @@
         1,
         1,
         1,
+        1,
         null,
         null,
         null,
@@ -2121,6 +2110,6 @@
         null
       ]
     },
-    "timestamp": 1373623223
+    "timestamp": 1373624550
   }
 }

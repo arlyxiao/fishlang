@@ -75,19 +75,6 @@ ActiveRecord::Schema.define(:version => 20130712081705) do
     t.datetime "updated_at",                 :null => false
   end
 
-  create_table "user_practices", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "practice_id"
-    t.string   "exam"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
-    t.integer  "error_count",  :default => 0
-    t.boolean  "has_finished", :default => false
-    t.integer  "points",       :default => 0
-    t.integer  "done_count",   :default => 0
-    t.string   "done_exam"
-  end
-
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
     t.string   "encrypted_password",     :default => "",    :null => false

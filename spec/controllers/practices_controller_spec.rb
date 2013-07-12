@@ -48,7 +48,8 @@ describe PracticesController do
         @user_exercise.save
 
         get 'show', :id => @practice.id
-        @user_exercise = @user.build_exercise(@practice)
+        @user_exercise.reload
+
       }
 
       it "error_count" do
@@ -60,8 +61,8 @@ describe PracticesController do
       end
 
       it "done_exam" do
-      @user_exercise.done_exam.should be_nil
-    end
+        @user_exercise.done_exam.should be_nil
+      end
     end
 
   end

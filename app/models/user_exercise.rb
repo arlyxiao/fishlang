@@ -14,6 +14,7 @@ class UserExercise < ActiveRecord::Base
     self.done_count = 0
     self.done_exam = nil
     self.save
+    reload
     self
   end
 
