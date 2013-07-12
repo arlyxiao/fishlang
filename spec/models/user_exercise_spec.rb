@@ -11,15 +11,19 @@ describe UserExercise do
   }
 
   it "invalid user_exercise" do
-    @user_exercise.invalid?.should == true
+    @user_exercise.nil?.should == true
   end
 
   describe "build sentences" do
     before {
-      @user_exercise.build_sentences(@practice)
+      @user_exercise = @user.build_exercise(@practice)
     }
 
-    describe "validate sentence_ids" do
+    it "valid exercise" do
+      @user.exercise.valid?.should == true
+    end
+
+    it "validate sentence_ids" do
       @user_exercise.sentence_ids.count.should == 10
     end
 
@@ -37,7 +41,7 @@ describe UserExercise do
       end
 
       it "has_finished" do
-        @user_exercise.has_finished.should == false
+        @user_exercise.has_finished?.should == false
       end
 
       it "done_exam" do
@@ -58,12 +62,12 @@ describe UserExercise do
         }
 
         it "sentence not done" do
-          @sentence.done_exam?.should == false
+          @sentence.done_exam?(@user_exercise).should == false
         end
 
         it "sentence done" do
           @user_exercise.refresh(@sentence)
-          @user_exercise.done_exam?.should == true
+          @sentence.done_exam?(@user_exercise).should == true
         end
 
         it "failure count" do
@@ -104,7 +108,7 @@ describe UserExercise do
         }
 
         it "sentence not done" do
-          @sentence.done_exam?.should == false
+          @sentence.done_exam?(@user_exercise).should == false
         end
 
         it "sentence done" do
@@ -149,24 +153,21 @@ describe UserExercise do
 
     describe "validate points" do
       it "10 points" do
-        expect{
-          @user_exercise.error_count = 0
-          @user_exercise.save
-        }.to change{@user_exercise.point}.by(10)
+        @user_exercise.error_count = 0
+        @user_exercise.save
+        @user_exercise.points == 10
       end
 
       it "1 points" do
-        expect{
-          @user_exercise.error_count = 1
-          @user_exercise.save
-        }.to change{@user_exercise.point}.by(1)
+        @user_exercise.error_count = 1
+        @user_exercise.save
+        @user_exercise.points == 1
       end
 
       it "0 points" do
-        expect{
-          @user_exercise.error_count = (2..10).to_a.sample(1).first
-          @user_exercise.save
-        }.to change{@user_exercise.point}.by(0)
+        @user_exercise.error_count = (2..10).to_a.sample(1).first
+        @user_exercise.save
+        @user_exercise.points == 0
       end
     end
 

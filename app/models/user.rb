@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
 
 
   include UserPractice::UserMethods
+  include UserExercise::UserMethods
   include SentenceReport::UserMethods
   include SentenceFailure::UserMethods
 end
