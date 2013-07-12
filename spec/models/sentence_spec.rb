@@ -131,22 +131,6 @@ describe Sentence do
           end
         end
 
-        describe "finish practice" do
-          before {
-            (0..9).each do |i|
-              Sentence.find(@u1_sentence_ids[i]).next_id_by(@u1)
-            end
-            @user_practice_1 = @p1.user_practice(@u1)
-          }
-          
-          it "has_finished should be true" do
-            @user_practice_1.has_finished.should == true
-          end
-
-          it "points added" do
-            @user_practice_1.points.should == 10
-          end
-        end
 
       end
 

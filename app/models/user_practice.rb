@@ -32,6 +32,9 @@ class UserPractice < ActiveRecord::Base
 
     self.done_count = self.done_count + 1
     self.save
+
+    self.disable if done_exam == exam
+
     self
   end
 

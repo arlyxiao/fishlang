@@ -70,12 +70,12 @@ describe SentencesController do
         @user_practice.error_count.should == 1
       end
 
-      it "has_finished should be true" do
-        @user_practice.has_finished.should == true
+      it "has_finished should be false" do
+        @user_practice.has_finished.should == false
       end
 
       it "points should be correct" do
-        @user_practice.points.should == 1
+        @user_practice.points.should == 0
       end
 
       it "next_id should be correct" do
@@ -104,11 +104,11 @@ describe SentencesController do
       end
 
       it "has_finished should be true" do
-        @user_practice.has_finished.should == true
+        @user_practice.has_finished.should == false
       end
 
       it "points should be correct" do
-        @user_practice.points.should == 10
+        @user_practice.points.should == 0
       end
 
       it "next_id should be correct" do

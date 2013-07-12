@@ -14,10 +14,7 @@ class Sentence < ActiveRecord::Base
     return nil unless self.is_exam?(user_practice)
 
     ids = user.get_sentence_ids(practice)
-    if ids.last == self.id
-      user_practice.disable
-      return nil
-    end
+    return nil if ids.last == self.id
 
     ids[ids.index(self.id) + 1]
   end
