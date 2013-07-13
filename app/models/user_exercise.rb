@@ -44,6 +44,7 @@ class UserExercise < ActiveRecord::Base
   end
 
   def save_points(source)
+    return if source.nil?
     source.user_points(user).refresh(self)
   end
 

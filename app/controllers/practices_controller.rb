@@ -21,13 +21,14 @@ class PracticesController < ApplicationController
 
   def exam
     @at_exam = true
+    session[:current_type] = 'practice'
     @practice = Practice.find(session[:practice_id])
 
-    @user_practice = current_user.exercise
+    @user_exercise = current_user.exercise
   end
 
   def done
-    @user_practice = current_user.exercise
+    @user_exercise = current_user.exercise
   end
 
 end

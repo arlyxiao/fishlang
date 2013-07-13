@@ -13,6 +13,9 @@ describe SentencesController do
       t = FactoryGirl.create(:sentence_translation, :sentence => s, :subject => 'test')
     end
     @user_exercise = @user.build_exercise(@practice)
+
+    session[:current_type] = 'practice'
+    session[:practice_id] = @practice.id
     
   }
 
@@ -35,7 +38,6 @@ describe SentencesController do
 
   describe "#check, last sentence id" do
     before {
-      sign_in @user
       @sentence_ids = @user_exercise.sentence_ids
       @id = @sentence_ids[9]
       @sentence_failure = Sentence.find(@id).user_failure(@user)
@@ -75,6 +77,10 @@ describe SentencesController do
         @body['result'].should == false
       end
 
+      it "points" do
+        @practice.user_points(@user).points.should == 0
+      end
+
     end
 
     describe "correct translation" do
@@ -103,6 +109,10 @@ describe SentencesController do
 
       it "result should be correct" do
         @body['result'].should == true
+      end
+
+      it "points" do
+        @practice.user_points(@user).points.should == 0
       end
 
     end
@@ -145,6 +155,10 @@ describe SentencesController do
         @body['result'].should == false
       end
 
+      it "points" do
+        @practice.user_points(@user).points.should == 0
+      end
+
        
     end
 
@@ -175,6 +189,10 @@ describe SentencesController do
         @body['result'].should == true
       end
 
+      it "points" do
+        @practice.user_points(@user).points.should == 0
+      end
+
       describe "go into check page again with correct answer" do
         before {
           get 'check', :id => @id, :subject => 'test'
@@ -195,6 +213,10 @@ describe SentencesController do
 
         it "correct failure count" do
           @sentence_failure.count.should == 0
+        end
+
+        it "points" do
+          @practice.user_points(@user).points.should == 0
         end
 
       end
@@ -222,6 +244,10 @@ describe SentencesController do
           @sentence_failure.count.should == 0
         end
 
+        it "points" do
+          @practice.user_points(@user).points.should == 0
+        end
+
       end
 
     end
@@ -247,11 +273,15 @@ describe SentencesController do
       @sentence_failure.count.should == 0
     end
 
+    it "points" do
+      @practice.user_points(@user).points.should == 0
+    end
+
   end
 
 
 
-  describe "validate user practice" do
+  describe "validate user exercise" do
     before {
       @user_exercise = @user.build_exercise(@practice)
       @exam = @user_exercise.exam
@@ -275,79 +305,101 @@ describe SentencesController do
 
 
     describe "validate the whole practice by sentences, correct answers" do
-      before {
-        @sentence_ids = @user_exercise.sentence_ids
-        @sentence_ids.each do |id|
-          get 'check', :id => id, :subject => 'test'
+
+      describe "practice" do
+        before {
+
+          @sentence_ids = @user_exercise.sentence_ids
+          @sentence_ids.each do |id|
+            get 'check', :id => id, :subject => 'test'
+          end
+          @user_exercise.reload
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 0
         end
-        @user_exercise.reload
-      }
 
-      it "error_count" do
-        @user_exercise.error_count.should == 0
-      end
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
 
-      it "exam" do
-        @user_exercise.exam.should == @exam
-      end
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
 
-      it "has_finished?" do
-        @user_exercise.has_finished?.should == true
-      end
+        it "points" do
+          @practice.user_points(@user).points.should == 10
+        end
+      end    
 
     end
 
 
     describe "validate the whole practice by sentences, incorrect answers" do
-      before {
-        @sentence_ids = @user_exercise.sentence_ids
-        @sentence_ids.each do |id|
-          get 'check', :id => id, :subject => 'test111'
+
+      describe "practice" do
+        before {
+
+          @sentence_ids = @user_exercise.sentence_ids
+          @sentence_ids.each do |id| 
+            get 'check', :id => id, :subject => 'test111'
+          end
+          @user_exercise.reload
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 10
         end
-        @user_exercise.reload
-      }
 
-      it "error_count" do
-        @user_exercise.error_count.should == 10
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
+
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
+
+        it "points" do
+          @practice.user_points(@user).points.should == 0
+        end
       end
-
-      it "exam" do
-        @user_exercise.exam.should == @exam
-      end
-
-      it "has_finished?" do
-        @user_exercise.has_finished?.should == true
-      end
-
 
     end
 
 
-    describe "validate the whole practice by sentences, incorrect with correct answers" do
-      before {
-        @sentence_ids = @user_exercise.sentence_ids
-        8.times do |i|
-          get 'check', :id => @sentence_ids[i], :subject => 'test'
+    describe "validate the whole practice by sentences, incorrect and correct answers" do
+
+      describe "practice" do
+        before {
+          
+          @sentence_ids = @user_exercise.sentence_ids
+          8.times do |i|
+            get 'check', :id => @sentence_ids[i], :subject => 'test'
+          end
+          get 'check', :id => @sentence_ids[8], :subject => 'test1'
+          get 'check', :id => @sentence_ids[9], :subject => 'test'
+
+          @user_exercise.reload
+
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 1
         end
-        get 'check', :id => @sentence_ids[8], :subject => 'test1'
-        get 'check', :id => @sentence_ids[9], :subject => 'test'
 
-        @user_exercise.reload
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
 
-      }
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
 
-      it "error_count" do
-        @user_exercise.error_count.should == 1
+        it "points" do
+          @practice.user_points(@user).points.should == 1
+        end
       end
-
-      it "exam" do
-        @user_exercise.exam.should == @exam
-      end
-
-      it "has_finished?" do
-        @user_exercise.has_finished?.should == true
-      end
-
 
     end
 

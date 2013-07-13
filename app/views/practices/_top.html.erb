@@ -6,7 +6,7 @@
     <%= render 'points', :practice => practice %>
   </h5>
   <% unless session[:practice_id].nil? %>
-	  <span id="practice_error_count" style="color: red;"><%= @user_practice.error_count %></span> errors,
-	  <span id="practice_done_count"><%= @user_practice.done_count %></span> done
+	  <span id="practice_error_count" style="color: red;"><%= @user_exercise.error_count %></span> errors,
+	  <span id="practice_done_count"><%= @user_exercise.done_count %></span> done
 	<% end %>
 </div>

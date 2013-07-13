@@ -4,6 +4,8 @@ class SentencesController < ApplicationController
   
   def pre_load
     @sentence = Sentence.find(params[:id]) if params[:id]
+
+    @source = Practice.find(session[:practice_id]) if session[:current_type] == 'practice'
   end
 
 
@@ -23,6 +25,7 @@ class SentencesController < ApplicationController
     user_exercise.result = @sentence.translate?(params[:subject])
 
     user_exercise.refresh(@sentence)
+    user_exercise.save_points(@source)
     
     render json: {
       :next_id => @sentence.next_id_by(current_user), 
