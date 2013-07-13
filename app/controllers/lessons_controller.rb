@@ -10,6 +10,19 @@ class LessonsController < ApplicationController
   def show
     authenticate_user!
     @practices = @lesson.practices
+
+    @user_exercise = current_user.build_exercise(@lesson)
+    @sentence_ids = @user_exercise.sentence_ids
+
+    session[:lesson_id] = @lesson.id
+  end
+
+  def exam
+    @at_exam = true
+    session[:current_type] = 'lesson'
+    @lesson = Lesson.find(session[:lesson_id])
+
+    @user_exercise = current_user.exercise
   end
 
 end

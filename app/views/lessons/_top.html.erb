@@ -1,9 +1,7 @@
 <div class="span8" style="margin: 20px 0px 0px 9px;">
   <h5>
-    <%= practice.lesson.category.name %> / 
-    <a href="/lessons/<%= practice.lesson.id %>"><%= practice.lesson.name %></a> / 
-    <a href="/practices/<%= practice.id %>"><%= practice.name %></a>
-    <%= render 'points', :practice => practice %>
+    <%= lesson.category.name %> / 
+    <a href="/lessons/<%= lesson.id %>"><%= lesson.name %></a>
   </h5>
   
   <span id="practice_error_count" style="color: red;"><%= @user_exercise.error_count %></span> errors,

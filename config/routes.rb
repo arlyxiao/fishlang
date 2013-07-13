@@ -2,7 +2,11 @@ Fishlang::Application.routes.draw do
 
   devise_for :users
 
-  resources :lessons
+  resources :lessons do
+    collection do
+      get :exam
+    end
+  end
 
   resources :practices do
     collection do

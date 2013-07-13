@@ -1,5 +1,5 @@
 class UserExercise < ActiveRecord::Base
-  attr_accessible :user, :exam, :error_count, :done_count, :done_exam
+  attr_accessible :user, :exam, :error_count, :done_count, :done_exam, :kind
 
   attr_accessor :result
 
@@ -9,12 +9,13 @@ class UserExercise < ActiveRecord::Base
 
   after_create :init_value
 
-  def init_value
+  def init_value(source = nil)
+    self.exam = source.generate_exam if source && self.has_finished?
     self.error_count = 0
     self.done_count = 0
     self.done_exam = nil
+    self.kind = source.class.name.downcase
     self.save
-    reload
     self
   end
 
@@ -63,11 +64,12 @@ class UserExercise < ActiveRecord::Base
 
     def build_exercise(source)
       if self.exercise.nil?
-        UserExercise.create(:user => self, :exam => source.generate_exam)
+        UserExercise.create(
+          :user => self, :exam => source.generate_exam, :kind => source.class.name.downcase)
         reload
       end
 
-      exercise.init_value
+      exercise.init_value(source)
     end
   end
 

@@ -14,9 +14,8 @@ class PracticesController < ApplicationController
   def show
     session[:practice_id] = @practice.id
 
-    current_user.build_exercise(@practice)
-
-    @sentence_ids = current_user.build_exercise(@practice).sentence_ids
+    @user_exercise = current_user.build_exercise(@practice)
+    @sentence_ids = @user_exercise.sentence_ids
   end
 
   def exam
@@ -28,14 +27,23 @@ class PracticesController < ApplicationController
   end
 
   def done
-    # return redirect_to "/lessons" unless current_user.exercise.has_finished?
     return redirect_to "/lessons" unless session[:current_type]
 
-    @practice = Practice.find(session[:practice_id]) if session[:current_type] == 'practice'
-    @user_exercise = current_user.exercise
+    if session[:current_type] == 'practice'
+      @practice = Practice.find(session[:practice_id])
+      @user_exercise = current_user.exercise
+    end
 
-    session[:current_type] = nil
-    session[:practice_id] = nil
+    if session[:current_type] == 'lesson'
+      @lesson = Lesson.find(session[:lesson_id])
+      @user_exercise = current_user.exercise
+    end
+
+    # return redirect_to "/lessons" if @user_exercise.has_finished?
+
+    #session[:current_type] = nil
+    #session[:practice_id] = nil
+    #session[:lesson_id] = nil
   end
 
 end

@@ -2,6 +2,11 @@
 	<%= render 'top', :practice => @practice %>
 <% end %>
 
+<% unless @lesson.nil? %>
+	<%= render 'lessons/top', :lesson => @lesson %>
+<% end %>
+
+
 <div class="well" style="margin: 100px 0px 0px 0px;">
   <h5><span style="color: red;"><%= @user_exercise.error_count %></span> errors, got 
   <span class="number"><%= @user_exercise.points %></span>

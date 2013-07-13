@@ -96,8 +96,7 @@ describe UserExercise do
           it "true" do
             @user_exercise.done_exam = @user_exercise.exam
             @user_exercise.save
-            @user_exercise.refresh(@sentence)
-            @user_exercise.has_finished?.should == true
+            @user_exercise.refresh(@sentence).has_finished?.should == true
           end
         end
 
@@ -143,8 +142,7 @@ describe UserExercise do
           it "true" do
             @user_exercise.done_exam = @user_exercise.exam
             @user_exercise.save
-            @user_exercise.refresh(@sentence)
-            @user_exercise.has_finished?.should == true
+            @user_exercise.refresh(@sentence).has_finished?.should == true
           end
         end
         

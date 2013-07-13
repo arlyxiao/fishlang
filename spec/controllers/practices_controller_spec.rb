@@ -12,7 +12,7 @@ describe PracticesController do
     before {
       sign_in @user
       get 'show', :id => @practice.id
-      @user_exercise = @user.build_exercise(@practice)
+      @user_exercise = @user.exercise
     }
 
     it "practice_id in session should be correct" do
@@ -42,15 +42,14 @@ describe PracticesController do
 
     describe "go into show page again" do
       before {
-        @user_exercise.error_count = 5
-        @user_exercise.done_count = 3
-        @user_exercise.done_exam = 'sss'
-        @user_exercise.save
-
+        @exam = @user_exercise.exam
         get 'show', :id => @practice.id
         @user_exercise.reload
-
       }
+
+      it "exam" do
+        @user_exercise.exam.should == @exam
+      end
 
       it "error_count" do
         @user_exercise.error_count.should == 0

@@ -6,6 +6,7 @@ class SentencesController < ApplicationController
     @sentence = Sentence.find(params[:id]) if params[:id]
 
     @source = Practice.find(session[:practice_id]) if session[:current_type] == 'practice'
+    @source = Lesson.find(session[:lesson_id]) if session[:current_type] == 'lesson'
   end
 
 
@@ -21,6 +22,7 @@ class SentencesController < ApplicationController
     user_exercise = current_user.exercise
 
     return render json: nil unless @sentence.is_exam?(user_exercise)
+    return render json: nil if user_exercise.kind != session[:current_type]
 
     user_exercise.result = @sentence.translate?(params[:subject])
 

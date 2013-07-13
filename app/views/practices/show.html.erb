@@ -3,7 +3,8 @@
 <div class="row">
   <div class="span8">
     <h5><%= @practice.lesson.category.name %> / 
-        <%= @practice.lesson.name %> / <%= @practice.name %>
+        <a href="/lessons/<%= @practice.lesson.id %>"><%= @practice.lesson.name %></a> 
+        / <%= @practice.name %>
         <%= render 'points', :practice => @practice %>
     </h5>
   </div>

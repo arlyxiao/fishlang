@@ -5,6 +5,13 @@
     <h5><%= @lesson.category.name %> / <%= @lesson.name %></h5>
   </div>
 
+
+  <div class="span8" style="margin-top: 10px;">
+    <% unless @sentence_ids.nil? %>
+      <button class="btn btn-primary" type="button" onclick="javascript: window.location.reload(); window.location.href = '/lessons/exam/#/sentences/<%= @sentence_ids.first %>'">Test out of this skill</button>
+    <% end %>
+  </div>
+
   <% @practices.each do |p| %>
     <div class="span8">
       <h5>
