@@ -14,9 +14,9 @@
 
 
 
-  <div class="span8" style="margin: 20px 0px 0px 9px;">
+  <div class="span8 a-list">
     <% @practices.each do |p| %>
-      <p style="margin-left:20px; padding: 5px;">
+      <p style="padding: 5px;">
         <a href="/practices/<%= p.id %>"><%= p.name %></a> 
         <%= render 'practices/points', :practice => p %>
       </p>

@@ -15,9 +15,9 @@
     <% end %>
   </div>
 
-  <div class="span8" style="margin: 20px 0px 0px 9px;">
+  <div class="span8 a-list">
     <% @practice.sentences.each do |s| %>
-      <p style="margin-left:20px; padding: 5px;">
+      <p style="padding: 5px;">
         <a href="http://conjugador.reverso.net/conjugacion-espanol-verbo-<%= s.verb %>.html" class="black" target="_blank"><%= s.verb %></a></p>
     <% end %>
   </div>
