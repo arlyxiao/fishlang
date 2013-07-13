@@ -6,7 +6,7 @@ FishLang.SentenceController = Ember.ObjectController.extend(
     success_url = '/practices/done'
 
     Ember.$.post(check_url, data).then (response) ->
-      window.location.href = success_url if response == null
+      window.location.href = "/lessons" if response == null
 
       $('#practice_error_count').html(response.error_count)
       $('#practice_done_count').html(response.done_count)

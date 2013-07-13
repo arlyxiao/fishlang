@@ -49,7 +49,7 @@ describe Sentence do
 
       it "same when build_sentences again" do
         @user_1.build_exercise(@practice_1)
-        @user_1.exercise.sentence_ids.should == @sentence_ids_1
+        @user_1.exercise.sentence_ids.should_not == @sentence_ids_1
       end
 
       describe "validate done exam" do

@@ -10,7 +10,7 @@ class UserExercise < ActiveRecord::Base
   after_create :init_value
 
   def init_value(source = nil)
-    self.exam = source.generate_exam if source && self.has_finished?
+    self.exam = source.generate_exam if source
     self.error_count = 0
     self.done_count = 0
     self.done_exam = nil

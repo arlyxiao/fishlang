@@ -48,7 +48,7 @@ describe PracticesController do
       }
 
       it "exam" do
-        @user_exercise.exam.should == @exam
+        @user_exercise.exam.should_not == @exam
       end
 
       it "error_count" do

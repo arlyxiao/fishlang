@@ -22,7 +22,7 @@ class SentencesController < ApplicationController
     user_exercise = current_user.exercise
 
     return render json: nil unless @sentence.is_exam?(user_exercise)
-    return render json: nil if user_exercise.kind != session[:current_type]
+    return render json: nil if user_exercise.has_finished?
 
     user_exercise.result = @sentence.translate?(params[:subject])
 
