@@ -31,7 +31,8 @@ class SentencesController < ApplicationController
       :next_id => @sentence.next_id_by(current_user), 
       :result => user_exercise.result, 
       :error_count => user_exercise.error_count,
-      :done_count => user_exercise.done_count
+      :done_count => user_exercise.done_count,
+      :current_type => session[:current_type]
     }
   end
 

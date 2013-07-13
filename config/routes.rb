@@ -7,9 +7,6 @@ Fishlang::Application.routes.draw do
   resources :practices do
     collection do
       get :exam
-    end
-
-    member do
       get :done
     end
   end
