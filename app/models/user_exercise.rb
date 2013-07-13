@@ -28,9 +28,9 @@ class UserExercise < ActiveRecord::Base
 
     sentence.move_done(self)
 
-    sentence.user_failure(user).refresh unless result
+    sentence.user_failure(user).refresh(result)
+    
     self.error_count = self.error_count + 1 unless result
-
     self.done_count = self.done_count + 1
     self.save
 

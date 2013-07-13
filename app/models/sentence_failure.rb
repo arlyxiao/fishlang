@@ -9,8 +9,10 @@ class SentenceFailure < ActiveRecord::Base
   default_scope :order => "count DESC"
 
 
-  def refresh
-  	self.count = self.count + 1
+  def refresh(result)
+    return if result && count == 0
+  	self.count = self.count + 1 unless result
+    self.correct_count = self.correct_count + 1 if result
   	self.save
   end
 
