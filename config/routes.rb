@@ -24,7 +24,11 @@ Fishlang::Application.routes.draw do
 
   end
 
-  resources :sentence_failures
+  resources :sentence_failures do
+    collection do
+      get :exam
+    end
+  end
 
 
   namespace :admin do

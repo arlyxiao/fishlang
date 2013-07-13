@@ -6,8 +6,13 @@
 	<%= render 'lessons/top', :lesson => @lesson %>
 <% end %>
 
+<% if session[:current_type] == 'sentence_failure' %>
+	<%= render 'sentence_failures/top' %>
+<% end %>
 
-<div class="well" style="margin: 100px 0px 0px 0px;">
+
+
+<div class="well" style="margin: 100px 0px 0px 10px;">
   <h5><span style="color: red;"><%= @user_exercise.error_count %></span> errors, got 
   <span class="number"><%= @user_exercise.points %></span>
  points</h5>

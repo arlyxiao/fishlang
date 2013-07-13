@@ -10,6 +10,10 @@ class SentenceFailure < ActiveRecord::Base
 
   scope :by_count, :conditions => ['correct_count < count * 3']
 
+  def generate_exam
+    self.class.all.sample(10).map(&:id).to_json
+  end
+
 
   def refresh(result)
     return if result && count == 0

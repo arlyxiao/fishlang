@@ -31,15 +31,15 @@ class PracticesController < ApplicationController
 
     if session[:current_type] == 'practice'
       @practice = Practice.find(session[:practice_id])
-      @user_exercise = current_user.exercise
     end
 
     if session[:current_type] == 'lesson'
       @lesson = Lesson.find(session[:lesson_id])
-      @user_exercise = current_user.exercise
     end
 
-    # return redirect_to "/lessons" if @user_exercise.has_finished?
+    @user_exercise = current_user.exercise
+
+    # return redirect_to "/lessons" unless @user_exercise.has_finished?
 
     #session[:current_type] = nil
     #session[:practice_id] = nil

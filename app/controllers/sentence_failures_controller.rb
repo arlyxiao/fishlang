@@ -7,7 +7,18 @@ class SentenceFailuresController < ApplicationController
   end
 
   def index    
-    @sentence_failures = current_user.sentence_failures.page params[:page]
+    @sentence_failures = current_user.sentence_failures.by_count.page params[:page]
+
+    @user_exercise = current_user.build_exercise(@sentence_failures.first)
+    @sentence_ids = @user_exercise.sentence_ids
+
+  end
+
+  def exam
+  	@at_exam = true
+  	session[:current_type] = 'sentence_failure'
+
+    @user_exercise = current_user.exercise
   end
 
 end

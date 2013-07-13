@@ -1,10 +1,10 @@
 <%= render 'users/menu' %>
 
-<% unless @sentence_failures.any? %>
+<% if @sentence_failures.count < 1 || @sentence_failures.blank? %>
   <div class="row">
     <div class="span8">
       <h5>Sentence Failures</h5>
-      <p >Great, empty failures now.</p>    
+      <p >Great, your failures are less than 10 now.</p>    
     </div>
   </div>
 
@@ -13,11 +13,21 @@
   <div class="row">
     <div class="span8">
       <h5>Sentence Failures</h5>
+
+      <div class="span8" style="margin: 10px 0px 20px 0px;">
+        <% unless @sentence_ids.nil? %>
+          <button class="btn btn-primary" type="button" onclick="javascript: window.location.reload(); window.location.href = '/sentence_failures/exam/#/sentences/<%= @sentence_ids.first %>'">Test out of this skill</button>
+        <% end %>
+      </div>
+
+      <p>*** To avoid these, You need to practise more. 
+      Make sure that the correct counts are 3 times more than errors</p>
+
       <table class="table table-bordered table-striped table-hover">
         <thead>
           <tr>
             <th>Sentence</th>
-            <th>Count</th>
+            <th>N/Y</th>
             <th></th>
           </tr>
         </thead>
@@ -29,7 +39,7 @@
 
             <tr>
               <td><%= r.sentence.subject %></td>
-              <td><%= r.count %></td>
+              <td><%= r.count %> / <%= r.correct_count %></td>
               <td>
                 <a href="javascript: void(0);" data-id="<%= r.id %>" class="show-translations">translations</a>
               </td>
