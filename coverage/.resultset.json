@@ -813,6 +813,8 @@
         null,
         1,
         null,
+        1,
+        null,
         null,
         1,
         8,
@@ -828,9 +830,9 @@
         null,
         null,
         1,
-        8,
-        8,
-        8,
+        9,
+        9,
+        9,
         null,
         null,
         null,
@@ -1367,7 +1369,7 @@
       "/Users/xiaorich/www/fishlang/spec/factories/category.rb": [
         1,
         1,
-        9,
+        25,
         null,
         null
       ],
@@ -1375,7 +1377,7 @@
         1,
         1,
         1,
-        9,
+        25,
         null,
         null
       ],
@@ -1383,7 +1385,7 @@
         1,
         1,
         1,
-        9,
+        25,
         null,
         null
       ],
@@ -1391,12 +1393,13 @@
         1,
         1,
         1,
-        9,
-        9,
+        25,
+        25,
         null,
         null
       ],
       "/Users/xiaorich/www/fishlang/spec/factories/sentence_failure.rb": [
+        1,
         1,
         1,
         1,
@@ -1414,11 +1417,11 @@
       ],
       "/Users/xiaorich/www/fishlang/spec/factories/user.rb": [
         1,
-        17,
+        49,
         null,
         1,
-        9,
-        9,
+        25,
+        25,
         1,
         null,
         null,
@@ -1426,6 +1429,6 @@
         null
       ]
     },
-    "timestamp": 1373707620
+    "timestamp": 1373708860
   }
 }

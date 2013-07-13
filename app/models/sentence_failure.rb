@@ -1,5 +1,5 @@
 class SentenceFailure < ActiveRecord::Base
-  attr_accessible :user, :sentence, :count
+  attr_accessible :user, :sentence, :count, :correct_count
 
   belongs_to :user
   belongs_to :sentence
@@ -7,6 +7,8 @@ class SentenceFailure < ActiveRecord::Base
   validates :user, :sentence, :count, :presence => true
 
   default_scope :order => "count DESC"
+
+  scope :by_count, :conditions => ['correct_count < count * 3']
 
 
   def refresh(result)
