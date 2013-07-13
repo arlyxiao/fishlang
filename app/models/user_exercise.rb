@@ -43,6 +43,10 @@ class UserExercise < ActiveRecord::Base
     0
   end
 
+  def save_points(source)
+    source.user_points(user).refresh(self)
+  end
+
 
   def sentence_ids
     return [] if exam.blank?

@@ -14,7 +14,7 @@ describe UserExercise do
     @user_exercise.nil?.should == true
   end
 
-  describe "build sentences" do
+  describe "build exercise" do
     before {
       @user_exercise = @user.build_exercise(@practice)
     }
@@ -154,23 +154,105 @@ describe UserExercise do
 
 
     describe "validate points" do
-      it "10 points" do
-        @user_exercise.error_count = 0
-        @user_exercise.save
-        @user_exercise.points == 10
+      describe "10 points" do
+        before {
+          @user_exercise.error_count = 0
+          @user_exercise.save
+        }
+
+        it "points" do
+          @user_exercise.points == 10
+        end
+
+        describe "not finished" do
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(0)
+          end
+        end
+
+        describe "finished" do
+          before {
+            @user_exercise.done_exam = @user_exercise.exam
+            @user_exercise.save
+          }
+
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(10)
+          end
+        end
+        
       end
 
-      it "1 points" do
-        @user_exercise.error_count = 1
-        @user_exercise.save
-        @user_exercise.points == 1
+      describe "1 points" do
+        before {
+          @user_exercise.error_count = 1
+          @user_exercise.save
+        }
+
+        it "points" do
+          @user_exercise.points == 1
+        end
+
+        describe "not finished" do
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(0)
+          end
+        end
+
+        describe "finished" do
+          before {
+            @user_exercise.done_exam = @user_exercise.exam
+            @user_exercise.save
+          }
+
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(1)
+          end
+        end
+        
       end
 
-      it "0 points" do
-        @user_exercise.error_count = (2..10).to_a.sample(1).first
-        @user_exercise.save
-        @user_exercise.points == 0
+      describe "0 points" do
+        before {
+          @user_exercise.error_count = (2..10).to_a.sample(1).first
+          @user_exercise.save
+        }
+
+        it "points" do
+          @user_exercise.points == 0
+        end
+
+        describe "not finished" do
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(0)
+          end
+        end
+
+        describe "finished" do
+          before {
+            @user_exercise.done_exam = @user_exercise.exam
+            @user_exercise.save
+          }
+
+          it "save points" do
+            expect{
+              @user_exercise.save_points(@practice)
+            }.to change{@practice.user_points(@user).points}.by(0)
+          end
+        end
+
       end
+
     end
 
   end

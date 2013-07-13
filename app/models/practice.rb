@@ -10,5 +10,6 @@ class Practice < ActiveRecord::Base
     sentences.sample(10).map(&:id).to_json
   end
 
+  include PracticePoint::PracticeMethods
 
 end
