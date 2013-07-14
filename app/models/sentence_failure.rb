@@ -11,7 +11,7 @@ class SentenceFailure < ActiveRecord::Base
   scope :by_count, :conditions => ['correct_count < count * 3']
 
   def generate_exam
-    self.class.all.sample(10).map(&:id).to_json
+    self.class.all.sample(10).map(&:sentence_id).to_json
   end
 
 
@@ -40,5 +40,7 @@ class SentenceFailure < ActiveRecord::Base
       base.has_many :sentence_failures
     end
   end
+
+  include SentenceFailurePoint::SentenceFailureMethods
 
 end

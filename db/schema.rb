@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130713091924) do
+ActiveRecord::Schema.define(:version => 20130714085002) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,13 @@ ActiveRecord::Schema.define(:version => 20130713091924) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "sentence_failure_points", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "points",     :default => 0, :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "sentence_failures", :force => true do |t|

@@ -292,6 +292,10 @@ describe SentencesController do
       @user_exercise.kind.should == 'practice'
     end
 
+    it "empty failures" do
+      SentenceFailure.all.count.should == 0
+    end
+
 
     describe "validate the whole practice by sentences, correct answers" do
 
@@ -320,6 +324,13 @@ describe SentencesController do
         it "points" do
           @practice.user_points(@user).points.should == 10
         end
+
+        it "empty failures" do
+          SentenceFailure.all.each do |f|
+            f.count.should == 0
+            f.correct_count.should == 0
+          end
+        end
       end    
 
     end
@@ -334,6 +345,9 @@ describe SentencesController do
           @sentence_ids.each do |id| 
             get 'check', :id => id, :subject => 'test111'
           end
+
+          @failures = SentenceFailure.all
+
           @user_exercise.reload
         }
 
@@ -350,8 +364,16 @@ describe SentencesController do
         end
 
         it "points" do
-          @practice.user_points(@user).points.should == 0
+           @practice.user_points(@user).points.should == 0
         end
+
+        it "failures" do
+          @failures.each do |f|
+            f.count.should == 1
+            f.correct_count.should == 0
+          end
+        end
+
       end
 
     end
@@ -802,6 +824,158 @@ describe SentencesController do
 
   end
 
+end
+
+
+# test sentence failure
+describe SentencesController do
+
+  before {
+    @user = FactoryGirl.create :user
+    sign_in @user
+
+    @lesson = FactoryGirl.create :lesson
+    @practice_1 = FactoryGirl.create :practice, :lesson => @lesson
+    @practice_2 = FactoryGirl.create :practice, :lesson => @lesson
+
+    10.times do |i|
+      s = FactoryGirl.create(:sentence, :practice => @practice_1)
+
+      t = FactoryGirl.create(:sentence_translation, :sentence => s, :subject => 'test')
+
+      FactoryGirl.create(:sentence_failure, :sentence => s, :user => @user, :count => 2)
+    end
+
+    10.times do |i|
+      s = FactoryGirl.create(:sentence, :practice => @practice_2)
+
+      t = FactoryGirl.create(:sentence_translation, :sentence => s, :subject => 'test')
+
+      @failure = FactoryGirl.create(:sentence_failure, :sentence => s, :user => @user, :count => 3)
+    end
+
+    @user_exercise = @user.build_exercise(@failure)
+
+    session[:current_type] = 'sentence_failure'    
+  }
+
+  describe "validate user exercise" do
+    before {
+      @exam = @user_exercise.exam
+    }
+
+    it "has_finished?" do
+      @user_exercise.has_finished?.should == false
+    end
+
+    it "kind" do
+      @user_exercise.kind.should == 'sentencefailure'
+    end
+
+
+    describe "validate the whole practice by sentences, correct answers" do
+
+      describe "sentence failure" do
+        before {
+
+          @sentence_ids = @user_exercise.sentence_ids
+          @sentence_ids.each do |id|
+            get 'check', :id => id, :subject => 'test'
+          end
+          @user_exercise.reload
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 0
+        end
+
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
+
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
+
+        it "points" do
+
+          @failure.user_points(@user).points.should == 10
+
+        end
+      end    
+
+    end
+
+
+    describe "validate the whole practice by sentences, incorrect answers" do
+
+      describe "sentence_failure" do
+        before {
+
+          @sentence_ids = @user_exercise.sentence_ids
+          @sentence_ids.each do |id| 
+            get 'check', :id => id, :subject => 'test111'
+          end
+          @user_exercise.reload
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 10
+        end
+
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
+
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
+
+        it "points" do
+          @failure.user_points(@user).points.should == 0
+        end
+      end
+
+    end
+
+
+    describe "validate the whole sentences, incorrect and correct answers" do
+
+      describe "sentence_failure" do
+        before {
+          
+          @sentence_ids = @user_exercise.sentence_ids
+          8.times do |i|
+            get 'check', :id => @sentence_ids[i], :subject => 'test'
+          end
+          get 'check', :id => @sentence_ids[8], :subject => 'test1'
+          get 'check', :id => @sentence_ids[9], :subject => 'test'
+
+          @user_exercise.reload
+
+        }
+
+        it "error_count" do
+          @user_exercise.error_count.should == 1
+        end
+
+        it "exam" do
+          @user_exercise.exam.should == @exam
+        end
+
+        it "has_finished?" do
+          @user_exercise.has_finished?.should == true
+        end
+
+        it "points" do
+          @failure.user_points(@user).points.should == 1
+        end
+      end
+
+    end
+
+
+  end
 end
 
 
