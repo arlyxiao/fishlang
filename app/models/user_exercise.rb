@@ -72,6 +72,22 @@ class UserExercise < ActiveRecord::Base
 
       exercise.init_value(source)
     end
+
+    def total_points
+      total = 0
+
+      lesson_points = LessonPoint.where(:user_id => self.id)
+      lesson_points.map { |p| total = p.points + total } unless lesson_points.blank?
+
+      practice_points = PracticePoint.where(:user_id => self.id)
+      practice_points.map { |p| total = p.points + total } unless practice_points.blank?
+
+      failure = SentenceFailurePoint.where(:user_id => self.id).first
+      total = failure.points + total unless failure.nil?
+
+      total
+    end
+
   end
 
 end

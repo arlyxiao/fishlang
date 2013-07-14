@@ -67,6 +67,10 @@ describe SentencesController do
         @practice.user_points(@user).points.should == 0
       end
 
+      it "total points" do
+        @user.total_points.should == 0
+      end
+
     end
 
     describe "correct translation" do
@@ -325,6 +329,10 @@ describe SentencesController do
           @practice.user_points(@user).points.should == 10
         end
 
+        it "total points" do
+          @user.total_points.should == 10
+        end
+
         it "empty failures" do
           SentenceFailure.all.each do |f|
             f.count.should == 0
@@ -448,6 +456,10 @@ describe SentencesController do
     session[:lesson_id] = @lesson.id
     
   }
+
+  it "total points" do
+    @user.total_points.should == 0
+  end
 
 
 
@@ -749,6 +761,11 @@ describe SentencesController do
         it "points" do
           @lesson.user_points(@user).points.should == 10
         end
+
+        it "total points" do
+          @user.total_points.should == 10
+        end
+
       end    
 
     end
@@ -781,6 +798,12 @@ describe SentencesController do
         it "points" do
           @lesson.user_points(@user).points.should == 0
         end
+
+        it "total points" do
+          @user.total_points.should == 0
+        end
+
+
       end
 
     end
@@ -817,6 +840,11 @@ describe SentencesController do
         it "points" do
           @lesson.user_points(@user).points.should == 1
         end
+
+        it "total points" do
+          @user.total_points.should == 1
+        end
+
       end
 
     end
