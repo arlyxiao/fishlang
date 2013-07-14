@@ -461,6 +461,10 @@ describe SentencesController do
     @user.total_points.should == 0
   end
 
+  it "equal" do
+    @user.points.should == @user.total_points
+  end
+
 
 
   describe "#check, last sentence id" do
@@ -766,6 +770,11 @@ describe SentencesController do
           @user.total_points.should == 10
         end
 
+        it "equal" do
+          @user.reload
+          @user.points.should == @user.total_points
+        end
+
       end    
 
     end
@@ -801,6 +810,11 @@ describe SentencesController do
 
         it "total points" do
           @user.total_points.should == 0
+        end
+
+        it "equal" do
+          @user.reload
+          @user.points.should == @user.total_points
         end
 
 
@@ -843,6 +857,11 @@ describe SentencesController do
 
         it "total points" do
           @user.total_points.should == 1
+        end
+
+        it "equal" do
+          @user.reload
+          @user.points.should == @user.total_points
         end
 
       end

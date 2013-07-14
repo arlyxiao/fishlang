@@ -5,13 +5,6 @@ class SentenceFailurePoint < ActiveRecord::Base
 
   validates :user, :points, :presence => true
 
-  def refresh(user_exercise)
-  	return unless user_exercise.has_finished?
-  	self.points = self.points + user_exercise.points
-  	self.save
-  	reload
-  	self
-  end
 
   module SentenceFailureMethods
 

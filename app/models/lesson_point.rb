@@ -6,13 +6,6 @@ class LessonPoint < ActiveRecord::Base
 
   validates :user, :lesson, :points, :presence => true
 
-  def refresh(user_exercise)
-  	return unless user_exercise.has_finished?
-  	self.points = self.points + user_exercise.points
-  	self.save
-  	reload
-  	self
-  end
 
   module LessonMethods
     def self.included(base)

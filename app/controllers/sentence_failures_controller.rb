@@ -9,8 +9,10 @@ class SentenceFailuresController < ApplicationController
   def index    
     @sentence_failures = current_user.sentence_failures.by_count.page params[:page]
 
-    @user_exercise = current_user.build_exercise(@sentence_failures.first)
-    @sentence_ids = @user_exercise.sentence_ids
+    unless @sentence_failures.blank?
+      @user_exercise = current_user.build_exercise(@sentence_failures.first)
+      @sentence_ids = @user_exercise.sentence_ids
+    end
 
   end
 

@@ -6,13 +6,6 @@ class PracticePoint < ActiveRecord::Base
 
   validates :user, :practice, :points, :presence => true
 
-  def refresh(user_exercise)
-  	return unless user_exercise.has_finished?
-  	self.points = self.points + user_exercise.points
-  	self.save
-  	reload
-  	self
-  end
 
   module PracticeMethods
     def self.included(base)
