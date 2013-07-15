@@ -7,7 +7,7 @@ class SentencesController < ApplicationController
 
     @source = Practice.find(session[:practice_id]) if session[:current_type] == 'practice'
     @source = Lesson.find(session[:lesson_id]) if session[:current_type] == 'lesson'
-    @source = SentenceFailure.all.first if session[:current_type] == 'sentence_failure'
+    @source = SentenceFailure.first if session[:current_type] == 'sentence_failure'
   end
 
 
