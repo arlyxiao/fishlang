@@ -9,12 +9,9 @@ class SentenceFailurePoint < ActiveRecord::Base
   module SentenceFailureMethods
 
     def user_points(user)
-      unless SentenceFailurePoint.where(:user_id => user.id).exists?
-        SentenceFailurePoint.create(:user => user)
-      end
-      
-      SentenceFailurePoint.where(:user_id => user.id).first
+      SentenceFailurePoint.where(:user_id => user.id).first_or_create
     end
+
   end
 
 end

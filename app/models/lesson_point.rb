@@ -13,8 +13,7 @@ class LessonPoint < ActiveRecord::Base
     end
 
     def user_points(user)
-      points.create(:user => user) unless points.where(:user_id => user.id).exists?
-      points.where(:user_id => user.id).first
+      points.where(:user_id => user.id).first_or_create
     end
   end
 
