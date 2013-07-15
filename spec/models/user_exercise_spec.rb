@@ -3,7 +3,8 @@ require "spec_helper"
 describe UserExercise do
   before {
     @user = FactoryGirl.create(:user)
-    @practice = FactoryGirl.create(:practice)
+    @lesson = FactoryGirl.create(:lesson)
+    @practice = FactoryGirl.create(:practice, :lesson => @lesson)
 
     12.times { @sentence = FactoryGirl.create(:sentence, :practice => @practice) }
 
@@ -49,7 +50,7 @@ describe UserExercise do
       end
 
       it "exam" do
-        JSON.parse(@user_exercise.exam).count.should == 10
+        @user_exercise.sentence_ids.count.should == 10
       end
     end
 
@@ -92,12 +93,6 @@ describe UserExercise do
           it "has_finished should be false" do
             @user_exercise.has_finished?.should == false
           end
-
-          it "true" do
-            @user_exercise.done_exam = @user_exercise.exam
-            @user_exercise.save
-            @user_exercise.has_finished?.should == true
-          end
         end
 
       end
@@ -138,12 +133,6 @@ describe UserExercise do
           it "has_finished should be false" do
             @user_exercise.has_finished?.should == false
           end
-
-          it "true" do
-            @user_exercise.done_exam = @user_exercise.exam
-            @user_exercise.save
-            @user_exercise.refresh(@sentence).has_finished?.should == true
-          end
         end
         
       end
@@ -152,6 +141,12 @@ describe UserExercise do
 
 
     describe "validate points" do
+      before {
+        FactoryGirl.create(:lesson_point, :user => @user, :lesson => @lesson, :points => 20)
+        FactoryGirl.create(:practice_point, :user => @user, :practice => @practice, :points => 30)
+        FactoryGirl.create(:sentence_failure_point, :user => @user, :points => 10)
+      }
+
       describe "10 points" do
         before {
           @user_exercise.error_count = 0
@@ -176,10 +171,17 @@ describe UserExercise do
             @user_exercise.save
           }
 
-          it "save points" do
+          it "practice points" do
             expect{
               @user_exercise.save_points(@practice)
             }.to change{@practice.user_points(@user).points}.by(10)
+          end
+
+          it "user points" do
+            expect{
+              @user_exercise.save_points(@practice)
+              @user.reload
+            }.to change{@user.points}.by(10)
           end
         end
         
@@ -213,6 +215,13 @@ describe UserExercise do
             expect{
               @user_exercise.save_points(@practice)
             }.to change{@practice.user_points(@user).points}.by(1)
+          end
+
+          it "user points" do
+            expect{
+              @user_exercise.save_points(@practice)
+              @user.reload
+            }.to change{@user.points}.by(1)
           end
         end
         

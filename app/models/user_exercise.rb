@@ -54,7 +54,7 @@ class UserExercise < ActiveRecord::Base
     source_points.points = source_points.points + points
     source_points.save
 
-    user.points = user.points + source_points.points
+    user.points = user.points + points
     user.save
     user.reload
   end

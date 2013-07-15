@@ -569,6 +569,7 @@ describe "Sentence check" do
       	@user.points.should == 10
       end
 
+
       describe "go into sentence_failures page" do
       	before {
       		get "/sentence_failures"
@@ -578,6 +579,8 @@ describe "Sentence check" do
       	it "count" do
       		@sentence_failures.count.should == 0
       	end
+
+
 
 
       end
