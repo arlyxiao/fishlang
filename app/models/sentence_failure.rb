@@ -29,9 +29,7 @@ class SentenceFailure < ActiveRecord::Base
     end
 
     def user_failure(user)
-    	rows = failures.where(:user_id => user.id)
-    	return rows.first if rows.exists?
-    	failures.create(:user => user)
+      failures.where(:user_id => user.id).first_or_create
     end
   end
 
