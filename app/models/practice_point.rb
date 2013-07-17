@@ -6,6 +6,8 @@ class PracticePoint < ActiveRecord::Base
 
   validates :user, :practice, :points, :presence => true
 
+  validates :practice_id, :uniqueness => {:scope => :user_id}
+
 
   module PracticeMethods
     def self.included(base)

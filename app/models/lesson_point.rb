@@ -6,6 +6,8 @@ class LessonPoint < ActiveRecord::Base
 
   validates :user, :lesson, :points, :presence => true
 
+  validates :lesson_id, :uniqueness => {:scope => :user_id}
+
 
   module LessonMethods
     def self.included(base)

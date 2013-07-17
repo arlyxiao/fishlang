@@ -5,6 +5,7 @@ class SentenceFailure < ActiveRecord::Base
   belongs_to :sentence
 
   validates :user, :sentence, :count, :presence => true
+  validates :sentence_id, :uniqueness => {:scope => :user_id}
 
   default_scope :order => "count DESC"
 
