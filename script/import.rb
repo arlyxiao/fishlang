@@ -54,11 +54,5 @@ end
 
 save_users
 
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_reports")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE user_exercises")
-
 import
 

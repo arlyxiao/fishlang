@@ -15,6 +15,7 @@ Rails 3.2.12 <br/>
 
 bundle install <br />
 rake db:migrate <br />
+rake db:schema:load <br />
 rake db:seed <br />
 
 ### admin account:

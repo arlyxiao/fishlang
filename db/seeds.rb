@@ -1,7 +1,4 @@
 # User
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
-
-
 user = User.create!(
 	{
 		email: 'admin@fishlang.com', 
@@ -14,13 +11,18 @@ user.update_attribute :admin, true
 
 
 # lessons
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE categories")
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE lessons")
+=begin
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_reports")
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE user_exercises")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_failures")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE lesson_points")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE practice_points")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_failure_points")
+=end
 
 
 
