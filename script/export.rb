@@ -26,7 +26,6 @@ def export
         end
 
         practice_hash = {
-          :id => p.id,
           :name => p.name,
           :sentences => sentences_hash
         }
