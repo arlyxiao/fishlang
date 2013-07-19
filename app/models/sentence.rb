@@ -8,6 +8,7 @@ class Sentence < ActiveRecord::Base
            :dependent => :destroy
 
   validates :practice, :subject, :verb, :presence => true
+  validates :subject, :uniqueness => {:case_sensitive => false}
 
   def next_id_by(user)
     user_exercise = user.exercise
