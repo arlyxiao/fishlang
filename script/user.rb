@@ -7,14 +7,17 @@ def save_users
   rows.each do |r|
     user = User.create!(
       {
-        email: r['email'], 
-        name: r['name'], 
-        password: r['password'], 
-        password_confirmation: r['password_confirmation'] 
+        email: r[:email], 
+        name: r[:name], 
+        password: r[:password], 
+        password_confirmation: r[:password_confirmation] 
       }
     )
     user.update_attribute :admin, true
   end
 end
+
+
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
 
 save_users
