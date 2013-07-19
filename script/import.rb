@@ -1,24 +1,4 @@
-ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
-
-
 $dir = ARGV[0]
-
-
-def save_users
-	path = File.join($dir, 'users.yaml')
-	rows = YAML.load_file(path)
-	rows.each do |r|
-		user = User.create!(
-			{
-				email: r['email'], 
-				name: r['name'], 
-				password: r['password'], 
-				password_confirmation: r['password_confirmation'] 
-			}
-		)
-		user.update_attribute :admin, true
-	end
-end
 
 
 def import
@@ -52,7 +32,17 @@ def import
 end
 
 
-save_users
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE users")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE practices")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentences")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_translations")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_reports")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE user_exercises")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_failures")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE lesson_points")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE practice_points")
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE sentence_failure_points")
+
 
 import
 
