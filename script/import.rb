@@ -56,6 +56,8 @@ l2 = Lesson.create(:category => c1, :name => 'Present Perfect')
 l3 = Lesson.create(:category => c1, :name => 'Imperfect')
 l4 = Lesson.create(:category => c1, :name => 'Preterite')
 l5 = Lesson.create(:category => c1, :name => 'Past Perfect - Pluperfect')
+l5 = Lesson.create(:category => c1, :name => 'Past Perfect Simple')
+
 l6 = Lesson.create(:category => c1, :name => 'Future')
 l7 = Lesson.create(:category => c1, :name => 'Future Perfect')
 l8 = Lesson.create(:category => c1, :name => 'Condicional')

@@ -6,5 +6,4 @@ class VerbTense < ActiveRecord::Base
 
   validates :name, :uniqueness => {:scope => :lesson_id}
 
-
 end
