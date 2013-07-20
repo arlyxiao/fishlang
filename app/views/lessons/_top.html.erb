@@ -4,6 +4,5 @@
     <a href="/lessons/<%= lesson.id %>"><%= lesson.name %></a>
   </h5>
   
-  <span id="practice_error_count" style="color: red;"><%= @user_exercise.error_count %></span> errors,
-  <span id="practice_done_count"><%= @user_exercise.done_count %></span> done
+  <%= render 'practices/top_status' %>
 </div>

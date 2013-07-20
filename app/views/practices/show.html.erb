@@ -16,9 +16,12 @@
   </div>
 
   <div class="span8 a-list">
+    <% i = 1 %>
     <% @practice.sentences.select("DISTINCT(verb)").each do |s| %>
       <p style="padding: 5px;">
-        <a href="http://conjugador.reverso.net/conjugacion-espanol-verbo-<%= s.verb %>.html" class="black" target="_blank"><%= s.verb %></a></p>
+        <a href="http://conjugador.reverso.net/conjugacion-espanol-verbo-<%= s.verb %>.html" class="black" target="_blank"><%= i %>, <%= s.verb %></a></p>
+
+      <% i = i + 1 %>
     <% end %>
   </div>
 
