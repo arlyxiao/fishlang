@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130714103120) do
+ActiveRecord::Schema.define(:version => 20130720032440) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -120,5 +120,24 @@ ActiveRecord::Schema.define(:version => 20130714103120) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "verb_tenses", :force => true do |t|
+    t.string   "name"
+    t.integer  "lesson_id"
+    t.string   "yo"
+    t.string   "tu"
+    t.string   "el"
+    t.string   "ella"
+    t.string   "usted"
+    t.string   "nosotros"
+    t.string   "nosotras"
+    t.string   "vosotros"
+    t.string   "vosotras"
+    t.string   "ellos"
+    t.string   "ellas"
+    t.string   "ustedes"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

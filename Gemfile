@@ -13,6 +13,8 @@ gem 'simple_form'
 
 gem 'kaminari', '0.14.1'
 
+gem 'nokogiri'
+
 
 # emberjs
 gem 'ember-rails', git: 'git://github.com/emberjs/ember-rails.git'
