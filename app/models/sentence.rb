@@ -21,8 +21,10 @@ class Sentence < ActiveRecord::Base
   end
 
   def translate?(subject)
-    subjects = translations.map!{|c| c.subject.downcase.strip.squeeze(' ')}
-    subjects.include? subject.downcase.strip.squeeze(' ')
+    subjects = translations.map!{|c| 
+      _reorganize(c.subject)
+    }
+    subjects.include? _reorganize(subject)
   end
 
   def move_done(user_exercise)
@@ -44,6 +46,12 @@ class Sentence < ActiveRecord::Base
   def is_exam?(user_exercise)
     user_exercise.sentence_ids.include? self.id
   end
+
+  private
+    def _reorganize(str)
+      a = str.downcase.strip.squeeze(' ')
+      a.sub( /^((yo)|(tú)|(ellos)|(ellas)|(nosotros)|(nosotras))/, '' ).downcase.strip.squeeze(' ')
+    end
 
 
   include SentenceFailure::SentenceMethods
