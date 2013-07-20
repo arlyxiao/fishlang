@@ -4,7 +4,7 @@ class VerbTense < ActiveRecord::Base
 
   belongs_to :lesson
 
-  #validates :name, :uniqueness => {:scope => :lesson_id}
+  validates :name, :uniqueness => {:scope => :lesson_id}
 
 
 end

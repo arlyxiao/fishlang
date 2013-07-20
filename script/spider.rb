@@ -12,7 +12,7 @@ def fetch(verb)
   doc.xpath('//table/tr').each do |row|
     row.xpath('./td').each do |td|
 
-      p "#{i}, #{td.text}"
+      # p "#{i}, #{td.text}"
       tenses << td.text
 
       i = i + 1
@@ -24,10 +24,11 @@ def fetch(verb)
 end
 
 categories = Category.all
-
+tenses = ''
 
 
 Sentence.select("DISTINCT(verb)").first(2).each do |s|
+
   tenses = fetch(s.verb)
   tense_data = []
 
