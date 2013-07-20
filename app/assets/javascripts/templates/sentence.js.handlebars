@@ -11,6 +11,13 @@
       <p class="alert alert-success">You are correct</p>
 
       <div class="well">
+        <h5>Translations:</h5>
+        <p>
+          {{#each t in translations}}
+            <span style="color: green;">{{t.subject}}</span> <br />
+          {{/each}}
+        </p>
+
         <p>
           <div class="btn-group">
             <a href="javascript:void(0);" {{action 'report'}} class="btn btn-warning">Report a Problem</a>
