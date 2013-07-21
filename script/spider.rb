@@ -1,6 +1,8 @@
 require 'open-uri'
 
 # ActiveRecord::Base.connection.execute("TRUNCATE TABLE verb_tenses")
+
+
 File.open("spider_error_file", "w") do |f|
   f << ""
 end
