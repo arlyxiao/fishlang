@@ -12,7 +12,7 @@ module SentenceReplaceRegular
         replace_str = replace_str + w + ' '
       end
 
-      str.sub( %r{#{pattern}}, replace_str.strip ).downcase.strip
+      str.gsub( pattern, replace_str.strip ).downcase.strip
     end
 
     def _pattern_1(verb_tense)
@@ -29,7 +29,7 @@ module SentenceReplaceRegular
       ellas = "ellas #{verb_tense.ellas}"
       ustedes = "ustedes #{verb_tense.ustedes}"
 
-      pattern_1 = "((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))"
+      pattern_1 = /((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))/
     end
 
 
@@ -47,7 +47,7 @@ module SentenceReplaceRegular
       ellas = "ellas ((no )?((lo)|(no)|(la)|(te)|(me)))? #{verb_tense.ellas}"
       ustedes = "ustedes ((no )?((lo)|(no)|(la)|(te)|(me)))? #{verb_tense.ustedes}"
 
-      pattern_2 = "((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))"
+      pattern_2 = /((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))/
 
     end
 

@@ -263,6 +263,27 @@ describe SentenceTranslation do
         end
       end
 
+
+      describe "twice" do
+        before {
+          @sentence_translation_1 = FactoryGirl.create(:sentence_translation,
+            :sentence => @sentence,
+            :subject => "ella no lo puede, él no lo puede"
+          )
+          @subject_1 = "no lo puede, no lo puede"
+          @subject_2 = "lo no puede"
+
+        }
+
+        it "sentence translation(1)" do
+          @sentence.translate?(@subject_1).should == true
+        end
+
+        it "sentence translation(2)" do
+          @sentence.translate?(@subject_2).should == false
+        end
+      end
+
     end
 
 
