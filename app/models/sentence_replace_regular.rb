@@ -50,11 +50,31 @@ module SentenceReplaceRegular
 
     end
 
+
+    def _pattern_3(verb_tense)
+      yo = "yo lo #{verb_tense.yo}"
+      tu = "tú lo #{verb_tense.tu}"
+      el = "él lo #{verb_tense.el}"
+      ella = "ella lo #{verb_tense.ella}"
+      usted = "usted lo #{verb_tense.usted}"
+      nosotros = "nosotros lo #{verb_tense.nosotros}"
+      nosotras = "nosotras lo #{verb_tense.nosotras}"
+      vosotros = "vosotros lo #{verb_tense.vosotros}"
+      vosotras = "vosotras lo #{verb_tense.vosotras}"
+      ellos = "ellos lo #{verb_tense.ellos}"
+      ellas = "ellas lo #{verb_tense.ellas}"
+      ustedes = "ustedes lo #{verb_tense.ustedes}"
+
+      pattern_3 = "((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))"
+
+    end
+
     def _reorganize(str)
       str = str.downcase.strip.squeeze(' ')
       return str if verb_tense.nil?
 
       str = _build_string(str, _pattern_1(verb_tense))
       str = _build_string(str, _pattern_2(verb_tense))
+      str = _build_string(str, _pattern_3(verb_tense))
     end
 end
