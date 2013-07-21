@@ -111,5 +111,31 @@ describe SentenceTranslation do
 
   end
 
+  describe "Validate translate" do
+
+    before {
+      @sentence = Sentence.find(1)
+    }
+
+    describe "with no" do
+      before {
+        @subject_1 = "En este momento yo no puedo volver"
+        @subject_2 = 'En este momento no puedo volver'
+      }
+
+      it "sentence translation(1) should be correct" do
+        @sentence.translate?(@subject_1).should == true
+      end
+
+      it "sentence translation(2) should be correct" do
+        @sentence.translate?(@subject_2).should == true
+      end
+
+
+    end
+
+
+  end
+
 
 end
