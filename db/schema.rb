@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130720032440) do
+ActiveRecord::Schema.define(:version => 20130721012447) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -83,10 +83,11 @@ ActiveRecord::Schema.define(:version => 20130720032440) do
 
   create_table "sentences", :force => true do |t|
     t.string   "subject"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.integer  "practice_id"
     t.string   "verb"
+    t.integer  "verb_tense_id", :default => 0, :null => false
   end
 
   create_table "user_exercises", :force => true do |t|

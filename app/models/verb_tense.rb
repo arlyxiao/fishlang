@@ -3,6 +3,7 @@ class VerbTense < ActiveRecord::Base
                   :nosotros, :nosotras, :vosotros, :vosotras, :ellos, :ellas, :ustedes
 
   belongs_to :lesson
+  has_many :sentences
 
   validates :name, :uniqueness => {:scope => :lesson_id}
 

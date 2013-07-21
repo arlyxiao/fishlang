@@ -1,7 +1,8 @@
 class Sentence < ActiveRecord::Base
-  attr_accessible :practice, :subject, :verb
+  attr_accessible :practice, :subject, :verb, :verb_tense
 
   belongs_to :practice
+  belongs_to :verb_tense
   has_many :translations, 
            :class_name => 'SentenceTranslation', 
            :foreign_key => :sentence_id,
@@ -49,8 +50,32 @@ class Sentence < ActiveRecord::Base
 
   private
     def _reorganize(str)
-      a = str.downcase.strip.squeeze(' ')
-      a.sub( /^((yo)|(tú)|(ellos)|(ellas)|(nosotros)|(nosotras))/, '' ).downcase.strip.squeeze(' ')
+      str = str.downcase.strip.squeeze(' ')
+      return str if verb_tense.nil?
+
+      yo = "yo #{verb_tense.yo}"
+      tu = "tú #{verb_tense.tu}"
+      el = "él #{verb_tense.el}"
+      ella = "ella #{verb_tense.ella}"
+      usted = "usted #{verb_tense.usted}"
+      nosotros = "nosotros #{verb_tense.nosotros}"
+      nosotras = "nosotras #{verb_tense.nosotras}"
+      vosotros = "vosotros #{verb_tense.vosotros}"
+      vosotras = "vosotras #{verb_tense.vosotras}"
+      ellos = "ellos #{verb_tense.ellos}"
+      ellas = "ellas #{verb_tense.ellas}"
+      ustedes = "ustedes #{verb_tense.ustedes}"
+
+      pattern = "((#{yo})|(#{tu})|(#{el})|(#{ella})|(#{usted})|(#{nosotros})|(#{nosotras})|(#{vosotros})|(#{vosotras})|(#{ellos})|(#{ellas})|(#{ustedes}))"
+
+      match_words = str[/^#{pattern}/]
+      return str if match_words.nil?
+
+
+      replace_word = match_words.split(' ')[1]
+      str = str.sub( %r{^#{pattern}}, replace_word )
+
+      str.downcase.strip
     end
 
 
